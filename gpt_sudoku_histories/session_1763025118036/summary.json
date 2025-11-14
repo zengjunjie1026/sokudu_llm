@@ -1,0 +1,12 @@
+{
+  "model": "qwen3-max",
+  "temperature": 1,
+  "provider": "qwen",
+  "timestamp": "2025-11-13T09:11:58Z",
+  "rounds": 24,
+  "max_rounds": 100,
+  "success": true,
+  "puzzle": ". 1 . . . . . 5 7\n5 2 . 3 . 1 8 . 4\n. 8 4 . 7 . . . 6\n. 4 . 2 . 7 . . .\n. . 3 1 . . 4 8 5\n1 . . . 5 . 7 . 3\n. . 8 . 2 . 3 . .\n. 3 1 . 8 . . . .\n4 . . . 1 3 9 . 8",
+  "conversation_file": "conversation.json",
+  "final_issues": []
+}

@@ -1,10 +1,10 @@
 """
-调用 OpenAI GPT-5 解答 16x16 数独题目的脚本。
+调用 LLM（OpenAI/DeepSeek/Qwen 等）解答 16x16 数独题目的脚本。
 
 流程：
 1. 随机生成一个 16x16 数独题目（支持自定义挖空数量）。
-2. 与 GPT-5 进行多轮对话，严格禁止使用任何外部工具。
-3. 每轮回复都会解析、校验，并把问题反馈给 GPT-5 重新作答。
+2. 与模型进行多轮对话，严格禁止使用任何外部工具。
+3. 每轮回复都会解析、校验，并把问题反馈给模型重新作答。
 4. 所有提示词、回复、校验结果与（若存在）思考摘要都会写入 JSON 历史文件。
 """
 
@@ -12,20 +12,12 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import random
 import re
 import shutil
 import time
 from pathlib import Path
 from typing import Any, List, Optional, Sequence, Tuple
-
-try:
-    from openai import OpenAI
-except ImportError as exc:  # pragma: no cover
-    raise ImportError(
-        "需要安装 openai>=1.0.0 包才能运行本脚本，请执行 `pip install --upgrade openai`."
-    ) from exc
 
 from sudoku16_solver import (
     SIZE,
@@ -35,9 +27,10 @@ from sudoku16_solver import (
     generate_complete_board,
 )
 
+from llm_client import LLMClientError, PROVIDERS, chat_completion, get_provider
 
 SYSTEM_PROMPT = (
-    "You are GPT-5, a reasoning-only assistant working in a plain text environment. "
+    "You are a reasoning-only assistant working in a plain text environment. "
     "You must not invoke, simulate, or reference any external tools, code execution, "
     "or calculators. Solve the Sudoku puzzle strictly by mental reasoning and provide "
     "your final answer clearly."
@@ -64,16 +57,6 @@ FEEDBACK_PROMPT_TEMPLATE = (
 EXPECTED_SET = set(range(1, SIZE + 1))
 
 
-# ----------------------------------------------------------------------
-# 工具函数
-# ----------------------------------------------------------------------
-def ensure_api_key() -> None:
-    if not os.getenv("OPENAI_API_KEY"):
-        raise EnvironmentError(
-            "未检测到 OPENAI_API_KEY 环境变量，请先设置 OpenAI API Key 再运行脚本。"
-        )
-
-
 def board_to_display_text(board: Sequence[Sequence[int]]) -> str:
     """展示用文本，0 使用 '.'。"""
     return board_to_text(board)
@@ -81,7 +64,7 @@ def board_to_display_text(board: Sequence[Sequence[int]]) -> str:
 
 def parse_rows_from_text(text: str, expected: int = SIZE) -> List[List[int]]:
     """
-    从 GPT 回复中提取每行的 16 个数字。
+    从模型回复中提取每行的 16 个数字。
     支持识别 0（视为留空）与 1-16。
     """
 
@@ -125,7 +108,7 @@ class SudokuCheckResult:
 
 
 # ----------------------------------------------------------------------
-# GPT 会话管理
+# LLM 会话管理
 # ----------------------------------------------------------------------
 class Sudoku16ChatSession:
     def __init__(
@@ -133,18 +116,19 @@ class Sudoku16ChatSession:
         puzzle: Sequence[Sequence[int]],
         model: str = "gpt-5",
         temperature: float = 1.0,
+        provider: str = "openai",
         history_dir: Optional[Path] = None,
         system_prompt: str = SYSTEM_PROMPT,
     ) -> None:
-        ensure_api_key()
         self.puzzle = [list(row) for row in puzzle]
         self.model = model
         self.temperature = temperature
+        self.provider = provider
         self.session_dir = history_dir or self._default_session_dir()
         self.session_dir.mkdir(parents=True, exist_ok=True)
         self.history_file = self.session_dir / "conversation.json"
         self.system_prompt = system_prompt
-        self.client = OpenAI()
+        self.provider_config = get_provider(provider)
         self.initial_prompt = USER_PROMPT_TEMPLATE.format(
             puzzle=board_to_display_text(self.puzzle)
         )
@@ -197,20 +181,17 @@ class Sudoku16ChatSession:
         )
 
     # ------------------------------------------------------------------
-    # 与 GPT-5 交互
+    # 与 LLM 交互
     # ------------------------------------------------------------------
     def request_solution(self, user_content: str) -> Tuple[str, Optional[str]]:
         user_message = {"role": "user", "content": user_content}
         messages = [{"role": "system", "content": self.system_prompt}] + self.messages + [user_message]
-        response = self.client.chat.completions.create(
+        assistant_message, reasoning_text = chat_completion(
+            provider=self.provider,
             model=self.model,
             messages=messages,
             temperature=self.temperature,
         )
-
-        choice = response.choices[0].message
-        assistant_message = choice.content.strip() if choice.content else ""
-        reasoning_text = self._normalize_reasoning(getattr(choice, "reasoning", None)) or None
 
         self.messages.extend(
             [
@@ -221,32 +202,6 @@ class Sudoku16ChatSession:
         self._save_history()
 
         return assistant_message, reasoning_text
-
-    @staticmethod
-    def _normalize_reasoning(value: Any) -> Optional[str]:
-        if value is None:
-            return None
-        if isinstance(value, str):
-            return value or None
-        if isinstance(value, dict):
-            if "text" in value and isinstance(value["text"], str):
-                return value["text"] or None
-            if "content" in value and isinstance(value["content"], str):
-                return value["content"] or None
-            if "tokens" in value and isinstance(value["tokens"], list):
-                collected = "".join(
-                    token.get("text", "")
-                    for token in value["tokens"]
-                    if isinstance(token, dict)
-                )
-                return collected or None
-            return json.dumps(value, ensure_ascii=False)
-        if isinstance(value, list):
-            combined = "".join(
-                item for item in (Sudoku16ChatSession._normalize_reasoning(v) or "" for v in value)
-            )
-            return combined or None
-        return str(value)
 
     # ------------------------------------------------------------------
     # 校验
@@ -364,6 +319,7 @@ def generate_random_puzzle(holes: int = 180) -> List[List[int]]:
 def run_session(
     model: str,
     temperature: float,
+    provider: str,
     reset: bool,
     history_dir: Path,
     holes: int,
@@ -397,10 +353,11 @@ def run_session(
         puzzle=puzzle,
         model=model,
         temperature=temperature,
+        provider=provider,
         history_dir=session_dir,
     )
 
-    print("📨 发送给 GPT-5 的 16x16 题目：")
+    print(f"📨 发送给 {provider} 的 16x16 题目：")
     print(board_to_display_text(puzzle))
 
     last_answer_text = ""
@@ -427,11 +384,14 @@ def run_session(
 
         try:
             assistant_reply, reasoning_log = session.request_solution(user_prompt)
+        except LLMClientError as exc:  # pragma: no cover
+            print(f"❌ 调用 {provider} 接口失败：{exc}")
+            return
         except Exception as exc:  # pragma: no cover
-            print(f"❌ 调用 OpenAI 接口失败：{exc}")
+            print(f"❌ 调用 {provider} 接口出现未知错误：{exc}")
             return
 
-        print("\n🤖 GPT-5 的完整回复：\n")
+        print(f"\n🤖 {provider} 的完整回复：\n")
         print(assistant_reply or "(未识别到任何回答内容)")
 
         result = session.evaluate_answer(assistant_reply)
@@ -446,14 +406,14 @@ def run_session(
         )
 
         if result.is_correct:
-            print("\n✅ GPT-5 在本轮提供了正确的 16x16 数独解答。")
+            print(f"\n✅ {provider} 在本轮提供了正确的 16x16 数独解答。")
             if result.parsed_board:
                 print("\n🧾 最终解析的 16x16 解答：")
                 print(board_to_display_text(result.parsed_board))
             success = True
             break
 
-        print("\n❌ GPT-5 的解答仍存在问题：")
+        print(f"\n❌ {provider} 的解答仍存在问题：")
         for issue in result.issues:
             print(f"- {issue}")
 
@@ -469,6 +429,7 @@ def run_session(
     summary = {
         "model": model,
         "temperature": temperature,
+        "provider": provider,
         "timestamp": session.created_at,
         "rounds": round_count,
         "max_rounds": max_rounds,
@@ -491,13 +452,19 @@ def run_session(
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="调用 GPT-5 解答 16x16 数独并验证结果的脚本")
-    parser.add_argument("--model", default="gpt-5", help="调用的 OpenAI 模型名称")
+    parser = argparse.ArgumentParser(description="调用 LLM 解答 16x16 数独并验证结果的脚本")
+    parser.add_argument("--model", default="gpt-5", help="调用的模型名称")
     parser.add_argument(
         "--temperature",
         type=float,
         default=1.0,
         help="生成温度，默认为 1.0",
+    )
+    parser.add_argument(
+        "--provider",
+        choices=list(PROVIDERS.keys()),
+        default="openai",
+        help="选择调用的 LLM 供应商（openai/deepseek/qwen），默认为 openai",
     )
     parser.add_argument(
         "--holes",
@@ -520,7 +487,7 @@ def parse_args() -> argparse.Namespace:
         "--max-rounds",
         type=int,
         default=10,
-        help="允许与 GPT-5 进行的最大轮数，默认为 10",
+        help="允许与模型进行的最大轮数，默认为 10",
     )
     return parser.parse_args()
 
@@ -530,6 +497,7 @@ if __name__ == "__main__":
     run_session(
         model=args.model,
         temperature=args.temperature,
+        provider=args.provider,
         reset=args.reset,
         history_dir=args.history_dir,
         holes=args.holes,

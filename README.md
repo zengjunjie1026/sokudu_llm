@@ -1,6 +1,6 @@
 # 数独求解器 (Sudoku Solver)
 
-一个使用回溯算法实现的数独求解器程序，并支持调用 OpenAI GPT-5 进行纯文本解答校验。
+一个使用回溯算法实现的数独求解器程序，并支持调用多种 LLM（OpenAI / DeepSeek / Qwen 等）进行纯文本解答校验。
 
 ## 功能特点
 
@@ -9,8 +9,8 @@
 - ✅ 随机生成不同的数独题目
 - ✅ 美观的棋盘显示格式
 - ✅ 完整的输入验证
-- ✅ 可调用 OpenAI GPT-5 文本求解并自动验证答案
-- ✅ 出错时自动生成反馈，与 GPT-5 多轮对话直到回答正确或达到上限
+- ✅ 可调用多种 LLM 文本求解并自动验证答案
+- ✅ 出错时自动生成反馈，与模型多轮对话直到回答正确或达到上限
 - ✅ 支持 9x9 与 16x16 两种棋盘规模
 
 ## 使用方法
@@ -68,9 +68,9 @@ python sudoku_solver.py
 ...
 ```
 
-## 调用 GPT-5 解答
+## 调用 LLM 解答
 
-通过 `gpt_sudoku_session.py` 可以把随机生成的数独题交给 OpenAI GPT-5 处理，并自动验证回复是否正确。每次运行都会生成一个新的题目，并在历史目录中新建一个 `session_<timestamp>/` 子目录，内部包含：
+通过 `gpt_sudoku_session.py` 可以把随机生成的数独题交给 LLM 处理，并自动验证回复是否正确。每次运行都会生成一个新的题目，并在历史目录中新建一个 `session_<timestamp>/` 子目录，内部包含：
 
 - `conversation.json`：完整的聊天记录（含 reasoning 字段，若模型返回）
 - `summary.json`：本次对话概览（轮数、是否成功、最后的问题等）
@@ -78,46 +78,55 @@ python sudoku_solver.py
 
 ### 运行前准备
 
-1. 在环境中设置 OpenAI API Key
+1. 在环境中设置对应供应商的 API Key
 
    ```bash
+   # OpenAI
    export OPENAI_API_KEY=sk-xxxx...
+
+   # DeepSeek
+   export DEEPSEEK_API_KEY=dsk-xxxx...
+
+   # Qwen (DashScope 兼容模式)
+   export DASHSCOPE_API_KEY=sk-xxxx...
    ```
 
 2. 安装依赖
 
    ```bash
-   pip install --upgrade openai
+   pip install --upgrade requests
    ```
 
 ### 运行脚本
 
 ```bash
 python gpt_sudoku_session.py \
-  --model gpt-5 \               # 可选：指定模型
+  --provider openai \           # 可选：openai / deepseek / qwen
+  --model gpt-5 \               # 可选：指定模型（不填则使用供应商默认模型）
   --temperature 1 \             # 可选：回复温度，默认为 1
   --holes 45 \                  # 可选：挖空数量，默认 45（中等难度）
   --history-dir ./histories \   # 可选：自定义历史目录
-  --max-rounds 3 \              # 可选：最多与 GPT-5 对话轮数，默认 3
+  --max-rounds 3 \              # 可选：最多对话轮数，默认 3
   --reset                       # 可选：启动前清空历史目录
 ```
 
 程序会：
 
-- 随机生成一个可解的数独题目，并向 GPT-5 发送提示
-- 明确禁止 GPT-5 使用任何外部工具，只能在文本中给出解答
+- 随机生成一个可解的数独题目，并向模型发送提示
+- 明确禁止模型使用任何外部工具，只能在文本中给出解答
 - 将会话记录保存到指定目录下独立的 `session_<timestamp>/conversation.json`
-- 解析并验证 GPT-5 的解答，指出不符合数独规则的行/列/宫或与原题冲突的位置
+- 解析并验证模型的解答，指出不符合数独规则的行/列/宫或与原题冲突的位置
 - 若答案有误，会自动总结问题生成下一轮提示，把完整聊天记录继续带入直至回答正确或达到最大轮数
 - 将每一轮的提示、回复、校验结果完整写入 JSON 记录，并额外生成 `summary.json`、`rounds.txt` 方便快速查阅
 
 ### 16x16 数独测试
 
-我们也提供了 16x16 棋盘的 GPT 调度脚本，逻辑与 9x9 类似，但题目与校验规则针对 16x16 做了强化：
+我们也提供了 16x16 棋盘的 LLM 调度脚本，逻辑与 9x9 类似，但题目与校验规则针对 16x16 做了强化：
 
 ```bash
 python gpt_sudoku_session_16.py \
-  --model gpt-5 \                 # 可选：指定模型
+  --provider deepseek \          # 可选：openai / deepseek / qwen
+  --model deepseek-chat \        # 可选：指定模型
   --temperature 1.0 \             # 可选：回复温度，默认为 1.0
   --holes 180 \                   # 可选：挖空数量，默认 180
   --history-dir ./histories16 \   # 可选：自定义 16x16 历史目录
@@ -127,9 +136,9 @@ python gpt_sudoku_session_16.py \
 
 工作流程：
 
-- 随机生成可解的 16x16 数独题目，并向 GPT-5 发送
-- 明确禁止 GPT 使用任何外部工具；要求输出 16 行，每行 16 个数字
-- 多轮对话自动反馈问题，直到 GPT 给出合法解答或达到最大轮数
+- 随机生成可解的 16x16 数独题目，并向模型发送
+- 明确禁止模型使用任何外部工具；要求输出 16 行，每行 16 个数字
+- 多轮对话自动反馈问题，直到模型给出合法解答或达到最大轮数
 - 所有历史写入 `session_<timestamp>/conversation.json`，并附带 `summary.json`、`rounds.txt`
 
 ## 要求
