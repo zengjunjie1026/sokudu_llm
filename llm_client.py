@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 
 import requests
+from loguru import logger
 
 
 class LLMClientError(RuntimeError):
@@ -132,9 +133,19 @@ def chat_completion(
         "Content-Type": "application/json",
     }
 
+    endpoint = config.endpoint()
+    logger.debug(
+        "POST {endpoint} | provider={provider} model={model} temperature={temperature} messages={count}",
+        endpoint=endpoint,
+        provider=config.name,
+        model=payload["model"],
+        temperature=temperature,
+        count=len(messages),
+    )
+
     try:
         response = requests.post(
-            config.endpoint(),
+            endpoint,
             json=payload,
             headers=headers,
             timeout=config.request_timeout,
@@ -155,6 +166,14 @@ def chat_completion(
 
     content = (choice.get("content") or "").strip()
     reasoning = normalize_reasoning(choice.get("reasoning"))
+
+    logger.debug(
+        "Response {endpoint} | provider={provider} status={status} content_preview={preview}",
+        endpoint=endpoint,
+        provider=config.name,
+        status=response.status_code,
+        preview=(content.splitlines()[0][:120] if content else ""),
+    )
 
     return content, reasoning
 
