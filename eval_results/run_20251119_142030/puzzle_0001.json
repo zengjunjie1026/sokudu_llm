@@ -1,0 +1,157 @@
+{
+  "index": 0,
+  "puzzle": [
+    [1, 0, 0, 4],
+    [0, 4, 0, 0],
+    [0, 0, 3, 1],
+    [3, 0, 4, 2]
+  ],
+  "solution": [
+    [1, 3, 2, 4],
+    [2, 4, 1, 3],
+    [4, 2, 3, 1],
+    [3, 1, 4, 2]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 2.28072452545166,
+      "error": null
+    },
+    {
+      "sample_index": 1,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 2.710902214050293,
+      "error": null
+    },
+    {
+      "sample_index": 2,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 2.421762228012085,
+      "error": null
+    },
+    {
+      "sample_index": 3,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 2.2246739864349365,
+      "error": null
+    },
+    {
+      "sample_index": 4,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 2.5826096534729004,
+      "error": null
+    },
+    {
+      "sample_index": 5,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 3.4535701274871826,
+      "error": null
+    },
+    {
+      "sample_index": 6,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 3.7593133449554443,
+      "error": null
+    },
+    {
+      "sample_index": 7,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 3.4213945865631104,
+      "error": null
+    },
+    {
+      "sample_index": 8,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 3.5652694702148438,
+      "error": null
+    },
+    {
+      "sample_index": 9,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 4 lines, each with 4 numbers separated by spaces.\n\nPuzzle:\n1 . . 4\n. 4 . .\n. . 3 1\n3 . 4 2\n",
+      "raw_answer": "1 3 2 4  \n2 4 1 3  \n4 2 3 1  \n3 1 4 2",
+      "parsed_board": [
+        [1, 3, 2, 4],
+        [2, 4, 1, 3],
+        [4, 2, 3, 1],
+        [3, 1, 4, 2]
+      ],
+      "is_correct": true,
+      "latency": 3.5795531272888184,
+      "error": null
+    }
+  ]
+}

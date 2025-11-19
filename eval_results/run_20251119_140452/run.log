@@ -1,0 +1,271 @@
+2025-11-19 14:04:52.947 | INFO     | __main__:main:402 - Evaluating 10 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=deepseek, model=deepseek-reasoner, temperature=0.0, samples=10
+2025-11-19 14:04:52.948 | INFO     | __main__:main:420 - 
+--- Puzzle 1/10 ---
+2025-11-19 14:04:52.948 | DEBUG    | __main__:evaluate_puzzle:150 - Evaluating puzzle: [[0, 0, 0, 0, 0, 0, 9, 0, 0], [6, 3, 0, 0, 4, 0, 0, 8, 0], [0, 0, 2, 0, 6, 0, 0, 0, 4], [0, 0, 0, 0, 1, 0, 7, 5, 8], [4, 0, 0, 0, 0, 0, 6, 2, 9], [0, 8, 9, 0, 2, 0, 0, 0, 3], [5, 0, 1, 0, 0, 0, 8, 0, 0], [0, 0, 0, 8, 0, 0, 0, 0, 6], [8, 7, 0, 5, 3, 2, 0, 0, 0]]
+2025-11-19 14:04:52.948 | DEBUG    | __main__:evaluate_puzzle:151 - Solution: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-19 14:04:52.948 | DEBUG    | __main__:evaluate_puzzle:152 - Provider: deepseek
+2025-11-19 14:04:52.948 | DEBUG    | __main__:evaluate_puzzle:153 - Model: deepseek-reasoner
+2025-11-19 14:04:52.949 | DEBUG    | __main__:evaluate_puzzle:154 - Temperature: 0.0
+2025-11-19 14:04:52.949 | DEBUG    | __main__:evaluate_puzzle:155 - Num samples: 10
+2025-11-19 14:04:52.949 | DEBUG    | __main__:evaluate_puzzle:156 - Seed: None
+2025-11-19 14:04:53.145 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 14:04:53.146 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 14:22:58.334 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=1 4 8 3 5 6 9 7 2  
+2025-11-19 14:22:58.335 | INFO     | __main__:evaluate_puzzle:175 - Answer: 1 4 8 3 5 6 9 7 2  
+6 3 5 2 4 9 1 8 7  
+9 1 2 7 6 8 5 3 4  
+3 2 6 4 1 7 5 9 8  
+4 5 7 8 3 1 6 2 9  
+7 8 9 5 2 4 3 1 6  
+5 6 1 9 7 3 8 4 2  
+2 9 3 8 4 5 7 6 1  
+8 7 4 6 9 2 1 5 3
+2025-11-19 14:22:58.335 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: [[1, 4, 8, 3, 5, 6, 9, 7, 2], [6, 3, 5, 2, 4, 9, 1, 8, 7], [9, 1, 2, 7, 6, 8, 5, 3, 4], [3, 2, 6, 4, 1, 7, 5, 9, 8], [4, 5, 7, 8, 3, 1, 6, 2, 9], [7, 8, 9, 5, 2, 4, 3, 1, 6], [5, 6, 1, 9, 7, 3, 8, 4, 2], [2, 9, 3, 8, 4, 5, 7, 6, 1], [8, 7, 4, 6, 9, 2, 1, 5, 3]]
+2025-11-19 14:22:58.335 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 14:22:58.336 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1085.190076828003
+2025-11-19 14:22:58.336 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 14:22:58.336 | INFO     | __main__:evaluate_puzzle:196 - Answer: 1 4 8 3 5 6 9 7 2  
+6 3 5 2 4 9 1 8 7  
+9 1 2 7 6 8 5 3 4  
+3 2 6 4 1 7 5 9 8  
+4 5 7 8 3 1 6 2 9  
+7 8 9 5 2 4 3 1 6  
+5 6 1 9 7 3 8 4 2  
+2 9 3 8 4 5 7 6 1  
+8 7 4 6 9 2 1 5 3
+2025-11-19 14:22:58.492 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 14:22:58.493 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 14:42:17.231 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 14:42:17.232 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 14:42:17.232 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 14:42:17.233 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 14:42:17.233 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1158.7410397529602
+2025-11-19 14:42:17.233 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 14:42:17.233 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 14:42:17.422 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 14:42:17.423 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 15:03:47.677 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 15:03:47.678 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 15:03:47.678 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 15:03:47.679 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 15:03:47.679 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1290.2567574977875
+2025-11-19 15:03:47.679 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:03:47.680 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 15:03:47.829 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:03:47.830 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 15:25:29.002 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 15:25:29.003 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 15:25:29.004 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 15:25:29.004 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 15:25:29.004 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1301.1751692295074
+2025-11-19 15:25:29.004 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:25:29.005 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 15:25:29.019 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:25:29.019 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 15:47:14.962 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 15:47:14.963 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 15:47:14.964 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 15:47:14.964 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 15:47:14.964 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1305.9455935955048
+2025-11-19 15:47:14.965 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:47:14.966 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 15:47:14.986 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 15:47:14.987 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 16:08:54.118 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 16:08:54.119 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 16:08:54.119 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 16:08:54.119 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 16:08:54.120 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1299.1330630779266
+2025-11-19 16:08:54.120 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 16:08:54.120 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 16:08:54.223 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 16:08:54.223 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2
+2025-11-19 16:29:09.140 | DEBUG    | llm_client:chat_completion:170 - Response https://api.deepseek.com/v1/chat/completions | provider=deepseek status=200 content_preview=
+2025-11-19 16:29:09.141 | INFO     | __main__:evaluate_puzzle:175 - Answer: 
+2025-11-19 16:29:09.142 | INFO     | __main__:evaluate_puzzle:192 - Parsed board: None
+2025-11-19 16:29:09.142 | INFO     | __main__:evaluate_puzzle:193 - Is correct: False
+2025-11-19 16:29:09.142 | INFO     | __main__:evaluate_puzzle:194 - Latency: 1214.919214963913
+2025-11-19 16:29:09.142 | INFO     | __main__:evaluate_puzzle:195 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 16:29:09.142 | INFO     | __main__:evaluate_puzzle:196 - Answer: 
+2025-11-19 16:29:09.168 | INFO     | __main__:evaluate_puzzle:162 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-19 16:29:09.169 | DEBUG    | llm_client:chat_completion:137 - POST https://api.deepseek.com/v1/chat/completions | provider=deepseek model=deepseek-reasoner temperature=0.0 messages=2

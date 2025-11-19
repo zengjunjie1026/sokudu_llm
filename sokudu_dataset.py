@@ -351,6 +351,12 @@ def parse_args() -> argparse.Namespace:
         description="Generate Sudoku datasets with unique solutions."
     )
     parser.add_argument(
+        "--num-4x4",
+        type=int,
+        default=1000,
+        help="Number of 4x4 puzzles to generate (default: 1000).",
+    )
+    parser.add_argument(
         "--num-9x9",
         type=int,
         default=1000,
@@ -375,6 +381,12 @@ def parse_args() -> argparse.Namespace:
         help="Minimum number of clues retained in 16x16 puzzles.",
     )
     parser.add_argument(
+        "--min-clues-4x4",
+        type=int,
+        default=None,
+        help="Minimum number of clues retained in 4x4 puzzles.",
+    )
+    parser.add_argument(
         "--seed-9x9",
         type=int,
         default=2024,
@@ -387,6 +399,12 @@ def parse_args() -> argparse.Namespace:
         help="Random seed for 16x16 puzzle generation.",
     )
     parser.add_argument(
+        "--seed-4x4",
+        type=int,
+        default=2023,
+        help="Random seed for 4x4 puzzle generation.",
+    )
+    parser.add_argument(
         "--output-dir",
         type=Path,
         default=Path(__file__).resolve().parent / "sokudu_dataset",
@@ -397,6 +415,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=None,
         help="Check the specified dataset file for duplicate puzzles.",
+    )
+    parser.add_argument(
+        "--verify-unique",
+        type=Path,
+        default=None,
+        help="Verify that every puzzle inside the given dataset has a unique solution.",
     )
     return parser.parse_args()
 
@@ -436,15 +460,61 @@ def check_dataset_duplicates(dataset_path: Path) -> None:
         print(f"✓ No duplicate puzzles found in {dataset_path}.")
 
 
+def verify_unique_solutions(dataset_path: Path) -> None:
+    dataset_path = dataset_path.resolve()
+    if not dataset_path.exists():
+        raise FileNotFoundError(f"Dataset file not found: {dataset_path}")
+
+    with dataset_path.open("r", encoding="utf-8") as fp:
+        payload = json.load(fp)
+
+    puzzles = payload.get("puzzles")
+    if not isinstance(puzzles, list):
+        raise ValueError("Dataset payload missing 'puzzles' list.")
+
+    failures: List[int] = []
+    start = time.time()
+    total = len(puzzles)
+    print(f"Verifying uniqueness for {total} puzzle(s) in {dataset_path} ...")
+
+    for idx, entry in enumerate(puzzles):
+        puzzle = entry.get("puzzle")
+        if not isinstance(puzzle, list):
+            raise ValueError(f"Entry {idx} missing 'puzzle' grid.")
+
+        solver = SudokuSolver(puzzle)
+        solution_count = solver.solve(limit=2)
+        if not isinstance(solution_count, int) or solution_count != 1:
+            failures.append(idx)
+
+        if (idx + 1) % max(1, total // 20) == 0 or idx == total - 1:
+            print(f"  - Checked {idx + 1}/{total}")
+
+    elapsed = time.time() - start
+    if failures:
+        print(f"✗ Detected {len(failures)} puzzle(s) without unique solutions:")
+        for idx in failures[:50]:
+            print(f"  - Puzzle index {idx}")
+        if len(failures) > 50:
+            print("  ... (list truncated)")
+        raise RuntimeError("Uniqueness verification failed.")
+    else:
+        print(f"✓ All puzzles have unique solutions (elapsed {elapsed:.2f}s).")
+
+
 def main() -> None:
     args = parse_args()
     if args.check_file:
         check_dataset_duplicates(args.check_file)
         return
+    if args.verify_unique:
+        verify_unique_solutions(args.verify_unique)
+        return
 
     output_dir = args.output_dir.resolve()
 
     tasks = [
+        (4, args.num_4x4, args.min_clues_4x4, args.seed_4x4),
         (9, args.num_9x9, args.min_clues_9x9, args.seed_9x9),
         (16, args.num_16x16, args.min_clues_16x16, args.seed_16x16),
     ]

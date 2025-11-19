@@ -32,7 +32,7 @@ from collections import Counter
 from dataclasses import dataclass
 import sys
 from pathlib import Path
-from typing import Callable, Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 from llm_client import LLMClientError, chat_completion
 from loguru import logger
@@ -107,6 +107,23 @@ def is_valid_solution(
     return True
 
 
+def normalize_temperature(provider: str, model: str, temperature: float) -> float:
+    """
+    Some providers/models (e.g., OpenAI GPT-5) do not allow overriding temperature.
+    Force their supported default and warn the user when necessary.
+    """
+
+    if provider == "openai" and model and model.lower().startswith("gpt-5"):
+        if abs(temperature - 1.0) > 1e-6:
+            logger.warning(
+                "Model %s does not allow temperature=%.2f; forcing temperature=1.0",
+                model,
+                temperature,
+            )
+        return 1.0
+    return temperature
+
+
 @dataclass
 class SampleResult:
     raw_answer: str
@@ -126,16 +143,23 @@ def evaluate_puzzle(
     temperature: float,
     num_samples: int,
     seed: Optional[int] = None,
-    progress_callback: Optional[Callable[[int, SampleResult], None]] = None,
 ) -> List[SampleResult]:
     prompt = build_prompt(puzzle)
     results: List[SampleResult] = []
-
     rng = random.Random(seed)
+    logger.debug("Evaluating puzzle: {}", puzzle)
+    logger.debug("Solution: {}", solution)
+    logger.debug("Provider: {}", provider)
+    logger.debug("Model: {}", model)
+    logger.debug("Temperature: {}", temperature)
+    logger.debug("Num samples: {}", num_samples)
+    logger.debug("Seed: {}", seed)
+    effective_temperature = normalize_temperature(provider, model, temperature)
     for sample_index in range(num_samples):
         time.sleep(rng.uniform(0.0, 0.2))
         start = time.time()
         try:
+            logger.info("Prompt: {}", prompt)
             answer, _ = chat_completion(
                 provider=provider,
                 model=model,
@@ -146,8 +170,9 @@ def evaluate_puzzle(
                     },
                     {"role": "user", "content": prompt},
                 ],
-                temperature=temperature,
+                temperature=effective_temperature,
             )
+            logger.info("Answer: {}", answer)
         except LLMClientError as exc:
             sample_result = SampleResult(
                 raw_answer=f"[ERROR] {exc}",
@@ -158,14 +183,17 @@ def evaluate_puzzle(
                 error=str(exc),
             )
             results.append(sample_result)
-            if progress_callback:
-                progress_callback(sample_index, sample_result)
             continue
         parsed_board = parse_board_from_response(answer, len(puzzle))
         is_correct = (
             parsed_board is not None
             and is_valid_solution(parsed_board, puzzle, solution)
         )
+        logger.info("Parsed board: {}", parsed_board)
+        logger.info("Is correct: {}", is_correct)
+        logger.info("Latency: {}", time.time() - start)
+        logger.info("Prompt: {}", prompt)
+        logger.info("Answer: {}", answer)
         sample_result = SampleResult(
             raw_answer=answer,
             parsed_board=parsed_board,
@@ -174,8 +202,6 @@ def evaluate_puzzle(
             prompt=prompt,
         )
         results.append(sample_result)
-        if progress_callback:
-            progress_callback(sample_index, sample_result)
 
     return results
 
@@ -212,45 +238,6 @@ def compute_majority_accuracy(results: Sequence[List[SampleResult]]) -> float:
             correct_majorities += 1
 
     return correct_majorities / total if total else 0.0
-
-
-def _truncate_preview(text: str, limit: int = 120) -> str:
-    stripped = text.strip()
-    if not stripped:
-        return ""
-    first_line = stripped.splitlines()[0]
-    if len(first_line) <= limit:
-        return first_line
-    return first_line[: limit - 3] + "..."
-
-
-def _print_sample_progress(
-    *,
-    puzzle_idx: int,
-    total_puzzles: int,
-    sample_idx: int,
-    total_samples: int,
-    result: SampleResult,
-) -> None:
-    status = "✓" if result.is_correct else ("!" if result.error else "…")
-    latency_text = f"{result.latency:.2f}s" if result.latency >= 0 else "n/a"
-    logger.info(
-        "[Puzzle {}/{}] Sample {}/{} {} latency={}",
-        puzzle_idx,
-        total_puzzles,
-        sample_idx + 1,
-        total_samples,
-        status,
-        latency_text,
-    )
-
-    if result.error:
-        logger.error("  error: {}", result.error)
-        return
-
-    preview = _truncate_preview(result.raw_answer)
-    if preview:
-        logger.info("  output: {}", preview)
 
 
 def parse_args() -> argparse.Namespace:
@@ -312,6 +299,13 @@ def parse_args() -> argparse.Namespace:
         default=str(Path(__file__).resolve().parent / "eval_results"),
         help="Directory to write evaluation summaries and logs.",
     )
+    parser.add_argument(
+        "--log-level",
+        type=str,
+        default="INFO",
+        choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
+        help="Logging level for console and file outputs (default: INFO).",
+    )
     return parser.parse_args()
 
 
@@ -324,6 +318,63 @@ def load_dataset(path: str) -> List[Dict[str, List[List[int]]]]:
         raise ValueError("Invalid dataset: missing 'puzzles' list.")
 
     return puzzles
+
+
+def _write_board(fp, board: Sequence[Sequence[int]], indent: int) -> None:
+    indent_str = " " * indent
+    fp.write("[\n")
+    row_indent = indent_str + "  "
+    for idx, row in enumerate(board):
+        row_text = "[" + ", ".join(str(cell) for cell in row) + "]"
+        trailing = "," if idx < len(board) - 1 else ""
+        fp.write(f"{row_indent}{row_text}{trailing}\n")
+    fp.write(f"{indent_str}]" if indent else "]")
+
+
+def write_puzzle_file(path: Path, payload: Dict[str, object]) -> None:
+    with path.open("w", encoding="utf-8") as fp:
+        fp.write("{\n")
+        fp.write(f'  "index": {payload["index"]},\n')
+
+        fp.write('  "puzzle": ')
+        _write_board(fp, payload["puzzle"], indent=2)
+        fp.write(",\n")
+
+        fp.write('  "solution": ')
+        _write_board(fp, payload["solution"], indent=2)
+        fp.write(",\n")
+
+        fp.write('  "samples": [\n')
+        samples = payload.get("samples", [])
+        for sample_idx, sample in enumerate(samples):
+            fp.write("    {\n")
+            fp.write(f'      "sample_index": {sample["sample_index"]},\n')
+            fp.write(f'      "prompt": {json.dumps(sample["prompt"], ensure_ascii=False)},\n')
+            fp.write(f'      "raw_answer": {json.dumps(sample["raw_answer"], ensure_ascii=False)},\n')
+
+            fp.write('      "parsed_board": ')
+            parsed = sample.get("parsed_board")
+            if parsed is None:
+                fp.write("null,\n")
+            else:
+                _write_board(fp, parsed, indent=6)
+                fp.write(",\n")
+
+            fp.write(f'      "is_correct": {"true" if sample["is_correct"] else "false"},\n')
+            fp.write(f'      "latency": {sample["latency"]},\n')
+            error = sample.get("error")
+            if error is None:
+                fp.write('      "error": null\n')
+            else:
+                fp.write(f'      "error": {json.dumps(error, ensure_ascii=False)}\n')
+
+            fp.write("    }")
+            if sample_idx < len(samples) - 1:
+                fp.write(",")
+            fp.write("\n")
+
+        fp.write("  ]\n")
+        fp.write("}\n")
 
 
 def main() -> None:
@@ -340,8 +391,13 @@ def main() -> None:
     run_dir.mkdir(parents=True, exist_ok=True)
 
     logger.remove()
-    logger.add(sys.stdout, level="INFO", enqueue=True)
-    logger.add(run_dir / "run.log", level="DEBUG", encoding="utf-8", enqueue=True)
+    logger.add(sys.stdout, level=args.log_level, enqueue=True)
+    logger.add(
+        run_dir / "run.log",
+        level="DEBUG",
+        encoding="utf-8",
+        enqueue=True,
+    )
 
     logger.info(
         "Evaluating {} puzzle(s) from {} using provider={}, model={}, temperature={}, samples={}",
@@ -371,13 +427,6 @@ def main() -> None:
             temperature=args.temperature,
             num_samples=args.num_samples,
             seed=args.seed,
-            progress_callback=lambda sample_idx, sample_result, _index=index, _total=len(dataset): _print_sample_progress(
-                puzzle_idx=_index,
-                total_puzzles=_total,
-                sample_idx=sample_idx,
-                total_samples=args.num_samples,
-                result=sample_result,
-            ),
         )
         all_results.append(samples)
         latencies.extend(sample.latency for sample in samples if sample.latency >= 0)
@@ -414,8 +463,7 @@ def main() -> None:
             )
 
         puzzle_path = run_dir / f"puzzle_{index:04d}.json"
-        with puzzle_path.open("w", encoding="utf-8") as fh:
-            json.dump(puzzle_payload, fh, ensure_ascii=False, indent=2)
+        write_puzzle_file(puzzle_path, puzzle_payload)
 
         success_flag = "✓" if any(sample.is_correct for sample in samples) else "✗"
         correct_count = sum(sample.is_correct for sample in samples)

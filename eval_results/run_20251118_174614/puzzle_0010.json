@@ -1,0 +1,297 @@
+{
+  "index": 9,
+  "puzzle": [
+    [
+      4,
+      0,
+      0,
+      0,
+      3,
+      0,
+      0,
+      0,
+      8
+    ],
+    [
+      7,
+      3,
+      0,
+      6,
+      9,
+      1,
+      4,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      7,
+      4,
+      6,
+      8,
+      3,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      7,
+      0,
+      4
+    ],
+    [
+      2,
+      7,
+      0,
+      0,
+      0,
+      8,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      2,
+      1,
+      0,
+      0,
+      3,
+      4,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      2,
+      5,
+      0,
+      0
+    ],
+    [
+      5,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      9,
+      0
+    ]
+  ],
+  "solution": [
+    [
+      4,
+      2,
+      9,
+      5,
+      3,
+      7,
+      1,
+      6,
+      8
+    ],
+    [
+      7,
+      3,
+      8,
+      6,
+      9,
+      1,
+      4,
+      2,
+      5
+    ],
+    [
+      6,
+      5,
+      1,
+      2,
+      8,
+      4,
+      9,
+      7,
+      3
+    ],
+    [
+      9,
+      1,
+      5,
+      7,
+      4,
+      6,
+      8,
+      3,
+      2
+    ],
+    [
+      3,
+      8,
+      6,
+      9,
+      2,
+      5,
+      7,
+      1,
+      4
+    ],
+    [
+      2,
+      7,
+      4,
+      3,
+      1,
+      8,
+      6,
+      5,
+      9
+    ],
+    [
+      8,
+      6,
+      2,
+      1,
+      5,
+      9,
+      3,
+      4,
+      7
+    ],
+    [
+      1,
+      9,
+      3,
+      4,
+      7,
+      2,
+      5,
+      8,
+      6
+    ],
+    [
+      5,
+      4,
+      7,
+      8,
+      6,
+      3,
+      2,
+      9,
+      1
+    ]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-aed36014-e47b-44fa-b001-3550ccb3435d\",\"request_id\":\"aed36014-e47b-44fa-b001-3550ccb3435d\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.11233329772949219,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-aed36014-e47b-44fa-b001-3550ccb3435d\",\"request_id\":\"aed36014-e47b-44fa-b001-3550ccb3435d\"}"
+    },
+    {
+      "sample_index": 1,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-5a33f4fd-be83-4f4e-aff2-849ae91da295\",\"request_id\":\"5a33f4fd-be83-4f4e-aff2-849ae91da295\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.0985565185546875,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-5a33f4fd-be83-4f4e-aff2-849ae91da295\",\"request_id\":\"5a33f4fd-be83-4f4e-aff2-849ae91da295\"}"
+    },
+    {
+      "sample_index": 2,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-01896f04-71b4-44c2-a908-f237266e9128\",\"request_id\":\"01896f04-71b4-44c2-a908-f237266e9128\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.10634183883666992,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-01896f04-71b4-44c2-a908-f237266e9128\",\"request_id\":\"01896f04-71b4-44c2-a908-f237266e9128\"}"
+    },
+    {
+      "sample_index": 3,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-5b9a89e9-f803-423e-a15b-69d20b825088\",\"request_id\":\"5b9a89e9-f803-423e-a15b-69d20b825088\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.11211204528808594,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-5b9a89e9-f803-423e-a15b-69d20b825088\",\"request_id\":\"5b9a89e9-f803-423e-a15b-69d20b825088\"}"
+    },
+    {
+      "sample_index": 4,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-960a7cfd-6d07-4ee6-9560-7af57f4d9a6e\",\"request_id\":\"960a7cfd-6d07-4ee6-9560-7af57f4d9a6e\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.1052408218383789,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-960a7cfd-6d07-4ee6-9560-7af57f4d9a6e\",\"request_id\":\"960a7cfd-6d07-4ee6-9560-7af57f4d9a6e\"}"
+    },
+    {
+      "sample_index": 5,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-0875fc11-9ee4-4ddf-80c7-8c71e3c39112\",\"request_id\":\"0875fc11-9ee4-4ddf-80c7-8c71e3c39112\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.0945425033569336,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-0875fc11-9ee4-4ddf-80c7-8c71e3c39112\",\"request_id\":\"0875fc11-9ee4-4ddf-80c7-8c71e3c39112\"}"
+    },
+    {
+      "sample_index": 6,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-83196a19-e3dd-452d-be27-cc838b1b8eea\",\"request_id\":\"83196a19-e3dd-452d-be27-cc838b1b8eea\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.10517287254333496,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-83196a19-e3dd-452d-be27-cc838b1b8eea\",\"request_id\":\"83196a19-e3dd-452d-be27-cc838b1b8eea\"}"
+    },
+    {
+      "sample_index": 7,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-dd2d0734-afbc-4c5e-b996-e25f46c98b6c\",\"request_id\":\"dd2d0734-afbc-4c5e-b996-e25f46c98b6c\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.09234905242919922,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-dd2d0734-afbc-4c5e-b996-e25f46c98b6c\",\"request_id\":\"dd2d0734-afbc-4c5e-b996-e25f46c98b6c\"}"
+    },
+    {
+      "sample_index": 8,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-3f39c45b-5609-49bd-9281-be6629f45b38\",\"request_id\":\"3f39c45b-5609-49bd-9281-be6629f45b38\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.1122596263885498,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-3f39c45b-5609-49bd-9281-be6629f45b38\",\"request_id\":\"3f39c45b-5609-49bd-9281-be6629f45b38\"}"
+    },
+    {
+      "sample_index": 9,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n4 . . . 3 . . . 8\n7 3 . 6 9 1 4 . .\n. . 1 2 . . . . .\n. . . 7 4 6 8 3 .\n. . . . . . 7 . 4\n2 7 . . . 8 . . .\n. . 2 1 . . 3 4 .\n1 . . . . 2 5 . .\n5 . . . . . . 9 .\n",
+      "raw_answer": "[ERROR] qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-e080bf6e-2ac7-485e-a756-76c6ea86101d\",\"request_id\":\"e080bf6e-2ac7-485e-a756-76c6ea86101d\"}",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 0.10677623748779297,
+      "error": "qwen 接口返回错误 400: {\"error\":{\"message\":\"Access denied, please make sure your account is in good standing. For details, see: https://help.aliyun.com/zh/model-studio/error-code#overdue-payment\",\"type\":\"Arrearage\",\"param\":null,\"code\":\"Arrearage\"},\"id\":\"chatcmpl-e080bf6e-2ac7-485e-a756-76c6ea86101d\",\"request_id\":\"e080bf6e-2ac7-485e-a756-76c6ea86101d\"}"
+    }
+  ]
+}

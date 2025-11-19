@@ -1,0 +1,174 @@
+2025-11-18 17:23:55.364 | INFO     | __main__:main:310 - Evaluating 10 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=qwen, model=qwen3-max, temperature=0.0, samples=10
+2025-11-18 17:23:55.365 | INFO     | __main__:main:328 - 
+--- Puzzle 1/10 ---
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:133 - Evaluating puzzle: [[0, 0, 0, 0, 0, 0, 9, 0, 0], [6, 3, 0, 0, 4, 0, 0, 8, 0], [0, 0, 2, 0, 6, 0, 0, 0, 4], [0, 0, 0, 0, 1, 0, 7, 5, 8], [4, 0, 0, 0, 0, 0, 6, 2, 9], [0, 8, 9, 0, 2, 0, 0, 0, 3], [5, 0, 1, 0, 0, 0, 8, 0, 0], [0, 0, 0, 8, 0, 0, 0, 0, 6], [8, 7, 0, 5, 3, 2, 0, 0, 0]]
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:134 - Solution: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:135 - Provider: qwen
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:136 - Model: qwen3-max
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:137 - Temperature: 0.0
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:138 - Num samples: 10
+2025-11-18 17:23:55.365 | DEBUG    | __main__:evaluate_puzzle:139 - Seed: None
+2025-11-18 17:23:55.478 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:23:55.478 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:25:55.752 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:25:55.753 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:27:55.991 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:27:55.991 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:29:56.199 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:29:56.200 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:31:56.439 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:31:56.439 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:33:56.773 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:33:56.774 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:35:57.074 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:35:57.075 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:37:57.375 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:37:57.375 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:39:57.573 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:39:57.573 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:41:57.908 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-18 17:41:57.908 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2
+2025-11-18 17:43:58.060 | INFO     | __main__:main:379 - [1/10] ✗ correct_samples=0/10
+2025-11-18 17:43:58.061 | INFO     | __main__:main:328 - 
+--- Puzzle 2/10 ---
+2025-11-18 17:43:58.061 | DEBUG    | __main__:evaluate_puzzle:133 - Evaluating puzzle: [[0, 0, 6, 0, 0, 9, 0, 2, 0], [0, 7, 0, 0, 0, 8, 0, 0, 0], [8, 5, 0, 0, 0, 4, 9, 0, 0], [0, 0, 3, 9, 0, 0, 0, 5, 2], [5, 0, 0, 0, 8, 3, 1, 4, 0], [4, 0, 0, 0, 0, 0, 0, 0, 9], [1, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 8, 4, 9, 7, 5, 0, 0], [0, 0, 7, 2, 1, 0, 0, 0, 0]]
+2025-11-18 17:43:58.062 | DEBUG    | __main__:evaluate_puzzle:134 - Solution: [[3, 1, 6, 5, 7, 9, 4, 2, 8], [9, 7, 4, 3, 2, 8, 6, 1, 5], [8, 5, 2, 1, 6, 4, 9, 7, 3], [7, 6, 3, 9, 4, 1, 8, 5, 2], [5, 2, 9, 7, 8, 3, 1, 4, 6], [4, 8, 1, 6, 5, 2, 7, 3, 9], [1, 4, 5, 8, 3, 6, 2, 9, 7], [2, 3, 8, 4, 9, 7, 5, 6, 1], [6, 9, 7, 2, 1, 5, 3, 8, 4]]
+2025-11-18 17:43:58.062 | DEBUG    | __main__:evaluate_puzzle:135 - Provider: qwen
+2025-11-18 17:43:58.062 | DEBUG    | __main__:evaluate_puzzle:136 - Model: qwen3-max
+2025-11-18 17:43:58.062 | DEBUG    | __main__:evaluate_puzzle:137 - Temperature: 0.0
+2025-11-18 17:43:58.062 | DEBUG    | __main__:evaluate_puzzle:138 - Num samples: 10
+2025-11-18 17:43:58.063 | DEBUG    | __main__:evaluate_puzzle:139 - Seed: None
+2025-11-18 17:43:58.127 | DEBUG    | __main__:evaluate_puzzle:144 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+
+2025-11-18 17:43:58.128 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2

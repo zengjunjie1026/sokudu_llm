@@ -17,7 +17,7 @@ import shutil
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from sudoku_solver import SudokuSolver
 
@@ -40,13 +40,12 @@ USER_PROMPT_TEMPLATE = (
 )
 
 FEEDBACK_PROMPT_TEMPLATE = (
-    "上一轮你的答案存在错误，请在严格遵守以下规则的前提下重新解答：\n"
-    "- 仍然禁止使用任何外部工具或程序，也不要声称使用了工具。\n"
+    "之前的回答中仍存在错误，请参考下方清单逐项修正：\n"
+    "- 禁止使用任何外部工具或程序，也不要声称使用了工具。\n"
     "- 输出 9 行，每行 9 个数字（空格分隔），在答案之后再给出必要的说明。\n"
-    "- 必须修正列出的所有问题，确保与题面给出的已知数字完全一致。\n\n"
-    "上一轮的答案：\n{last_answer}\n\n"
-    "发现的问题：\n{issues}\n\n"
-    "请重新给出完整解答。题目再次提供如下：\n{puzzle}\n"
+    "- 必须确保与题面给出的已知数字完全一致，并修复所有列出的问题。\n\n"
+    "{history}\n\n"
+    "题目再次提供如下：\n{puzzle}\n"
 )
 
 def board_to_text(board: Sequence[Sequence[int]]) -> str:
@@ -149,13 +148,22 @@ class SudokuChatSession:
 
     def build_feedback_prompt(
         self,
-        last_answer: str,
-        last_issues: Sequence[str],
+        history: Sequence[Tuple[str, Sequence[str]]],
     ) -> str:
-        issues_text = "\n".join(f"- {issue}" for issue in last_issues) if last_issues else "- 未提供问题详情"
+        sections: List[str] = []
+        for idx, (answer, issues) in enumerate(history, start=1):
+            cleaned_answer = answer.strip() or "(未识别到有效答案)"
+            if issues:
+                issues_text = "\n".join(f"    - {issue}" for issue in issues)
+            else:
+                issues_text = "    - 未提供问题详情"
+            sections.append(
+                f"回答 {idx}：\n{cleaned_answer}\n存在的问题：\n{issues_text}"
+            )
+
+        history_text = "\n\n".join(sections) if sections else "(暂无历史记录)"
         return FEEDBACK_PROMPT_TEMPLATE.format(
-            last_answer=last_answer.strip() or "(上一轮没有识别出有效答案)",
-            issues=issues_text,
+            history=history_text,
             puzzle=board_to_text(self.puzzle),
         )
 
@@ -263,16 +271,6 @@ class SudokuChatSession:
                         f"第 {box_row + 1} 行第 {box_col + 1} 宫不符合数独规则：{'; '.join(issue_parts)}。"
                     )
 
-        # 最终与基准解比较
-        mismatch = first_mismatch(candidate, self.correct_solution)
-        if mismatch is not None:
-            r, c = mismatch
-            issues.append(
-                "与内部验证解不同："
-                f"第 {r + 1} 行第 {c + 1} 列回答为 {candidate[r][c]}，"
-                f"而内部解为 {self.correct_solution[r][c]}。"
-            )
-
         is_correct = not issues
         return SudokuCheckResult(is_correct=is_correct, issues=issues, parsed_board=candidate)
 
@@ -341,7 +339,8 @@ def run_session(
     history_dir: Path,
     holes: int,
     max_rounds: int,
-) -> None:
+    puzzle_override: Optional[Sequence[Sequence[int]]] = None,
+) -> Dict[str, Any]:
     history_dir = history_dir.resolve()
     history_dir.mkdir(parents=True, exist_ok=True)
 
@@ -359,7 +358,10 @@ def run_session(
                     continue
         print(f"🧹 已清空历史记录目录，删除 {removed} 个历史条目。")
 
-    puzzle = generate_random_puzzle(holes=holes)
+    if puzzle_override is not None:
+        puzzle = [list(row) for row in puzzle_override]
+    else:
+        puzzle = generate_random_puzzle(holes=holes)
     session_ts = int(time.time() * 1000)
     session_dir = history_dir / f"session_{session_ts}"
 
@@ -376,6 +378,7 @@ def run_session(
 
     last_answer_text = ""
     last_result: Optional[SudokuCheckResult] = None
+    attempt_history: List[Tuple[str, List[str]]] = []
     round_count = 0
     final_result: Optional[SudokuCheckResult] = None
     success = False
@@ -391,19 +394,38 @@ def run_session(
                 if last_result and last_result.parsed_board
                 else last_answer_text
             )
-            user_prompt = session.build_feedback_prompt(
-                last_answer=answer_snapshot,
-                last_issues=last_result.issues if last_result else [],
-            )
+            user_prompt = session.build_feedback_prompt(history=attempt_history)
 
         try:
             assistant_reply, reasoning_log = session.request_solution(user_prompt)
         except LLMClientError as exc:  # pragma: no cover - 运行期容错
             print(f"❌ 调用 {provider} 接口失败：{exc}")
-            return
+            return {
+                "model": model,
+                "temperature": temperature,
+                "provider": provider,
+                "timestamp": session.created_at,
+                "rounds": round_count,
+                "max_rounds": max_rounds,
+                "success": False,
+                "puzzle": board_to_text(puzzle),
+                "conversation_file": str(session.history_file.name),
+                "error": str(exc),
+            }
         except Exception as exc:  # pragma: no cover - 运行期容错
             print(f"❌ 调用 {provider} 接口出现未知错误：{exc}")
-            return
+            return {
+                "model": model,
+                "temperature": temperature,
+                "provider": provider,
+                "timestamp": session.created_at,
+                "rounds": round_count,
+                "max_rounds": max_rounds,
+                "success": False,
+                "puzzle": board_to_text(puzzle),
+                "conversation_file": str(session.history_file.name),
+                "error": str(exc),
+            }
 
         print(f"\n🤖 {provider} 的完整回复：\n")
         print(assistant_reply or "(未识别到任何回答内容)")
@@ -437,6 +459,13 @@ def run_session(
 
         last_result = result
         last_answer_text = assistant_reply
+        attempt_history.append(
+            (
+                assistant_reply.strip()
+                or (board_to_text(result.parsed_board) if result.parsed_board else "(未识别到有效答案)"),
+                list(result.issues),
+            )
+        )
     else:
         print(f"\n⚠️ 已进行 {max_rounds} 轮对话，仍未获得正确解答，请稍后重试或调整提示。")
 
@@ -450,6 +479,7 @@ def run_session(
         "success": success,
         "puzzle": board_to_text(puzzle),
         "conversation_file": str(session.history_file.name),
+        "error": None,
     }
     if final_result:
         summary["final_issues"] = final_result.issues
@@ -463,6 +493,133 @@ def run_session(
     print("\n📁 会话记录目录:", session.session_dir)
     print("   - 对话文件:", session.history_file)
     print("   - 概要文件:", summary_path)
+
+    return summary
+
+
+def load_dataset_puzzles(dataset_path: Path) -> List[List[List[int]]]:
+    dataset_path = dataset_path.resolve()
+    with dataset_path.open("r", encoding="utf-8") as fh:
+        payload = json.load(fh)
+
+    puzzles = payload.get("puzzles")
+    if not isinstance(puzzles, list):
+        raise ValueError("数据集缺少 puzzles 列表。")
+
+    extracted: List[List[List[int]]] = []
+    for entry in puzzles:
+        puzzle = entry.get("puzzle")
+        if not isinstance(puzzle, list):
+            continue
+        extracted.append(puzzle)
+    return extracted
+
+
+def run_dataset_benchmark(
+    dataset_path: Path,
+    limit: int,
+    model: str,
+    temperature: float,
+    provider: str,
+    reset: bool,
+    history_dir: Path,
+    max_rounds: int,
+    retry_attempts: int,
+) -> None:
+    puzzles = load_dataset_puzzles(dataset_path)
+    limit = max(0, min(limit, len(puzzles)))
+    if limit == 0:
+        print(f"⚠️ 数据集为空或 limit=0：{dataset_path}")
+        return
+
+    print(
+        f"📚 使用数据集 {dataset_path} 的前 {limit} 道题，评估模型 {provider}:{model} "
+        f"(temperature={temperature}, max_rounds={max_rounds})"
+    )
+
+    success_count = 0
+    total_rounds = 0
+    per_puzzle_rounds: List[int] = []
+    per_puzzle_success: List[bool] = []
+    skipped_puzzles: List[Dict[str, Any]] = []
+
+    for idx in range(limit):
+        print(f"\n=== 数据集题目 {idx + 1}/{limit} ===")
+        summary: Optional[Dict[str, Any]] = None
+        last_error: Optional[str] = None
+
+        for attempt in range(1, max(1, retry_attempts) + 1):
+            summary = run_session(
+                model=model,
+                temperature=temperature,
+                provider=provider,
+                reset=reset and idx == 0 and attempt == 1,
+                history_dir=history_dir,
+                holes=0,
+                max_rounds=max_rounds,
+                puzzle_override=puzzles[idx],
+            )
+            if summary is None:
+                last_error = "unknown failure"
+                print(
+                    f"⚠️ 题目 {idx + 1} 第 {attempt}/{retry_attempts} 次尝试失败：未知原因"
+                )
+                time.sleep(1)
+                continue
+            if summary.get("error"):
+                last_error = summary["error"]
+                print(
+                    f"⚠️ 题目 {idx + 1} 第 {attempt}/{retry_attempts} 次尝试失败：{last_error}"
+                )
+                time.sleep(1)
+                continue
+            break
+
+        if summary is None or summary.get("error"):
+            print(f"🚫 题目 {idx + 1} 多次重试失败，跳过。")
+            skipped_puzzles.append(
+                {
+                    "index": idx,
+                    "error": last_error or "unknown failure",
+                    "attempts": retry_attempts,
+                }
+            )
+            per_puzzle_success.append(False)
+            per_puzzle_rounds.append(0)
+            continue
+
+        per_puzzle_success.append(summary.get("success", False))
+        per_puzzle_rounds.append(summary.get("rounds", max_rounds))
+        if summary.get("success"):
+            success_count += 1
+            total_rounds += summary.get("rounds", 0)
+
+    print("\n=== 数据集评估总结 ===")
+    success_rate = success_count / limit
+    avg_rounds = total_rounds / success_count if success_count else None
+    print(f"总题目数: {limit}")
+    print(f"成功题目数: {success_count} ({success_rate:.1%})")
+    if avg_rounds is not None:
+        print(f"平均成功轮数: {avg_rounds:.2f}")
+    else:
+        print("平均成功轮数: 无成功题目")
+
+    if skipped_puzzles:
+        skipped_path = history_dir.resolve() / "dataset_skipped.json"
+        record = {
+            "dataset": str(dataset_path),
+            "model": model,
+            "provider": provider,
+            "temperature": temperature,
+            "max_rounds": max_rounds,
+            "retry_attempts": retry_attempts,
+            "failed_puzzles": skipped_puzzles,
+        }
+        with skipped_path.open("w", encoding="utf-8") as fh:
+            json.dump(record, fh, ensure_ascii=False, indent=2)
+        print(f"⚠️ 有 {len(skipped_puzzles)} 道题未完成，已记录在 {skipped_path}")
+    else:
+        print("所有题目均已尝试完成。")
 
 
 def parse_args() -> argparse.Namespace:
@@ -503,17 +660,48 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="允许与模型进行的最大轮数，默认为 10",
     )
+    parser.add_argument(
+        "--dataset",
+        type=Path,
+        default=None,
+        help="指定数据集 JSON（如 sokudu_dataset/sudoku_9x9.json）时，将按顺序使用题目，而非随机生成。",
+    )
+    parser.add_argument(
+        "--dataset-limit",
+        type=int,
+        default=100,
+        help="使用数据集模式时，读取的题目数量（默认 100）。",
+    )
+    parser.add_argument(
+        "--retry-attempts",
+        type=int,
+        default=10,
+        help="调用失败时的最大重试次数（默认 10 次）。",
+    )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    run_session(
-        model=args.model,
-        temperature=args.temperature,
-        provider=args.provider,
-        reset=args.reset,
-        history_dir=args.history_dir,
-        holes=args.holes,
-        max_rounds=max(args.max_rounds, 1),
-    )
+    if args.dataset:
+        run_dataset_benchmark(
+            dataset_path=args.dataset,
+            limit=args.dataset_limit,
+            model=args.model,
+            temperature=args.temperature,
+            provider=args.provider,
+            reset=args.reset,
+            history_dir=args.history_dir,
+            max_rounds=max(args.max_rounds, 1),
+            retry_attempts=max(1, args.retry_attempts),
+        )
+    else:
+        run_session(
+            model=args.model,
+            temperature=args.temperature,
+            provider=args.provider,
+            reset=args.reset,
+            history_dir=args.history_dir,
+            holes=args.holes,
+            max_rounds=max(args.max_rounds, 1),
+        )

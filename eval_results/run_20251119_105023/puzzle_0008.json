@@ -1,0 +1,217 @@
+{
+  "index": 7,
+  "puzzle": [
+    [3, 0, 7, 2, 0, 9, 0, 0, 0],
+    [0, 0, 0, 8, 0, 3, 7, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [0, 0, 0, 9, 0, 8, 0, 1, 0],
+    [9, 0, 0, 1, 4, 6, 8, 7, 0],
+    [1, 6, 0, 0, 0, 0, 0, 2, 0],
+    [4, 8, 3, 0, 0, 0, 0, 5, 0],
+    [0, 0, 0, 6, 0, 0, 3, 0, 0],
+    [0, 7, 0, 3, 5, 0, 0, 0, 9]
+  ],
+  "solution": [
+    [3, 5, 7, 2, 1, 9, 4, 6, 8],
+    [2, 4, 1, 8, 6, 3, 7, 9, 5],
+    [8, 9, 6, 4, 7, 5, 2, 3, 1],
+    [7, 3, 4, 9, 2, 8, 5, 1, 6],
+    [9, 2, 5, 1, 4, 6, 8, 7, 3],
+    [1, 6, 8, 5, 3, 7, 9, 2, 4],
+    [4, 8, 3, 7, 9, 1, 6, 5, 2],
+    [5, 1, 9, 6, 8, 2, 3, 4, 7],
+    [6, 7, 2, 3, 5, 4, 1, 8, 9]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n5 4 9 8 1 3 7 6 2  \n8 2 6 4 7 5 9 3 1  \n7 3 4 9 2 8 6 1 5  \n9 5 2 1 4 6 8 7 3  \n1 6 8 5 3 7 4 2 9  \n4 8 3 7 9 1 2 5 6  \n2 9 5 6 8 4 3 1 7  \n6 7 1 3 5 2 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [5, 4, 9, 8, 1, 3, 7, 6, 2],
+        [8, 2, 6, 4, 7, 5, 9, 3, 1],
+        [7, 3, 4, 9, 2, 8, 6, 1, 5],
+        [9, 5, 2, 1, 4, 6, 8, 7, 3],
+        [1, 6, 8, 5, 3, 7, 4, 2, 9],
+        [4, 8, 3, 7, 9, 1, 2, 5, 6],
+        [2, 9, 5, 6, 8, 4, 3, 1, 7],
+        [6, 7, 1, 3, 5, 2, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 6.033604383468628,
+      "error": null
+    },
+    {
+      "sample_index": 1,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n2 9 6 8 1 3 7 5 4  \n5 4 8 4 7 5 2 9 1  \n7 3 2 9 2 8 4 1 5  \n9 5 4 1 4 6 8 7 3  \n1 6 5 7 3 4 9 2 6  \n4 8 3 1 9 7 6 5 2  \n9 2 1 6 8 2 3 4 7  \n6 7 2 3 5 1 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [2, 9, 6, 8, 1, 3, 7, 5, 4],
+        [5, 4, 8, 4, 7, 5, 2, 9, 1],
+        [7, 3, 2, 9, 2, 8, 4, 1, 5],
+        [9, 5, 4, 1, 4, 6, 8, 7, 3],
+        [1, 6, 5, 7, 3, 4, 9, 2, 6],
+        [4, 8, 3, 1, 9, 7, 6, 5, 2],
+        [9, 2, 1, 6, 8, 2, 3, 4, 7],
+        [6, 7, 2, 3, 5, 1, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.89886999130249,
+      "error": null
+    },
+    {
+      "sample_index": 2,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n5 4 9 8 1 3 7 6 2  \n8 2 6 4 7 5 9 3 1  \n7 3 4 9 2 8 6 1 5  \n9 5 2 1 4 6 8 7 3  \n1 6 8 5 3 7 4 2 9  \n4 8 3 7 9 1 2 5 6  \n2 9 5 6 8 4 3 1 7  \n6 7 1 3 5 2 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [5, 4, 9, 8, 1, 3, 7, 6, 2],
+        [8, 2, 6, 4, 7, 5, 9, 3, 1],
+        [7, 3, 4, 9, 2, 8, 6, 1, 5],
+        [9, 5, 2, 1, 4, 6, 8, 7, 3],
+        [1, 6, 8, 5, 3, 7, 4, 2, 9],
+        [4, 8, 3, 7, 9, 1, 2, 5, 6],
+        [2, 9, 5, 6, 8, 4, 3, 1, 7],
+        [6, 7, 1, 3, 5, 2, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.695760011672974,
+      "error": null
+    },
+    {
+      "sample_index": 3,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n2 9 6 8 1 3 7 5 4  \n5 4 8 4 7 5 2 9 1  \n7 3 2 9 2 8 4 1 5  \n9 5 4 1 4 6 8 7 2  \n1 6 5 7 3 4 9 2 6  \n4 8 3 1 9 2 6 5 7  \n9 2 1 6 8 7 3 4 1  \n6 7 2 3 5 1 4 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [2, 9, 6, 8, 1, 3, 7, 5, 4],
+        [5, 4, 8, 4, 7, 5, 2, 9, 1],
+        [7, 3, 2, 9, 2, 8, 4, 1, 5],
+        [9, 5, 4, 1, 4, 6, 8, 7, 2],
+        [1, 6, 5, 7, 3, 4, 9, 2, 6],
+        [4, 8, 3, 1, 9, 2, 6, 5, 7],
+        [9, 2, 1, 6, 8, 7, 3, 4, 1],
+        [6, 7, 2, 3, 5, 1, 4, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.854023456573486,
+      "error": null
+    },
+    {
+      "sample_index": 4,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n5 4 9 8 1 3 7 6 2  \n8 2 6 4 7 5 9 3 1  \n7 3 4 9 2 8 6 1 5  \n9 5 2 1 4 6 8 7 3  \n1 6 8 5 3 7 4 2 9  \n4 8 3 7 9 1 2 5 6  \n2 9 5 6 8 4 3 1 7  \n6 7 1 3 5 2 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [5, 4, 9, 8, 1, 3, 7, 6, 2],
+        [8, 2, 6, 4, 7, 5, 9, 3, 1],
+        [7, 3, 4, 9, 2, 8, 6, 1, 5],
+        [9, 5, 2, 1, 4, 6, 8, 7, 3],
+        [1, 6, 8, 5, 3, 7, 4, 2, 9],
+        [4, 8, 3, 7, 9, 1, 2, 5, 6],
+        [2, 9, 5, 6, 8, 4, 3, 1, 7],
+        [6, 7, 1, 3, 5, 2, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.807747840881348,
+      "error": null
+    },
+    {
+      "sample_index": 5,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n6 9 2 8 1 3 7 5 4  \n8 4 5 7 9 4 2 3 1  \n2 3 4 9 7 8 6 1 5  \n9 5 1 1 4 6 8 7 2  \n1 6 8 5 3 7 4 2 9  \n4 8 3 1 2 1 9 5 7  \n5 2 9 6 8 5 3 4 1  \n6 7 1 3 5 2 4 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [6, 9, 2, 8, 1, 3, 7, 5, 4],
+        [8, 4, 5, 7, 9, 4, 2, 3, 1],
+        [2, 3, 4, 9, 7, 8, 6, 1, 5],
+        [9, 5, 1, 1, 4, 6, 8, 7, 2],
+        [1, 6, 8, 5, 3, 7, 4, 2, 9],
+        [4, 8, 3, 1, 2, 1, 9, 5, 7],
+        [5, 2, 9, 6, 8, 5, 3, 4, 1],
+        [6, 7, 1, 3, 5, 2, 4, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.93409276008606,
+      "error": null
+    },
+    {
+      "sample_index": 6,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n2 9 6 8 1 3 7 5 4  \n5 4 8 4 7 5 2 9 1  \n7 3 2 9 2 8 4 1 5  \n9 5 4 1 4 6 8 7 3  \n1 6 5 7 3 4 9 2 6  \n4 8 3 1 9 2 6 5 7  \n9 2 1 6 8 7 3 4 2  \n6 7 2 3 5 1 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [2, 9, 6, 8, 1, 3, 7, 5, 4],
+        [5, 4, 8, 4, 7, 5, 2, 9, 1],
+        [7, 3, 2, 9, 2, 8, 4, 1, 5],
+        [9, 5, 4, 1, 4, 6, 8, 7, 3],
+        [1, 6, 5, 7, 3, 4, 9, 2, 6],
+        [4, 8, 3, 1, 9, 2, 6, 5, 7],
+        [9, 2, 1, 6, 8, 7, 3, 4, 2],
+        [6, 7, 2, 3, 5, 1, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.592698812484741,
+      "error": null
+    },
+    {
+      "sample_index": 7,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n2 9 6 8 1 3 7 5 4  \n5 4 8 4 7 5 2 9 1  \n7 3 2 9 2 8 4 1 5  \n9 5 4 1 4 6 8 7 2  \n1 6 5 7 3 4 9 2 6  \n4 8 3 1 9 2 6 5 7  \n9 2 1 6 8 7 3 4 5  \n6 7 2 3 5 1 4 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [2, 9, 6, 8, 1, 3, 7, 5, 4],
+        [5, 4, 8, 4, 7, 5, 2, 9, 1],
+        [7, 3, 2, 9, 2, 8, 4, 1, 5],
+        [9, 5, 4, 1, 4, 6, 8, 7, 2],
+        [1, 6, 5, 7, 3, 4, 9, 2, 6],
+        [4, 8, 3, 1, 9, 2, 6, 5, 7],
+        [9, 2, 1, 6, 8, 7, 3, 4, 5],
+        [6, 7, 2, 3, 5, 1, 4, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.760986566543579,
+      "error": null
+    },
+    {
+      "sample_index": 8,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n5 4 9 8 1 3 7 6 2  \n8 2 6 4 7 5 9 3 1  \n7 3 4 9 2 8 6 1 5  \n9 5 2 1 4 6 8 7 3  \n1 6 8 5 3 7 4 2 9  \n4 8 3 7 9 1 2 5 6  \n2 9 5 6 8 4 3 1 7  \n6 7 1 3 5 2 1 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [5, 4, 9, 8, 1, 3, 7, 6, 2],
+        [8, 2, 6, 4, 7, 5, 9, 3, 1],
+        [7, 3, 4, 9, 2, 8, 6, 1, 5],
+        [9, 5, 2, 1, 4, 6, 8, 7, 3],
+        [1, 6, 8, 5, 3, 7, 4, 2, 9],
+        [4, 8, 3, 7, 9, 1, 2, 5, 6],
+        [2, 9, 5, 6, 8, 4, 3, 1, 7],
+        [6, 7, 1, 3, 5, 2, 1, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.751477241516113,
+      "error": null
+    },
+    {
+      "sample_index": 9,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n3 . 7 2 . 9 . . .\n. . . 8 . 3 7 . .\n. . . . . . . . 1\n. . . 9 . 8 . 1 .\n9 . . 1 4 6 8 7 .\n1 6 . . . . . 2 .\n4 8 3 . . . . 5 .\n. . . 6 . . 3 . .\n. 7 . 3 5 . . . 9\n",
+      "raw_answer": "3 1 7 2 6 9 5 4 8  \n2 9 6 8 1 3 7 5 4  \n5 4 8 4 7 5 2 9 1  \n7 3 2 9 2 8 4 1 5  \n9 5 4 1 4 6 8 7 2  \n1 6 5 7 3 4 9 2 6  \n4 8 3 1 9 2 6 5 7  \n8 2 9 6 4 7 3 1 5  \n6 7 1 3 5 1 4 8 9",
+      "parsed_board": [
+        [3, 1, 7, 2, 6, 9, 5, 4, 8],
+        [2, 9, 6, 8, 1, 3, 7, 5, 4],
+        [5, 4, 8, 4, 7, 5, 2, 9, 1],
+        [7, 3, 2, 9, 2, 8, 4, 1, 5],
+        [9, 5, 4, 1, 4, 6, 8, 7, 2],
+        [1, 6, 5, 7, 3, 4, 9, 2, 6],
+        [4, 8, 3, 1, 9, 2, 6, 5, 7],
+        [8, 2, 9, 6, 4, 7, 3, 1, 5],
+        [6, 7, 1, 3, 5, 1, 4, 8, 9]
+      ],
+      "is_correct": false,
+      "latency": 5.845552444458008,
+      "error": null
+    }
+  ]
+}
