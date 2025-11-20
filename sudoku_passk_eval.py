@@ -10,14 +10,15 @@ Usage example
 
     python sudoku_passk_eval.py \
         --dataset /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json \
-        --provider qwen \
-        --model qwen3-max \
+        --provider glm \
+        --model glm-4 \
         --num-samples 10 \
-        --temperature 0.8 \
+        --temperature 0.7 \
         --limit 100
 
-Environment variable `DASHSCOPE_API_KEY` must be set when using the `qwen`
-provider. See `llm_client.py` for more details about provider configuration.
+Environment variables `GLM_API_KEY` (for provider `glm`) or `DASHSCOPE_API_KEY`
+(for provider `qwen`) must be set before running the script. See
+`llm_client.py` for more details about provider configuration.
 """
 
 from __future__ import annotations
@@ -255,19 +256,19 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--provider",
         type=str,
-        default="qwen",
-        help="LLM provider name (default: qwen).",
+        default="glm",
+        help="LLM provider name (default: glm).",
     )
     parser.add_argument(
         "--model",
         type=str,
-        default="qwen3-max",
-        help="LLM model identifier (default: qwen3-max).",
+        default="glm-4",
+        help="LLM model identifier (default: glm-4).",
     )
     parser.add_argument(
         "--temperature",
         type=float,
-        default=0.8,
+        default=0.7,
         help="Sampling temperature for the LLM.",
     )
     parser.add_argument(

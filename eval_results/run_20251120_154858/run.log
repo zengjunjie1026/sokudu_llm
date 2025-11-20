@@ -1,0 +1,564 @@
+2025-11-20 15:48:58.171 | INFO     | __main__:main:403 - Evaluating 10 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=qwen, model=qwen-plus, temperature=0.0, samples=1
+2025-11-20 15:48:58.171 | INFO     | __main__:main:421 - 
+--- Puzzle 1/10 ---
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 0, 0, 0, 0, 0, 9, 0, 0], [6, 3, 0, 0, 4, 0, 0, 8, 0], [0, 0, 2, 0, 6, 0, 0, 0, 4], [0, 0, 0, 0, 1, 0, 7, 5, 8], [4, 0, 0, 0, 0, 0, 6, 2, 9], [0, 8, 9, 0, 2, 0, 0, 0, 3], [5, 0, 1, 0, 0, 0, 8, 0, 0], [0, 0, 0, 8, 0, 0, 0, 0, 6], [8, 7, 0, 5, 3, 2, 0, 0, 0]]
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:48:58.172 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:48:58.286 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-20 15:48:58.287 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:02.075 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=1 4 5 2 8 7 9 6 3
+2025-11-20 15:49:02.075 | INFO     | __main__:evaluate_puzzle:176 - Answer: 1 4 5 2 8 7 9 6 3
+6 3 7 9 4 1 2 8 5
+9 1 2 3 6 5 3 7 4
+2 6 3 4 1 9 7 5 8
+4 5 7 3 8 6 6 2 9
+7 8 9 6 2 4 1 4 3
+5 2 1 7 9 6 8 3 4
+3 9 4 8 7 1 5 1 6
+8 7 6 5 3 2 4 9 1
+2025-11-20 15:49:02.076 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[1, 4, 5, 2, 8, 7, 9, 6, 3], [6, 3, 7, 9, 4, 1, 2, 8, 5], [9, 1, 2, 3, 6, 5, 3, 7, 4], [2, 6, 3, 4, 1, 9, 7, 5, 8], [4, 5, 7, 3, 8, 6, 6, 2, 9], [7, 8, 9, 6, 2, 4, 1, 4, 3], [5, 2, 1, 7, 9, 6, 8, 3, 4], [3, 9, 4, 8, 7, 1, 5, 1, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-20 15:49:02.076 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:02.076 | INFO     | __main__:evaluate_puzzle:195 - Latency: 3.790245294570923
+2025-11-20 15:49:02.077 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-20 15:49:02.077 | INFO     | __main__:evaluate_puzzle:197 - Answer: 1 4 5 2 8 7 9 6 3
+6 3 7 9 4 1 2 8 5
+9 1 2 3 6 5 3 7 4
+2 6 3 4 1 9 7 5 8
+4 5 7 3 8 6 6 2 9
+7 8 9 6 2 4 1 4 3
+5 2 1 7 9 6 8 3 4
+3 9 4 8 7 1 5 1 6
+8 7 6 5 3 2 4 9 1
+2025-11-20 15:49:02.078 | INFO     | __main__:main:471 - [1/10] ✗ correct_samples=0/1
+2025-11-20 15:49:02.078 | INFO     | __main__:main:421 - 
+--- Puzzle 2/10 ---
+2025-11-20 15:49:02.079 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 0, 6, 0, 0, 9, 0, 2, 0], [0, 7, 0, 0, 0, 8, 0, 0, 0], [8, 5, 0, 0, 0, 4, 9, 0, 0], [0, 0, 3, 9, 0, 0, 0, 5, 2], [5, 0, 0, 0, 8, 3, 1, 4, 0], [4, 0, 0, 0, 0, 0, 0, 0, 9], [1, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 8, 4, 9, 7, 5, 0, 0], [0, 0, 7, 2, 1, 0, 0, 0, 0]]
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[3, 1, 6, 5, 7, 9, 4, 2, 8], [9, 7, 4, 3, 2, 8, 6, 1, 5], [8, 5, 2, 1, 6, 4, 9, 7, 3], [7, 6, 3, 9, 4, 1, 8, 5, 2], [5, 2, 9, 7, 8, 3, 1, 4, 6], [4, 8, 1, 6, 5, 2, 7, 3, 9], [1, 4, 5, 8, 3, 6, 2, 9, 7], [2, 3, 8, 4, 9, 7, 5, 6, 1], [6, 9, 7, 2, 1, 5, 3, 8, 4]]
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:02.080 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:02.117 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+
+2025-11-20 15:49:02.117 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:05.635 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=4 3 6 5 7 9 8 2 1
+2025-11-20 15:49:05.636 | INFO     | __main__:evaluate_puzzle:176 - Answer: 4 3 6 5 7 9 8 2 1
+9 7 2 3 6 8 4 1 5
+8 5 1 7 2 4 9 6 3
+7 1 3 9 4 6 7 5 2
+5 9 2 6 8 3 1 4 7
+4 8 6 1 5 2 3 7 9
+1 6 9 8 3 5 2 7 4
+2 4 8 4 9 7 5 3 6
+3 2 7 2 1 6 4 9 8
+2025-11-20 15:49:05.636 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[4, 3, 6, 5, 7, 9, 8, 2, 1], [9, 7, 2, 3, 6, 8, 4, 1, 5], [8, 5, 1, 7, 2, 4, 9, 6, 3], [7, 1, 3, 9, 4, 6, 7, 5, 2], [5, 9, 2, 6, 8, 3, 1, 4, 7], [4, 8, 6, 1, 5, 2, 3, 7, 9], [1, 6, 9, 8, 3, 5, 2, 7, 4], [2, 4, 8, 4, 9, 7, 5, 3, 6], [3, 2, 7, 2, 1, 6, 4, 9, 8]]
+2025-11-20 15:49:05.637 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:05.637 | INFO     | __main__:evaluate_puzzle:195 - Latency: 3.520310401916504
+2025-11-20 15:49:05.637 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+
+2025-11-20 15:49:05.637 | INFO     | __main__:evaluate_puzzle:197 - Answer: 4 3 6 5 7 9 8 2 1
+9 7 2 3 6 8 4 1 5
+8 5 1 7 2 4 9 6 3
+7 1 3 9 4 6 7 5 2
+5 9 2 6 8 3 1 4 7
+4 8 6 1 5 2 3 7 9
+1 6 9 8 3 5 2 7 4
+2 4 8 4 9 7 5 3 6
+3 2 7 2 1 6 4 9 8
+2025-11-20 15:49:05.640 | INFO     | __main__:main:471 - [2/10] ✗ correct_samples=0/1
+2025-11-20 15:49:05.640 | INFO     | __main__:main:421 - 
+--- Puzzle 3/10 ---
+2025-11-20 15:49:05.641 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 2, 9, 0, 0, 8, 0, 0, 3], [0, 0, 0, 0, 2, 7, 5, 8, 0], [0, 0, 5, 6, 0, 0, 9, 4, 0], [7, 0, 0, 2, 6, 4, 3, 0, 0], [0, 0, 0, 0, 0, 0, 0, 7, 0], [0, 5, 3, 0, 7, 0, 0, 0, 0], [0, 1, 7, 0, 0, 0, 0, 0, 8], [6, 0, 0, 0, 0, 0, 1, 0, 0], [5, 0, 0, 4, 9, 0, 6, 0, 0]]
+2025-11-20 15:49:05.641 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[1, 2, 9, 5, 4, 8, 7, 6, 3], [3, 4, 6, 9, 2, 7, 5, 8, 1], [8, 7, 5, 6, 1, 3, 9, 4, 2], [7, 8, 1, 2, 6, 4, 3, 5, 9], [9, 6, 2, 1, 3, 5, 8, 7, 4], [4, 5, 3, 8, 7, 9, 2, 1, 6], [2, 1, 7, 3, 5, 6, 4, 9, 8], [6, 9, 4, 7, 8, 2, 1, 3, 5], [5, 3, 8, 4, 9, 1, 6, 2, 7]]
+2025-11-20 15:49:05.641 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:05.641 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:05.641 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:05.642 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:05.642 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:05.839 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 2 9 . . 8 . . 3
+. . . . 2 7 5 8 .
+. . 5 6 . . 9 4 .
+7 . . 2 6 4 3 . .
+. . . . . . . 7 .
+. 5 3 . 7 . . . .
+. 1 7 . . . . . 8
+6 . . . . . 1 . .
+5 . . 4 9 . 6 . .
+
+2025-11-20 15:49:05.839 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:11.998 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=4 2 9 5 1 8 7 6 3
+2025-11-20 15:49:11.999 | INFO     | __main__:evaluate_puzzle:176 - Answer: 4 2 9 5 1 8 7 6 3
+3 6 1 9 2 7 5 8 4
+8 7 5 6 3 1 9 4 2
+7 9 8 2 6 4 3 1 5
+1 4 6 3 8 9 2 7 5
+2 5 3 1 7 6 8 9 4
+9 1 7 6 5 3 4 2 8
+6 3 4 8 7 2 1 5 9
+5 8 2 4 9 1 6 3 7
+2025-11-20 15:49:11.999 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[4, 2, 9, 5, 1, 8, 7, 6, 3], [3, 6, 1, 9, 2, 7, 5, 8, 4], [8, 7, 5, 6, 3, 1, 9, 4, 2], [7, 9, 8, 2, 6, 4, 3, 1, 5], [1, 4, 6, 3, 8, 9, 2, 7, 5], [2, 5, 3, 1, 7, 6, 8, 9, 4], [9, 1, 7, 6, 5, 3, 4, 2, 8], [6, 3, 4, 8, 7, 2, 1, 5, 9], [5, 8, 2, 4, 9, 1, 6, 3, 7]]
+2025-11-20 15:49:11.999 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:11.999 | INFO     | __main__:evaluate_puzzle:195 - Latency: 6.16076135635376
+2025-11-20 15:49:12.000 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 2 9 . . 8 . . 3
+. . . . 2 7 5 8 .
+. . 5 6 . . 9 4 .
+7 . . 2 6 4 3 . .
+. . . . . . . 7 .
+. 5 3 . 7 . . . .
+. 1 7 . . . . . 8
+6 . . . . . 1 . .
+5 . . 4 9 . 6 . .
+
+2025-11-20 15:49:12.000 | INFO     | __main__:evaluate_puzzle:197 - Answer: 4 2 9 5 1 8 7 6 3
+3 6 1 9 2 7 5 8 4
+8 7 5 6 3 1 9 4 2
+7 9 8 2 6 4 3 1 5
+1 4 6 3 8 9 2 7 5
+2 5 3 1 7 6 8 9 4
+9 1 7 6 5 3 4 2 8
+6 3 4 8 7 2 1 5 9
+5 8 2 4 9 1 6 3 7
+2025-11-20 15:49:12.001 | INFO     | __main__:main:471 - [3/10] ✗ correct_samples=0/1
+2025-11-20 15:49:12.002 | INFO     | __main__:main:421 - 
+--- Puzzle 4/10 ---
+2025-11-20 15:49:12.002 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[7, 0, 0, 0, 0, 0, 0, 0, 0], [0, 4, 9, 0, 0, 0, 3, 0, 2], [2, 0, 0, 9, 0, 3, 0, 6, 0], [0, 0, 0, 0, 7, 0, 1, 3, 0], [0, 3, 1, 8, 9, 0, 0, 0, 0], [8, 0, 0, 0, 0, 1, 0, 2, 0], [1, 0, 4, 5, 6, 0, 2, 0, 0], [0, 6, 0, 2, 0, 0, 0, 5, 0], [0, 0, 7, 0, 0, 0, 6, 0, 1]]
+2025-11-20 15:49:12.002 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[7, 8, 3, 1, 2, 6, 9, 4, 5], [6, 4, 9, 7, 8, 5, 3, 1, 2], [2, 1, 5, 9, 4, 3, 8, 6, 7], [9, 5, 2, 6, 7, 4, 1, 3, 8], [4, 3, 1, 8, 9, 2, 5, 7, 6], [8, 7, 6, 3, 5, 1, 4, 2, 9], [1, 9, 4, 5, 6, 7, 2, 8, 3], [3, 6, 8, 2, 1, 9, 7, 5, 4], [5, 2, 7, 4, 3, 8, 6, 9, 1]]
+2025-11-20 15:49:12.002 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:12.003 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:12.003 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:12.003 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:12.003 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:12.060 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+7 . . . . . . . .
+. 4 9 . . . 3 . 2
+2 . . 9 . 3 . 6 .
+. . . . 7 . 1 3 .
+. 3 1 8 9 . . . .
+8 . . . . 1 . 2 .
+1 . 4 5 6 . 2 . .
+. 6 . 2 . . . 5 .
+. . 7 . . . 6 . 1
+
+2025-11-20 15:49:12.060 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:17.623 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=7 1 3 6 2 5 9 8 4
+2025-11-20 15:49:17.624 | INFO     | __main__:evaluate_puzzle:176 - Answer: 7 1 3 6 2 5 9 8 4
+6 4 9 7 8 1 3 1 2
+2 8 5 9 1 3 7 6 4
+4 9 6 2 7 8 1 3 5
+5 3 1 8 9 2 4 7 6
+8 7 2 6 4 1 5 2 9
+1 5 4 5 6 7 2 9 8
+9 6 8 2 1 4 8 5 7
+3 2 7 4 8 9 6 4 1
+2025-11-20 15:49:17.624 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[7, 1, 3, 6, 2, 5, 9, 8, 4], [6, 4, 9, 7, 8, 1, 3, 1, 2], [2, 8, 5, 9, 1, 3, 7, 6, 4], [4, 9, 6, 2, 7, 8, 1, 3, 5], [5, 3, 1, 8, 9, 2, 4, 7, 6], [8, 7, 2, 6, 4, 1, 5, 2, 9], [1, 5, 4, 5, 6, 7, 2, 9, 8], [9, 6, 8, 2, 1, 4, 8, 5, 7], [3, 2, 7, 4, 8, 9, 6, 4, 1]]
+2025-11-20 15:49:17.624 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:17.625 | INFO     | __main__:evaluate_puzzle:195 - Latency: 5.565082550048828
+2025-11-20 15:49:17.625 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+7 . . . . . . . .
+. 4 9 . . . 3 . 2
+2 . . 9 . 3 . 6 .
+. . . . 7 . 1 3 .
+. 3 1 8 9 . . . .
+8 . . . . 1 . 2 .
+1 . 4 5 6 . 2 . .
+. 6 . 2 . . . 5 .
+. . 7 . . . 6 . 1
+
+2025-11-20 15:49:17.625 | INFO     | __main__:evaluate_puzzle:197 - Answer: 7 1 3 6 2 5 9 8 4
+6 4 9 7 8 1 3 1 2
+2 8 5 9 1 3 7 6 4
+4 9 6 2 7 8 1 3 5
+5 3 1 8 9 2 4 7 6
+8 7 2 6 4 1 5 2 9
+1 5 4 5 6 7 2 9 8
+9 6 8 2 1 4 8 5 7
+3 2 7 4 8 9 6 4 1
+2025-11-20 15:49:17.627 | INFO     | __main__:main:471 - [4/10] ✗ correct_samples=0/1
+2025-11-20 15:49:17.627 | INFO     | __main__:main:421 - 
+--- Puzzle 5/10 ---
+2025-11-20 15:49:17.627 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 4, 0, 0, 0, 0, 3, 0, 0], [0, 0, 1, 0, 6, 0, 5, 0, 9], [0, 0, 9, 0, 0, 7, 6, 0, 2], [5, 0, 0, 0, 0, 0, 0, 0, 4], [2, 0, 0, 4, 7, 8, 0, 0, 0], [4, 1, 7, 0, 0, 5, 2, 0, 6], [0, 0, 0, 3, 0, 0, 0, 0, 0], [0, 0, 3, 0, 9, 0, 0, 0, 5], [9, 0, 0, 1, 5, 0, 0, 2, 0]]
+2025-11-20 15:49:17.627 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[6, 4, 2, 5, 1, 9, 3, 7, 8], [7, 8, 1, 2, 6, 3, 5, 4, 9], [3, 5, 9, 8, 4, 7, 6, 1, 2], [5, 9, 8, 6, 2, 1, 7, 3, 4], [2, 3, 6, 4, 7, 8, 9, 5, 1], [4, 1, 7, 9, 3, 5, 2, 8, 6], [1, 6, 5, 3, 8, 2, 4, 9, 7], [8, 2, 3, 7, 9, 4, 1, 6, 5], [9, 7, 4, 1, 5, 6, 8, 2, 3]]
+2025-11-20 15:49:17.628 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:17.628 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:17.628 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:17.628 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:17.628 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:17.822 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 4 . . . . 3 . .
+. . 1 . 6 . 5 . 9
+. . 9 . . 7 6 . 2
+5 . . . . . . . 4
+2 . . 4 7 8 . . .
+4 1 7 . . 5 2 . 6
+. . . 3 . . . . .
+. . 3 . 9 . . . 5
+9 . . 1 5 . . 2 .
+
+2025-11-20 15:49:17.822 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:20.982 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=6 4 2 9 8 1 3 7 7
+2025-11-20 15:49:20.983 | INFO     | __main__:evaluate_puzzle:176 - Answer: 6 4 2 9 8 1 3 7 7
+7 3 1 2 6 4 5 8 9
+8 5 9 3 4 7 6 1 2
+5 8 6 7 2 3 9 4 1
+2 9 4 4 7 8 1 5 3
+4 1 7 9 3 5 2 8 6
+1 2 5 3 7 6 8 9 4
+7 6 3 8 9 2 4 1 5
+9 7 8 1 5 4 7 2 3
+2025-11-20 15:49:20.983 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[6, 4, 2, 9, 8, 1, 3, 7, 7], [7, 3, 1, 2, 6, 4, 5, 8, 9], [8, 5, 9, 3, 4, 7, 6, 1, 2], [5, 8, 6, 7, 2, 3, 9, 4, 1], [2, 9, 4, 4, 7, 8, 1, 5, 3], [4, 1, 7, 9, 3, 5, 2, 8, 6], [1, 2, 5, 3, 7, 6, 8, 9, 4], [7, 6, 3, 8, 9, 2, 4, 1, 5], [9, 7, 8, 1, 5, 4, 7, 2, 3]]
+2025-11-20 15:49:20.983 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:20.984 | INFO     | __main__:evaluate_puzzle:195 - Latency: 3.161628007888794
+2025-11-20 15:49:20.984 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 4 . . . . 3 . .
+. . 1 . 6 . 5 . 9
+. . 9 . . 7 6 . 2
+5 . . . . . . . 4
+2 . . 4 7 8 . . .
+4 1 7 . . 5 2 . 6
+. . . 3 . . . . .
+. . 3 . 9 . . . 5
+9 . . 1 5 . . 2 .
+
+2025-11-20 15:49:20.984 | INFO     | __main__:evaluate_puzzle:197 - Answer: 6 4 2 9 8 1 3 7 7
+7 3 1 2 6 4 5 8 9
+8 5 9 3 4 7 6 1 2
+5 8 6 7 2 3 9 4 1
+2 9 4 4 7 8 1 5 3
+4 1 7 9 3 5 2 8 6
+1 2 5 3 7 6 8 9 4
+7 6 3 8 9 2 4 1 5
+9 7 8 1 5 4 7 2 3
+2025-11-20 15:49:20.985 | INFO     | __main__:main:471 - [5/10] ✗ correct_samples=0/1
+2025-11-20 15:49:20.986 | INFO     | __main__:main:421 - 
+--- Puzzle 6/10 ---
+2025-11-20 15:49:20.986 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 7, 8, 0, 3, 0, 6, 1, 4], [3, 0, 0, 0, 1, 6, 0, 9, 8], [0, 0, 0, 0, 0, 7, 2, 0, 0], [6, 4, 0, 0, 0, 5, 0, 3, 0], [0, 0, 0, 0, 6, 0, 1, 0, 0], [9, 0, 3, 0, 2, 1, 0, 0, 7], [0, 0, 0, 0, 5, 0, 0, 0, 9], [0, 6, 0, 0, 0, 3, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 7, 0]]
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[5, 7, 8, 9, 3, 2, 6, 1, 4], [3, 2, 4, 5, 1, 6, 7, 9, 8], [1, 9, 6, 8, 4, 7, 2, 5, 3], [6, 4, 1, 7, 8, 5, 9, 3, 2], [7, 8, 2, 3, 6, 9, 1, 4, 5], [9, 5, 3, 4, 2, 1, 8, 6, 7], [8, 1, 7, 6, 5, 4, 3, 2, 9], [4, 6, 9, 2, 7, 3, 5, 8, 1], [2, 3, 5, 1, 9, 8, 4, 7, 6]]
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:20.987 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:21.060 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 8 . 3 . 6 1 4
+3 . . . 1 6 . 9 8
+. . . . . 7 2 . .
+6 4 . . . 5 . 3 .
+. . . . 6 . 1 . .
+9 . 3 . 2 1 . . 7
+. . . . 5 . . . 9
+. 6 . . . 3 . . 1
+. . . . . . . 7 .
+
+2025-11-20 15:49:21.061 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:49:25.108 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=5 7 8 2 3 9 6 1 4
+2025-11-20 15:49:25.108 | INFO     | __main__:evaluate_puzzle:176 - Answer: 5 7 8 2 3 9 6 1 4
+3 2 4 5 1 6 7 9 8
+4 9 6 3 8 7 2 5 3
+6 4 7 9 2 5 8 3 2
+2 8 5 7 6 4 1 9 3
+9 1 3 8 2 1 4 6 7
+7 3 2 6 5 8 3 4 9
+8 6 9 4 7 3 5 2 1
+1 5 4 9 3 2 8 7 6
+2025-11-20 15:49:25.109 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[5, 7, 8, 2, 3, 9, 6, 1, 4], [3, 2, 4, 5, 1, 6, 7, 9, 8], [4, 9, 6, 3, 8, 7, 2, 5, 3], [6, 4, 7, 9, 2, 5, 8, 3, 2], [2, 8, 5, 7, 6, 4, 1, 9, 3], [9, 1, 3, 8, 2, 1, 4, 6, 7], [7, 3, 2, 6, 5, 8, 3, 4, 9], [8, 6, 9, 4, 7, 3, 5, 2, 1], [1, 5, 4, 9, 3, 2, 8, 7, 6]]
+2025-11-20 15:49:25.109 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:49:25.109 | INFO     | __main__:evaluate_puzzle:195 - Latency: 4.0493645668029785
+2025-11-20 15:49:25.110 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 8 . 3 . 6 1 4
+3 . . . 1 6 . 9 8
+. . . . . 7 2 . .
+6 4 . . . 5 . 3 .
+. . . . 6 . 1 . .
+9 . 3 . 2 1 . . 7
+. . . . 5 . . . 9
+. 6 . . . 3 . . 1
+. . . . . . . 7 .
+
+2025-11-20 15:49:25.110 | INFO     | __main__:evaluate_puzzle:197 - Answer: 5 7 8 2 3 9 6 1 4
+3 2 4 5 1 6 7 9 8
+4 9 6 3 8 7 2 5 3
+6 4 7 9 2 5 8 3 2
+2 8 5 7 6 4 1 9 3
+9 1 3 8 2 1 4 6 7
+7 3 2 6 5 8 3 4 9
+8 6 9 4 7 3 5 2 1
+1 5 4 9 3 2 8 7 6
+2025-11-20 15:49:25.111 | INFO     | __main__:main:471 - [6/10] ✗ correct_samples=0/1
+2025-11-20 15:49:25.112 | INFO     | __main__:main:421 - 
+--- Puzzle 7/10 ---
+2025-11-20 15:49:25.112 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[0, 7, 0, 3, 0, 1, 9, 6, 0], [0, 5, 0, 0, 4, 0, 3, 7, 0], [0, 0, 0, 0, 0, 7, 0, 0, 1], [0, 0, 0, 0, 0, 2, 0, 9, 0], [4, 2, 0, 9, 0, 0, 0, 0, 0], [0, 0, 7, 0, 0, 4, 1, 5, 2], [8, 3, 0, 0, 0, 0, 0, 0, 0], [7, 0, 0, 4, 2, 3, 0, 0, 5], [1, 0, 0, 0, 0, 0, 0, 0, 6]]
+2025-11-20 15:49:25.112 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[2, 7, 8, 3, 5, 1, 9, 6, 4], [6, 5, 1, 2, 4, 9, 3, 7, 8], [3, 9, 4, 8, 6, 7, 5, 2, 1], [5, 1, 6, 7, 8, 2, 4, 9, 3], [4, 2, 3, 9, 1, 5, 6, 8, 7], [9, 8, 7, 6, 3, 4, 1, 5, 2], [8, 3, 5, 1, 7, 6, 2, 4, 9], [7, 6, 9, 4, 2, 3, 8, 1, 5], [1, 4, 2, 5, 9, 8, 7, 3, 6]]
+2025-11-20 15:49:25.113 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:49:25.113 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:49:25.113 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:49:25.113 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:49:25.113 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:49:25.194 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 . 3 . 1 9 6 .
+. 5 . . 4 . 3 7 .
+. . . . . 7 . . 1
+. . . . . 2 . 9 .
+4 2 . 9 . . . . .
+. . 7 . . 4 1 5 2
+8 3 . . . . . . .
+7 . . 4 2 3 . . 5
+1 . . . . . . . 6
+
+2025-11-20 15:49:25.195 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:51:25.343 | INFO     | __main__:main:471 - [7/10] ✗ correct_samples=0/1
+2025-11-20 15:51:25.343 | INFO     | __main__:main:421 - 
+--- Puzzle 8/10 ---
+2025-11-20 15:51:25.343 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[3, 0, 7, 2, 0, 9, 0, 0, 0], [0, 0, 0, 8, 0, 3, 7, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 9, 0, 8, 0, 1, 0], [9, 0, 0, 1, 4, 6, 8, 7, 0], [1, 6, 0, 0, 0, 0, 0, 2, 0], [4, 8, 3, 0, 0, 0, 0, 5, 0], [0, 0, 0, 6, 0, 0, 3, 0, 0], [0, 7, 0, 3, 5, 0, 0, 0, 9]]
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[3, 5, 7, 2, 1, 9, 4, 6, 8], [2, 4, 1, 8, 6, 3, 7, 9, 5], [8, 9, 6, 4, 7, 5, 2, 3, 1], [7, 3, 4, 9, 2, 8, 5, 1, 6], [9, 2, 5, 1, 4, 6, 8, 7, 3], [1, 6, 8, 5, 3, 7, 9, 2, 4], [4, 8, 3, 7, 9, 1, 6, 5, 2], [5, 1, 9, 6, 8, 2, 3, 4, 7], [6, 7, 2, 3, 5, 4, 1, 8, 9]]
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:51:25.344 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:51:25.544 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+3 . 7 2 . 9 . . .
+. . . 8 . 3 7 . .
+. . . . . . . . 1
+. . . 9 . 8 . 1 .
+9 . . 1 4 6 8 7 .
+1 6 . . . . . 2 .
+4 8 3 . . . . 5 .
+. . . 6 . . 3 . .
+. 7 . 3 5 . . . 9
+
+2025-11-20 15:51:25.544 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:51:31.098 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=3 1 7 2 6 9 5 8 4
+2025-11-20 15:51:31.099 | INFO     | __main__:evaluate_puzzle:176 - Answer: 3 1 7 2 6 9 5 8 4
+5 2 9 8 1 3 7 4 6
+8 4 6 5 7 4 2 9 1
+7 3 4 9 2 8 6 1 5
+9 5 2 1 4 6 8 7 3
+1 6 8 7 3 5 9 2 4
+4 8 3 7 9 2 1 5 6
+2 9 5 6 8 1 3 4 7
+6 7 1 3 5 4 4 6 9
+2025-11-20 15:51:31.100 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[3, 1, 7, 2, 6, 9, 5, 8, 4], [5, 2, 9, 8, 1, 3, 7, 4, 6], [8, 4, 6, 5, 7, 4, 2, 9, 1], [7, 3, 4, 9, 2, 8, 6, 1, 5], [9, 5, 2, 1, 4, 6, 8, 7, 3], [1, 6, 8, 7, 3, 5, 9, 2, 4], [4, 8, 3, 7, 9, 2, 1, 5, 6], [2, 9, 5, 6, 8, 1, 3, 4, 7], [6, 7, 1, 3, 5, 4, 4, 6, 9]]
+2025-11-20 15:51:31.100 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:51:31.100 | INFO     | __main__:evaluate_puzzle:195 - Latency: 5.556295871734619
+2025-11-20 15:51:31.101 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+3 . 7 2 . 9 . . .
+. . . 8 . 3 7 . .
+. . . . . . . . 1
+. . . 9 . 8 . 1 .
+9 . . 1 4 6 8 7 .
+1 6 . . . . . 2 .
+4 8 3 . . . . 5 .
+. . . 6 . . 3 . .
+. 7 . 3 5 . . . 9
+
+2025-11-20 15:51:31.101 | INFO     | __main__:evaluate_puzzle:197 - Answer: 3 1 7 2 6 9 5 8 4
+5 2 9 8 1 3 7 4 6
+8 4 6 5 7 4 2 9 1
+7 3 4 9 2 8 6 1 5
+9 5 2 1 4 6 8 7 3
+1 6 8 7 3 5 9 2 4
+4 8 3 7 9 2 1 5 6
+2 9 5 6 8 1 3 4 7
+6 7 1 3 5 4 4 6 9
+2025-11-20 15:51:31.103 | INFO     | __main__:main:471 - [8/10] ✗ correct_samples=0/1
+2025-11-20 15:51:31.103 | INFO     | __main__:main:421 - 
+--- Puzzle 9/10 ---
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[8, 0, 6, 3, 7, 1, 9, 0, 5], [0, 3, 0, 0, 0, 0, 0, 0, 0], [0, 5, 1, 2, 9, 0, 0, 6, 0], [0, 0, 0, 0, 1, 0, 0, 7, 0], [6, 0, 0, 0, 0, 0, 0, 5, 8], [0, 0, 0, 8, 0, 5, 0, 0, 0], [3, 0, 0, 0, 6, 4, 0, 2, 0], [1, 0, 4, 0, 0, 7, 0, 0, 0], [9, 0, 0, 0, 8, 0, 7, 0, 0]]
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[8, 2, 6, 3, 7, 1, 9, 4, 5], [7, 3, 9, 4, 5, 6, 1, 8, 2], [4, 5, 1, 2, 9, 8, 3, 6, 7], [5, 9, 8, 6, 1, 2, 4, 7, 3], [6, 1, 3, 7, 4, 9, 2, 5, 8], [2, 4, 7, 8, 3, 5, 6, 9, 1], [3, 7, 5, 1, 6, 4, 8, 2, 9], [1, 8, 4, 9, 2, 7, 5, 3, 6], [9, 6, 2, 5, 8, 3, 7, 1, 4]]
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:51:31.104 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:51:31.105 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:51:31.154 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+8 . 6 3 7 1 9 . 5
+. 3 . . . . . . .
+. 5 1 2 9 . . 6 .
+. . . . 1 . . 7 .
+6 . . . . . . 5 8
+. . . 8 . 5 . . .
+3 . . . 6 4 . 2 .
+1 . 4 . . 7 . . .
+9 . . . 8 . 7 . .
+
+2025-11-20 15:51:31.154 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:51:36.473 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=8 2 6 3 7 1 9 4 5
+2025-11-20 15:51:36.474 | INFO     | __main__:evaluate_puzzle:176 - Answer: 8 2 6 3 7 1 9 4 5
+7 3 9 6 5 8 2 1 4
+4 5 1 2 9 3 8 6 7
+5 8 3 4 1 6 2 7 9
+6 4 2 7 3 9 1 5 8
+2 7 9 8 4 5 6 3 1
+3 9 7 5 6 4 5 2 6
+1 6 4 9 2 7 3 8 5
+9 1 5 3 8 2 7 4 6
+2025-11-20 15:51:36.474 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[8, 2, 6, 3, 7, 1, 9, 4, 5], [7, 3, 9, 6, 5, 8, 2, 1, 4], [4, 5, 1, 2, 9, 3, 8, 6, 7], [5, 8, 3, 4, 1, 6, 2, 7, 9], [6, 4, 2, 7, 3, 9, 1, 5, 8], [2, 7, 9, 8, 4, 5, 6, 3, 1], [3, 9, 7, 5, 6, 4, 5, 2, 6], [1, 6, 4, 9, 2, 7, 3, 8, 5], [9, 1, 5, 3, 8, 2, 7, 4, 6]]
+2025-11-20 15:51:36.475 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:51:36.475 | INFO     | __main__:evaluate_puzzle:195 - Latency: 5.3214569091796875
+2025-11-20 15:51:36.475 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+8 . 6 3 7 1 9 . 5
+. 3 . . . . . . .
+. 5 1 2 9 . . 6 .
+. . . . 1 . . 7 .
+6 . . . . . . 5 8
+. . . 8 . 5 . . .
+3 . . . 6 4 . 2 .
+1 . 4 . . 7 . . .
+9 . . . 8 . 7 . .
+
+2025-11-20 15:51:36.476 | INFO     | __main__:evaluate_puzzle:197 - Answer: 8 2 6 3 7 1 9 4 5
+7 3 9 6 5 8 2 1 4
+4 5 1 2 9 3 8 6 7
+5 8 3 4 1 6 2 7 9
+6 4 2 7 3 9 1 5 8
+2 7 9 8 4 5 6 3 1
+3 9 7 5 6 4 5 2 6
+1 6 4 9 2 7 3 8 5
+9 1 5 3 8 2 7 4 6
+2025-11-20 15:51:36.477 | INFO     | __main__:main:471 - [9/10] ✗ correct_samples=0/1
+2025-11-20 15:51:36.477 | INFO     | __main__:main:421 - 
+--- Puzzle 10/10 ---
+2025-11-20 15:51:36.478 | DEBUG    | __main__:evaluate_puzzle:151 - Evaluating puzzle: [[4, 0, 0, 0, 3, 0, 0, 0, 8], [7, 3, 0, 6, 9, 1, 4, 0, 0], [0, 0, 1, 2, 0, 0, 0, 0, 0], [0, 0, 0, 7, 4, 6, 8, 3, 0], [0, 0, 0, 0, 0, 0, 7, 0, 4], [2, 7, 0, 0, 0, 8, 0, 0, 0], [0, 0, 2, 1, 0, 0, 3, 4, 0], [1, 0, 0, 0, 0, 2, 5, 0, 0], [5, 0, 0, 0, 0, 0, 0, 9, 0]]
+2025-11-20 15:51:36.478 | DEBUG    | __main__:evaluate_puzzle:152 - Solution: [[4, 2, 9, 5, 3, 7, 1, 6, 8], [7, 3, 8, 6, 9, 1, 4, 2, 5], [6, 5, 1, 2, 8, 4, 9, 7, 3], [9, 1, 5, 7, 4, 6, 8, 3, 2], [3, 8, 6, 9, 2, 5, 7, 1, 4], [2, 7, 4, 3, 1, 8, 6, 5, 9], [8, 6, 2, 1, 5, 9, 3, 4, 7], [1, 9, 3, 4, 7, 2, 5, 8, 6], [5, 4, 7, 8, 6, 3, 2, 9, 1]]
+2025-11-20 15:51:36.478 | DEBUG    | __main__:evaluate_puzzle:153 - Provider: qwen
+2025-11-20 15:51:36.478 | DEBUG    | __main__:evaluate_puzzle:154 - Model: qwen-plus
+2025-11-20 15:51:36.479 | DEBUG    | __main__:evaluate_puzzle:155 - Temperature: 0.0
+2025-11-20 15:51:36.479 | DEBUG    | __main__:evaluate_puzzle:156 - Num samples: 1
+2025-11-20 15:51:36.479 | DEBUG    | __main__:evaluate_puzzle:157 - Seed: None
+2025-11-20 15:51:36.623 | INFO     | __main__:evaluate_puzzle:163 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+4 . . . 3 . . . 8
+7 3 . 6 9 1 4 . .
+. . 1 2 . . . . .
+. . . 7 4 6 8 3 .
+. . . . . . 7 . 4
+2 7 . . . 8 . . .
+. . 2 1 . . 3 4 .
+1 . . . . 2 5 . .
+5 . . . . . . 9 .
+
+2025-11-20 15:51:36.623 | DEBUG    | llm_client:chat_completion:144 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen-plus temperature=0.0 messages=2
+2025-11-20 15:51:42.207 | DEBUG    | llm_client:chat_completion:177 - Response https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen status=200 content_preview=4 2 9 5 3 7 6 1 8
+2025-11-20 15:51:42.207 | INFO     | __main__:evaluate_puzzle:176 - Answer: 4 2 9 5 3 7 6 1 8
+7 3 8 6 9 1 4 5 2
+6 5 1 2 8 4 9 7 3
+9 1 5 7 4 6 8 3 2
+8 6 3 9 2 5 7 1 4
+2 7 4 3 1 8 5 6 9
+9 8 2 1 5 9 3 4 6
+1 9 6 8 7 2 5 2 7
+5 4 7 4 6 3 1 9 2
+2025-11-20 15:51:42.208 | INFO     | __main__:evaluate_puzzle:193 - Parsed board: [[4, 2, 9, 5, 3, 7, 6, 1, 8], [7, 3, 8, 6, 9, 1, 4, 5, 2], [6, 5, 1, 2, 8, 4, 9, 7, 3], [9, 1, 5, 7, 4, 6, 8, 3, 2], [8, 6, 3, 9, 2, 5, 7, 1, 4], [2, 7, 4, 3, 1, 8, 5, 6, 9], [9, 8, 2, 1, 5, 9, 3, 4, 6], [1, 9, 6, 8, 7, 2, 5, 2, 7], [5, 4, 7, 4, 6, 3, 1, 9, 2]]
+2025-11-20 15:51:42.208 | INFO     | __main__:evaluate_puzzle:194 - Is correct: False
+2025-11-20 15:51:42.209 | INFO     | __main__:evaluate_puzzle:195 - Latency: 5.585650205612183
+2025-11-20 15:51:42.209 | INFO     | __main__:evaluate_puzzle:196 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+4 . . . 3 . . . 8
+7 3 . 6 9 1 4 . .
+. . 1 2 . . . . .
+. . . 7 4 6 8 3 .
+. . . . . . 7 . 4
+2 7 . . . 8 . . .
+. . 2 1 . . 3 4 .
+1 . . . . 2 5 . .
+5 . . . . . . 9 .
+
+2025-11-20 15:51:42.209 | INFO     | __main__:evaluate_puzzle:197 - Answer: 4 2 9 5 3 7 6 1 8
+7 3 8 6 9 1 4 5 2
+6 5 1 2 8 4 9 7 3
+9 1 5 7 4 6 8 3 2
+8 6 3 9 2 5 7 1 4
+2 7 4 3 1 8 5 6 9
+9 8 2 1 5 9 3 4 6
+1 9 6 8 7 2 5 2 7
+5 4 7 4 6 3 1 9 2
+2025-11-20 15:51:42.210 | INFO     | __main__:main:471 - [10/10] ✗ correct_samples=0/1
+2025-11-20 15:51:42.211 | INFO     | __main__:main:485 - 
+=== Evaluation Summary ===
+2025-11-20 15:51:42.211 | INFO     | __main__:main:487 - pass@1: 0.000%
+2025-11-20 15:51:42.212 | INFO     | __main__:main:488 - majority@pass: 0.000%
+2025-11-20 15:51:42.212 | INFO     | __main__:main:490 - Average latency per call: 16.29s
+2025-11-20 15:51:42.212 | INFO     | __main__:main:491 - Median latency per call: 5.44s
+2025-11-20 15:51:42.213 | INFO     | __main__:main:517 - 
+Detailed results written to /home/andrew/sokudo_llm/eval_results/run_20251120_154858

@@ -5,6 +5,7 @@
 - openai: 使用 https://api.openai.com/v1/chat/completions
 - deepseek: 使用 https://api.deepseek.com/v1/chat/completions
 - qwen (DashScope 兼容模式): https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
+- glm: 使用 https://open.bigmodel.cn/api/paas/v4/chat/completions
 
 如果需要扩展更多供应商，可在 PROVIDERS 常量中追加配置。
 """
@@ -53,6 +54,12 @@ PROVIDERS: Dict[str, ProviderConfig] = {
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
         api_key_env="DASHSCOPE_API_KEY",
         default_model="qwen-max-latest",
+    ),
+    "glm": ProviderConfig(
+        name="glm",
+        base_url="https://open.bigmodel.cn/api/paas/v4",
+        api_key_env="GLM_API_KEY",
+        default_model="glm-4",
     ),
 }
 

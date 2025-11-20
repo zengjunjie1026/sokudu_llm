@@ -552,8 +552,8 @@ def run_dataset_benchmark(
             summary = run_session(
                 model=model,
                 temperature=temperature,
-                provider=provider,
-                reset=reset and idx == 0 and attempt == 1,
+            provider=provider,
+            reset=reset and idx == 0 and attempt == 1,
                 history_dir=history_dir,
                 holes=0,
                 max_rounds=max_rounds,
@@ -683,25 +683,28 @@ def parse_args() -> argparse.Namespace:
 
 if __name__ == "__main__":
     args = parse_args()
-    if args.dataset:
-        run_dataset_benchmark(
-            dataset_path=args.dataset,
-            limit=args.dataset_limit,
-            model=args.model,
-            temperature=args.temperature,
-            provider=args.provider,
-            reset=args.reset,
-            history_dir=args.history_dir,
-            max_rounds=max(args.max_rounds, 1),
-            retry_attempts=max(1, args.retry_attempts),
-        )
-    else:
-        run_session(
-            model=args.model,
-            temperature=args.temperature,
-            provider=args.provider,
-            reset=args.reset,
-            history_dir=args.history_dir,
-            holes=args.holes,
-            max_rounds=max(args.max_rounds, 1),
-        )
+effective_temp = (
+    1.0 if args.provider == "openai" and args.model.lower().startswith("gpt-5") else args.temperature
+)
+if args.dataset:
+    run_dataset_benchmark(
+        dataset_path=args.dataset,
+        limit=args.dataset_limit,
+        model=args.model,
+        temperature=effective_temp,
+        provider=args.provider,
+        reset=args.reset,
+        history_dir=args.history_dir,
+        max_rounds=max(args.max_rounds, 1),
+        retry_attempts=max(1, args.retry_attempts),
+    )
+else:
+    run_session(
+        model=args.model,
+        temperature=effective_temp,
+        provider=args.provider,
+        reset=args.reset,
+        history_dir=args.history_dir,
+        holes=args.holes,
+        max_rounds=max(args.max_rounds, 1),
+    )
