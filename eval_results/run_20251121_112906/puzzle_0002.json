@@ -1,0 +1,36 @@
+{
+  "index": 1,
+  "puzzle": [
+    [0, 0, 6, 0, 0, 9, 0, 2, 0],
+    [0, 7, 0, 0, 0, 8, 0, 0, 0],
+    [8, 5, 0, 0, 0, 4, 9, 0, 0],
+    [0, 0, 3, 9, 0, 0, 0, 5, 2],
+    [5, 0, 0, 0, 8, 3, 1, 4, 0],
+    [4, 0, 0, 0, 0, 0, 0, 0, 9],
+    [1, 0, 0, 0, 0, 0, 2, 0, 0],
+    [0, 0, 8, 4, 9, 7, 5, 0, 0],
+    [0, 0, 7, 2, 1, 0, 0, 0, 0]
+  ],
+  "solution": [
+    [3, 1, 6, 5, 7, 9, 4, 2, 8],
+    [9, 7, 4, 3, 2, 8, 6, 1, 5],
+    [8, 5, 2, 1, 6, 4, 9, 7, 3],
+    [7, 6, 3, 9, 4, 1, 8, 5, 2],
+    [5, 2, 9, 7, 8, 3, 1, 4, 6],
+    [4, 8, 1, 6, 5, 2, 7, 3, 9],
+    [1, 4, 5, 8, 3, 6, 2, 9, 7],
+    [2, 3, 8, 4, 9, 7, 5, 6, 1],
+    [6, 9, 7, 2, 1, 5, 3, 8, 4]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.\n\nPuzzle:\n. . 6 . . 9 . 2 .\n. 7 . . . 8 . . .\n8 5 . . . 4 9 . .\n. . 3 9 . . . 5 2\n5 . . . 8 3 1 4 .\n4 . . . . . . . 9\n1 . . . . . 2 . .\n. . 8 4 9 7 5 . .\n. . 7 2 1 . . . .\n",
+      "raw_answer": "[ERROR] 调用 ollama 接口失败: HTTPConnectionPool(host='127.0.0.1', port=11434): Read timed out. (read timeout=120.0)",
+      "parsed_board": null,
+      "is_correct": false,
+      "latency": 120.1011483669281,
+      "error": "调用 ollama 接口失败: HTTPConnectionPool(host='127.0.0.1', port=11434): Read timed out. (read timeout=120.0)"
+    }
+  ]
+}

@@ -32,21 +32,51 @@ SYSTEM_PROMPT = (
 )
 
 USER_PROMPT_TEMPLATE = (
-    "请在纯文本环境中解答下面的 9x9 数独题目。\n"
-    "- 禁止使用任何外部工具、程序或求解器，也不要声称使用了工具。\n"
-    "- 请在推理后给出最终解答，格式为 9 行，每行 9 个数字，使用空格分隔。\n"
-    "- 如需解释，请放在解答之后。\n\n"
-    "题目：\n{puzzle}\n"
+     """You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a {size}×{size} grid, where {size} is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to {size} exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly {size} lines of output.
+7. Each line must contain exactly {size} digits (from 1 to {size}), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- {size} lines.
+- Each line: {size} numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+{puzzle}"""
+   
 )
 
-FEEDBACK_PROMPT_TEMPLATE = (
-    "之前的回答中仍存在错误，请参考下方清单逐项修正：\n"
-    "- 禁止使用任何外部工具或程序，也不要声称使用了工具。\n"
-    "- 输出 9 行，每行 9 个数字（空格分隔），在答案之后再给出必要的说明。\n"
-    "- 必须确保与题面给出的已知数字完全一致，并修复所有列出的问题。\n\n"
-    "{history}\n\n"
-    "题目再次提供如下：\n{puzzle}\n"
-)
+FEEDBACK_PROMPT_TEMPLATE = """Your previous solutions are still incorrect. Review every past attempt and fix all listed issues.
+
+Instructions (apply to a {size}×{size} Sudoku grid):
+1. You must NOT use or mention any external tools, code, or solvers—only mental reasoning.
+2. Produce exactly {size} lines of output; each line must contain {size} digits (1–{size}) separated by single spaces.
+3. Do not add commentary before or after the grid. If you need to explain, do it only after the grid on a new paragraph.
+4. Every row, column, and subgrid must satisfy Sudoku rules and must respect the givens from the puzzle.
+5. Address every issue listed below before submitting a new answer.
+
+History of answers and detected problems:
+{history}
+
+Puzzle (repeated for convenience):
+{puzzle}
+"""
 
 def board_to_text(board: Sequence[Sequence[int]]) -> str:
     """将 9x9 数独棋盘转换为字符串表示，空格使用句点表示。"""
@@ -113,7 +143,10 @@ class SudokuChatSession:
         self.system_prompt = system_prompt
         self.provider_config = get_provider(provider)
         self.correct_solution = self._solve_baseline()
-        self.initial_prompt = USER_PROMPT_TEMPLATE.format(puzzle=board_to_text(self.puzzle))
+        self.initial_prompt = USER_PROMPT_TEMPLATE.format(
+            puzzle=board_to_text(self.puzzle),
+            size=len(self.puzzle),
+        )
         self.messages: List[dict] = []
         self.round_records: List[dict] = []
         self.created_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -163,6 +196,7 @@ class SudokuChatSession:
 
         history_text = "\n\n".join(sections) if sections else "(暂无历史记录)"
         return FEEDBACK_PROMPT_TEMPLATE.format(
+            size=len(self.puzzle),
             history=history_text,
             puzzle=board_to_text(self.puzzle),
         )
@@ -624,7 +658,11 @@ def run_dataset_benchmark(
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="调用 LLM 解答数独并验证结果的脚本")
-    parser.add_argument("--model", default="gpt-5", help="调用的 OpenAI 模型名称")
+    parser.add_argument(
+        "--model",
+        default=None,
+        help="调用的模型名称；默认为所选 provider 的默认模型",
+    )
     parser.add_argument(
         "--temperature",
         type=float,
@@ -678,33 +716,48 @@ def parse_args() -> argparse.Namespace:
         default=10,
         help="调用失败时的最大重试次数（默认 10 次）。",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--use-ollama",
+        action="store_true",
+        help="快捷方式：使用本地 ollama 提供的 gpt-oss 模型（将 provider 设置为 ollama）。",
+    )
+
+    args = parser.parse_args()
+    if args.use_ollama:
+        args.provider = "ollama"
+        if args.model is None:
+            args.model = "gpt-oss:20b"
+
+    if args.model is None:
+        args.model = PROVIDERS[args.provider].default_model
+
+    return args
 
 
 if __name__ == "__main__":
     args = parse_args()
-effective_temp = (
-    1.0 if args.provider == "openai" and args.model.lower().startswith("gpt-5") else args.temperature
-)
-if args.dataset:
-    run_dataset_benchmark(
-        dataset_path=args.dataset,
-        limit=args.dataset_limit,
-        model=args.model,
-        temperature=effective_temp,
-        provider=args.provider,
-        reset=args.reset,
-        history_dir=args.history_dir,
-        max_rounds=max(args.max_rounds, 1),
-        retry_attempts=max(1, args.retry_attempts),
+    effective_temp = (
+        1.0 if args.provider == "openai" and args.model.lower().startswith("gpt-5") else args.temperature
     )
-else:
-    run_session(
-        model=args.model,
-        temperature=effective_temp,
-        provider=args.provider,
-        reset=args.reset,
-        history_dir=args.history_dir,
-        holes=args.holes,
-        max_rounds=max(args.max_rounds, 1),
-    )
+    if args.dataset:
+        run_dataset_benchmark(
+            dataset_path=args.dataset,
+            limit=args.dataset_limit,
+            model=args.model,
+            temperature=effective_temp,
+            provider=args.provider,
+            reset=args.reset,
+            history_dir=args.history_dir,
+            max_rounds=max(args.max_rounds, 1),
+            retry_attempts=max(1, args.retry_attempts),
+        )
+    else:
+        run_session(
+            model=args.model,
+            temperature=effective_temp,
+            provider=args.provider,
+            reset=args.reset,
+            history_dir=args.history_dir,
+            holes=args.holes,
+            max_rounds=max(args.max_rounds, 1),
+        )

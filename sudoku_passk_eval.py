@@ -5,8 +5,10 @@ Given a Sudoku dataset (e.g. `sokudu_dataset/sudoku_9x9.json`), this script
 queries an LLM multiple times per puzzle and reports pass@k metrics along with
 the majority-vote accuracy.
 
-Usage example
--------------
+Usage examples
+--------------
+
+Remote GLM (BigModel Cloud):
 
     python sudoku_passk_eval.py \
         --dataset /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json \
@@ -16,9 +18,20 @@ Usage example
         --temperature 0.7 \
         --limit 100
 
+Local Ollama (e.g., gpt-oss served via `ollama serve`):
+
+    python sudoku_passk_eval.py \
+        --dataset /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json \
+        --provider ollama \
+        --model gpt-oss \
+        --num-samples 5 \
+        --temperature 0.7 \
+        --limit 20
+
 Environment variables `GLM_API_KEY` (for provider `glm`) or `DASHSCOPE_API_KEY`
-(for provider `qwen`) must be set before running the script. See
-`llm_client.py` for more details about provider configuration.
+(for provider `qwen`) must be set before running the script. Provider `ollama`
+talks to the local server at http://127.0.0.1:11434 and does not require an API
+key. See `llm_client.py` for more details about provider configuration.
 """
 
 from __future__ import annotations
@@ -51,11 +64,34 @@ def format_puzzle(puzzle: Sequence[Sequence[int]]) -> str:
 
 def build_prompt(puzzle: Sequence[Sequence[int]]) -> str:
     return (
-        "You are a reasoning-only assistant working in plain text. "
-        "Solve the following Sudoku puzzle without using any external tools. "
-        "Return the completed grid as {size} lines, each with {size} numbers "
-        "separated by spaces.\n\n"
-        "Puzzle:\n{puzzle}\n"
+        
+       """You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a {size}×{size} grid, where {size} is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to {size} exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly {size} lines of output.
+7. Each line must contain exactly {size} digits (from 1 to {size}), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- {size} lines.
+- Each line: {size} numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+{puzzle}"""
     ).format(size=len(puzzle), puzzle=format_puzzle(puzzle))
 
 

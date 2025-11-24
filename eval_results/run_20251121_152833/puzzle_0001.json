@@ -1,0 +1,217 @@
+{
+  "index": 0,
+  "puzzle": [
+    [0, 0, 0, 0, 0, 0, 9, 0, 0],
+    [6, 3, 0, 0, 4, 0, 0, 8, 0],
+    [0, 0, 2, 0, 6, 0, 0, 0, 4],
+    [0, 0, 0, 0, 1, 0, 7, 5, 8],
+    [4, 0, 0, 0, 0, 0, 6, 2, 9],
+    [0, 8, 9, 0, 2, 0, 0, 0, 3],
+    [5, 0, 1, 0, 0, 0, 8, 0, 0],
+    [0, 0, 0, 8, 0, 0, 0, 0, 6],
+    [8, 7, 0, 5, 3, 2, 0, 0, 0]
+  ],
+  "solution": [
+    [1, 4, 8, 2, 5, 3, 9, 6, 7],
+    [6, 3, 7, 1, 4, 9, 2, 8, 5],
+    [9, 5, 2, 7, 6, 8, 3, 1, 4],
+    [2, 6, 3, 9, 1, 4, 7, 5, 8],
+    [4, 1, 5, 3, 8, 7, 6, 2, 9],
+    [7, 8, 9, 6, 2, 5, 1, 4, 3],
+    [5, 9, 1, 4, 7, 6, 8, 3, 2],
+    [3, 2, 4, 8, 9, 1, 5, 7, 6],
+    [8, 7, 6, 5, 3, 2, 4, 9, 1]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 67.88859748840332,
+      "error": null
+    },
+    {
+      "sample_index": 1,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 67.97577786445618,
+      "error": null
+    },
+    {
+      "sample_index": 2,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.03289461135864,
+      "error": null
+    },
+    {
+      "sample_index": 3,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.12371850013733,
+      "error": null
+    },
+    {
+      "sample_index": 4,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.1256172657013,
+      "error": null
+    },
+    {
+      "sample_index": 5,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.17847156524658,
+      "error": null
+    },
+    {
+      "sample_index": 6,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.50110816955566,
+      "error": null
+    },
+    {
+      "sample_index": 7,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.10274839401245,
+      "error": null
+    },
+    {
+      "sample_index": 8,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.06503629684448,
+      "error": null
+    },
+    {
+      "sample_index": 9,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. . . . . . 9 . .\n6 3 . . 4 . . 8 .\n. . 2 . 6 . . . 4\n. . . . 1 . 7 5 8\n4 . . . . . 6 2 9\n. 8 9 . 2 . . . 3\n5 . 1 . . . 8 . .\n. . . 8 . . . . 6\n8 7 . 5 3 2 . . .",
+      "raw_answer": "1 4 8 2 5 3 9 6 7\n6 3 7 1 4 9 2 8 5\n9 5 2 7 6 8 3 1 4\n2 6 3 9 1 4 7 5 8\n4 1 5 3 8 7 6 2 9\n7 8 9 6 2 5 1 4 3\n5 9 1 4 7 6 8 3 2\n3 2 4 8 9 1 5 7 6\n8 7 6 5 3 2 4 9 1",
+      "parsed_board": [
+        [1, 4, 8, 2, 5, 3, 9, 6, 7],
+        [6, 3, 7, 1, 4, 9, 2, 8, 5],
+        [9, 5, 2, 7, 6, 8, 3, 1, 4],
+        [2, 6, 3, 9, 1, 4, 7, 5, 8],
+        [4, 1, 5, 3, 8, 7, 6, 2, 9],
+        [7, 8, 9, 6, 2, 5, 1, 4, 3],
+        [5, 9, 1, 4, 7, 6, 8, 3, 2],
+        [3, 2, 4, 8, 9, 1, 5, 7, 6],
+        [8, 7, 6, 5, 3, 2, 4, 9, 1]
+      ],
+      "is_correct": true,
+      "latency": 68.08506035804749,
+      "error": null
+    }
+  ]
+}

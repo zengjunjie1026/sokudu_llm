@@ -1,0 +1,15 @@
+{
+  "dataset": "/home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json",
+  "provider": "ollama",
+  "model": "gpt-oss:20b",
+  "temperature": 0.0,
+  "num_samples": 1,
+  "puzzle_count": 1000,
+  "pass_metrics": {
+    "pass@1": 0.727
+  },
+  "majority_at_pass": 0.727,
+  "average_latency": 188.40615846586226,
+  "median_latency": 71.89285922050476,
+  "created_at": "2025-11-23T13:26:32Z"
+}

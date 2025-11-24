@@ -1,0 +1,46 @@
+{
+  "index": 911,
+  "puzzle": [
+    [0, 1, 0, 0, 0, 5, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3, 0, 9],
+    [7, 8, 3, 0, 1, 0, 4, 0, 5],
+    [3, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 7, 6, 9, 3, 5, 8, 2],
+    [0, 5, 0, 2, 0, 0, 0, 0, 0],
+    [0, 0, 8, 0, 0, 0, 0, 5, 0],
+    [0, 0, 0, 0, 0, 4, 8, 2, 0],
+    [0, 3, 5, 8, 7, 0, 0, 0, 0]
+  ],
+  "solution": [
+    [6, 1, 9, 4, 3, 5, 2, 7, 8],
+    [5, 2, 4, 7, 8, 6, 3, 1, 9],
+    [7, 8, 3, 9, 1, 2, 4, 6, 5],
+    [3, 9, 2, 1, 5, 8, 7, 4, 6],
+    [1, 4, 7, 6, 9, 3, 5, 8, 2],
+    [8, 5, 6, 2, 4, 7, 9, 3, 1],
+    [4, 6, 8, 3, 2, 9, 1, 5, 7],
+    [9, 7, 1, 5, 6, 4, 8, 2, 3],
+    [2, 3, 5, 8, 7, 1, 6, 9, 4]
+  ],
+  "samples": [
+    {
+      "sample_index": 0,
+      "prompt": "You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.\n\nInstructions:\n1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).\n2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.\n3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.\n4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.\n5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.\n6. Return exactly 9 lines of output.\n7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.\n8. Ensure the completed grid satisfies all Sudoku rules.\n\nPuzzle Input Format:\n- The puzzle is provided below under \"Puzzle:\".\n- Each line represents a row of the grid.\n- Digits are separated by spaces; empty cells are marked as '0' or '.'.\n\nYour Output Format:\n- Only the solved grid.\n- 9 lines.\n- Each line: 9 numbers separated by single spaces.\n- No extra text before or after.\n\nNow solve the following Sudoku puzzle:\n\nPuzzle:\n. 1 . . . 5 . . .\n. . . . . . 3 . 9\n7 8 3 . 1 . 4 . 5\n3 . . 1 . . . . .\n. . 7 6 9 3 5 8 2\n. 5 . 2 . . . . .\n. . 8 . . . . 5 .\n. . . . . 4 8 2 .\n. 3 5 8 7 . . . .",
+      "raw_answer": "6 1 9 4 3 5 2 7 8\n5 2 4 7 8 6 3 1 9\n7 8 3 9 1 2 4 6 5\n3 9 2 1 5 8 7 4 6\n1 4 7 6 9 3 5 8 2\n8 5 6 2 4 7 9 3 1\n4 6 8 3 2 9 1 5 7\n9 7 1 5 6 4 8 2 3\n2 3 5 8 7 1 6 9 4",
+      "parsed_board": [
+        [6, 1, 9, 4, 3, 5, 2, 7, 8],
+        [5, 2, 4, 7, 8, 6, 3, 1, 9],
+        [7, 8, 3, 9, 1, 2, 4, 6, 5],
+        [3, 9, 2, 1, 5, 8, 7, 4, 6],
+        [1, 4, 7, 6, 9, 3, 5, 8, 2],
+        [8, 5, 6, 2, 4, 7, 9, 3, 1],
+        [4, 6, 8, 3, 2, 9, 1, 5, 7],
+        [9, 7, 1, 5, 6, 4, 8, 2, 3],
+        [2, 3, 5, 8, 7, 1, 6, 9, 4]
+      ],
+      "is_correct": true,
+      "latency": 61.65928101539612,
+      "error": null
+    }
+  ]
+}

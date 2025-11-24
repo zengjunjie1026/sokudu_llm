@@ -1,0 +1,1541 @@
+2025-11-21 15:28:33.336 | INFO     | __main__:main:439 - Evaluating 1000 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=ollama, model=gpt-oss:20b, temperature=0.0, samples=10
+2025-11-21 15:28:33.336 | INFO     | __main__:main:457 - 
+--- Puzzle 1/1000 ---
+2025-11-21 15:28:33.336 | DEBUG    | __main__:evaluate_puzzle:187 - Evaluating puzzle: [[0, 0, 0, 0, 0, 0, 9, 0, 0], [6, 3, 0, 0, 4, 0, 0, 8, 0], [0, 0, 2, 0, 6, 0, 0, 0, 4], [0, 0, 0, 0, 1, 0, 7, 5, 8], [4, 0, 0, 0, 0, 0, 6, 2, 9], [0, 8, 9, 0, 2, 0, 0, 0, 3], [5, 0, 1, 0, 0, 0, 8, 0, 0], [0, 0, 0, 8, 0, 0, 0, 0, 6], [8, 7, 0, 5, 3, 2, 0, 0, 0]]
+2025-11-21 15:28:33.336 | DEBUG    | __main__:evaluate_puzzle:188 - Solution: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:28:33.336 | DEBUG    | __main__:evaluate_puzzle:189 - Provider: ollama
+2025-11-21 15:28:33.336 | DEBUG    | __main__:evaluate_puzzle:190 - Model: gpt-oss:20b
+2025-11-21 15:28:33.337 | DEBUG    | __main__:evaluate_puzzle:191 - Temperature: 0.0
+2025-11-21 15:28:33.337 | DEBUG    | __main__:evaluate_puzzle:192 - Num samples: 10
+2025-11-21 15:28:33.337 | DEBUG    | __main__:evaluate_puzzle:193 - Seed: None
+2025-11-21 15:28:33.383 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:28:33.383 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:29:41.270 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:231 - Latency: 67.88819074630737
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:29:41.271 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:29:41.333 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:29:41.333 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:30:49.307 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:231 - Latency: 67.97546362876892
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:30:49.308 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:30:49.499 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:30:49.500 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:31:57.531 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:31:57.531 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:31:57.531 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:31:57.531 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:31:57.532 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.03258037567139
+2025-11-21 15:31:57.532 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:31:57.532 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:31:57.728 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:31:57.729 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:33:05.850 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:33:05.850 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:33:05.851 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:33:05.851 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:33:05.851 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.12265515327454
+2025-11-21 15:33:05.851 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:33:05.852 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:33:05.920 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:33:05.920 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:34:14.044 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:34:14.044 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:34:14.045 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:34:14.045 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:34:14.045 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.12528610229492
+2025-11-21 15:34:14.045 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:34:14.045 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:34:14.116 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:34:14.116 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:35:22.293 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:35:22.293 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:35:22.294 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:35:22.294 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:35:22.294 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.17815661430359
+2025-11-21 15:35:22.294 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:35:22.294 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:35:22.397 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:35:22.398 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:36:30.897 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.5007164478302
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:36:30.898 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:36:31.049 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:36:31.049 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:37:39.150 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.10243725776672
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:37:39.151 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:37:39.228 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:37:39.229 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:38:47.292 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:38:47.292 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:38:47.293 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:38:47.293 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:38:47.293 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.06461501121521
+2025-11-21 15:38:47.293 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:38:47.293 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:38:47.309 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:38:47.309 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:39:55.393 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 15:39:55.393 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:39:55.393 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 15:39:55.393 | INFO     | __main__:evaluate_puzzle:230 - Is correct: True
+2025-11-21 15:39:55.393 | INFO     | __main__:evaluate_puzzle:231 - Latency: 68.0846176147461
+2025-11-21 15:39:55.393 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+2025-11-21 15:39:55.394 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 15:39:55.395 | INFO     | __main__:main:507 - [1/1000] ✓ correct_samples=10/10
+2025-11-21 15:39:55.395 | INFO     | __main__:main:457 - 
+--- Puzzle 2/1000 ---
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:187 - Evaluating puzzle: [[0, 0, 6, 0, 0, 9, 0, 2, 0], [0, 7, 0, 0, 0, 8, 0, 0, 0], [8, 5, 0, 0, 0, 4, 9, 0, 0], [0, 0, 3, 9, 0, 0, 0, 5, 2], [5, 0, 0, 0, 8, 3, 1, 4, 0], [4, 0, 0, 0, 0, 0, 0, 0, 9], [1, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 8, 4, 9, 7, 5, 0, 0], [0, 0, 7, 2, 1, 0, 0, 0, 0]]
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:188 - Solution: [[3, 1, 6, 5, 7, 9, 4, 2, 8], [9, 7, 4, 3, 2, 8, 6, 1, 5], [8, 5, 2, 1, 6, 4, 9, 7, 3], [7, 6, 3, 9, 4, 1, 8, 5, 2], [5, 2, 9, 7, 8, 3, 1, 4, 6], [4, 8, 1, 6, 5, 2, 7, 3, 9], [1, 4, 5, 8, 3, 6, 2, 9, 7], [2, 3, 8, 4, 9, 7, 5, 6, 1], [6, 9, 7, 2, 1, 5, 3, 8, 4]]
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:189 - Provider: ollama
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:190 - Model: gpt-oss:20b
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:191 - Temperature: 0.0
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:192 - Num samples: 10
+2025-11-21 15:39:55.395 | DEBUG    | __main__:evaluate_puzzle:193 - Seed: None
+2025-11-21 15:39:55.545 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 15:39:55.545 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:48:08.345 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 2 3 4 5 6 7 8 9
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:212 - Answer: 1 2 3 4 5 6 7 8 9
+2 3 4 5 6 7 8 9 1
+3 4 5 6 7 8 9 1 2
+4 5 6 7 8 9 1 2 3
+5 6 7 8 9 1 2 3 4
+6 7 8 9 1 2 3 4 5
+7 8 9 1 2 3 4 5 6
+8 9 1 2 3 4 5 6 7
+9 1 2 3 4 5 6 7 8
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: [[1, 2, 3, 4, 5, 6, 7, 8, 9], [2, 3, 4, 5, 6, 7, 8, 9, 1], [3, 4, 5, 6, 7, 8, 9, 1, 2], [4, 5, 6, 7, 8, 9, 1, 2, 3], [5, 6, 7, 8, 9, 1, 2, 3, 4], [6, 7, 8, 9, 1, 2, 3, 4, 5], [7, 8, 9, 1, 2, 3, 4, 5, 6], [8, 9, 1, 2, 3, 4, 5, 6, 7], [9, 1, 2, 3, 4, 5, 6, 7, 8]]
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:231 - Latency: 492.8014771938324
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 15:48:08.346 | INFO     | __main__:evaluate_puzzle:233 - Answer: 1 2 3 4 5 6 7 8 9
+2 3 4 5 6 7 8 9 1
+3 4 5 6 7 8 9 1 2
+4 5 6 7 8 9 1 2 3
+5 6 7 8 9 1 2 3 4
+6 7 8 9 1 2 3 4 5
+7 8 9 1 2 3 4 5 6
+8 9 1 2 3 4 5 6 7
+9 1 2 3 4 5 6 7 8
+2025-11-21 15:48:08.516 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 15:48:08.516 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 15:59:38.280 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 15:59:38.280 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 15:59:38.281 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 15:59:38.281 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 15:59:38.281 | INFO     | __main__:evaluate_puzzle:231 - Latency: 689.7651002407074
+2025-11-21 15:59:38.281 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 15:59:38.281 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 15:59:38.348 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 15:59:38.349 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 16:11:08.646 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 16:11:08.646 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 16:11:08.646 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 16:11:08.646 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 16:11:08.646 | INFO     | __main__:evaluate_puzzle:231 - Latency: 690.29829621315
+2025-11-21 16:11:08.647 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:11:08.647 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 16:11:08.692 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:11:08.693 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 16:22:38.713 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:231 - Latency: 690.021833896637
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:22:38.714 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 16:22:38.751 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:22:38.751 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 16:34:08.888 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 16:34:08.889 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 16:34:08.889 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 16:34:08.889 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 16:34:08.889 | INFO     | __main__:evaluate_puzzle:231 - Latency: 690.1383905410767
+2025-11-21 16:34:08.889 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:34:08.890 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 16:34:09.063 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:34:09.063 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 16:45:39.820 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 16:45:39.820 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 16:45:39.820 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 16:45:39.820 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 16:45:39.821 | INFO     | __main__:evaluate_puzzle:231 - Latency: 690.7577695846558
+2025-11-21 16:45:39.821 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:45:39.821 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 16:45:39.899 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:45:39.900 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 16:57:09.445 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=
+2025-11-21 16:57:09.445 | INFO     | __main__:evaluate_puzzle:212 - Answer: 
+2025-11-21 16:57:09.445 | INFO     | __main__:evaluate_puzzle:229 - Parsed board: None
+2025-11-21 16:57:09.446 | INFO     | __main__:evaluate_puzzle:230 - Is correct: False
+2025-11-21 16:57:09.446 | INFO     | __main__:evaluate_puzzle:231 - Latency: 689.5466833114624
+2025-11-21 16:57:09.446 | INFO     | __main__:evaluate_puzzle:232 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:57:09.446 | INFO     | __main__:evaluate_puzzle:233 - Answer: 
+2025-11-21 16:57:09.547 | INFO     | __main__:evaluate_puzzle:199 - Prompt: You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+Instructions:
+1. The puzzle is a 9×9 grid, where 9 is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
+2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to 9 exactly once.
+3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
+4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
+5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+6. Return exactly 9 lines of output.
+7. Each line must contain exactly 9 digits (from 1 to 9), separated by single spaces.
+8. Ensure the completed grid satisfies all Sudoku rules.
+
+Puzzle Input Format:
+- The puzzle is provided below under "Puzzle:".
+- Each line represents a row of the grid.
+- Digits are separated by spaces; empty cells are marked as '0' or '.'.
+
+Your Output Format:
+- Only the solved grid.
+- 9 lines.
+- Each line: 9 numbers separated by single spaces.
+- No extra text before or after.
+
+Now solve the following Sudoku puzzle:
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+2025-11-21 16:57:09.547 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2

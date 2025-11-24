@@ -30,7 +30,8 @@ class ProviderConfig:
     base_url: str
     api_key_env: str
     default_model: str
-    request_timeout: float = 120.0
+    request_timeout: float = 1200.0
+    requires_api_key: bool = True
 
     def endpoint(self) -> str:
         return self.base_url.rstrip("/") + "/chat/completions"
@@ -51,6 +52,7 @@ PROVIDERS: Dict[str, ProviderConfig] = {
     ),
     "qwen": ProviderConfig(
         name="qwen",
+        # https://dashscope.aliyuncs.com/compatible-mode/v1
         base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
         api_key_env="DASHSCOPE_API_KEY",
         default_model="qwen-max-latest",
@@ -60,6 +62,14 @@ PROVIDERS: Dict[str, ProviderConfig] = {
         base_url="https://open.bigmodel.cn/api/paas/v4",
         api_key_env="GLM_API_KEY",
         default_model="glm-4",
+    ),
+    "ollama": ProviderConfig(
+        name="ollama",
+        base_url="http://127.0.0.1:11434/v1",
+        api_key_env="",
+        default_model="gpt-oss:20b",
+        request_timeout=60000.0,
+        requires_api_key=False,
     ),
 }
 
@@ -71,7 +81,10 @@ def get_provider(provider: str) -> ProviderConfig:
         raise ValueError(f"不支持的 provider: {provider}") from exc
 
 
-def ensure_api_key(config: ProviderConfig) -> str:
+def ensure_api_key(config: ProviderConfig) -> Optional[str]:
+    if not config.requires_api_key:
+        return None
+
     key = os.getenv(config.api_key_env)
     if not key:
         raise EnvironmentError(
@@ -136,9 +149,10 @@ def chat_completion(
     }
 
     headers = {
-        "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
     }
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
 
     endpoint = config.endpoint()
     logger.debug(

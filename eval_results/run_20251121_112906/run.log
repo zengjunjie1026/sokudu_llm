@@ -1,0 +1,494 @@
+2025-11-21 11:29:06.512 | INFO     | __main__:main:416 - Evaluating 10 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=ollama, model=gpt-oss:20b, temperature=0.0, samples=1
+2025-11-21 11:29:06.512 | INFO     | __main__:main:434 - 
+--- Puzzle 1/10 ---
+2025-11-21 11:29:06.512 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 0, 0, 0, 0, 0, 9, 0, 0], [6, 3, 0, 0, 4, 0, 0, 8, 0], [0, 0, 2, 0, 6, 0, 0, 0, 4], [0, 0, 0, 0, 1, 0, 7, 5, 8], [4, 0, 0, 0, 0, 0, 6, 2, 9], [0, 8, 9, 0, 2, 0, 0, 0, 3], [5, 0, 1, 0, 0, 0, 8, 0, 0], [0, 0, 0, 8, 0, 0, 0, 0, 6], [8, 7, 0, 5, 3, 2, 0, 0, 0]]
+2025-11-21 11:29:06.512 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 11:29:06.512 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:29:06.512 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:29:06.512 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:29:06.513 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:29:06.513 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:29:06.644 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-21 11:29:06.644 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:30:14.579 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=1 4 8 2 5 3 9 6 7
+2025-11-21 11:30:14.579 | INFO     | __main__:evaluate_puzzle:189 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 11:30:14.579 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[1, 4, 8, 2, 5, 3, 9, 6, 7], [6, 3, 7, 1, 4, 9, 2, 8, 5], [9, 5, 2, 7, 6, 8, 3, 1, 4], [2, 6, 3, 9, 1, 4, 7, 5, 8], [4, 1, 5, 3, 8, 7, 6, 2, 9], [7, 8, 9, 6, 2, 5, 1, 4, 3], [5, 9, 1, 4, 7, 6, 8, 3, 2], [3, 2, 4, 8, 9, 1, 5, 7, 6], [8, 7, 6, 5, 3, 2, 4, 9, 1]]
+2025-11-21 11:30:14.580 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:30:14.580 | INFO     | __main__:evaluate_puzzle:208 - Latency: 67.9360716342926
+2025-11-21 11:30:14.580 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . . . . . 9 . .
+6 3 . . 4 . . 8 .
+. . 2 . 6 . . . 4
+. . . . 1 . 7 5 8
+4 . . . . . 6 2 9
+. 8 9 . 2 . . . 3
+5 . 1 . . . 8 . .
+. . . 8 . . . . 6
+8 7 . 5 3 2 . . .
+
+2025-11-21 11:30:14.580 | INFO     | __main__:evaluate_puzzle:210 - Answer: 1 4 8 2 5 3 9 6 7
+6 3 7 1 4 9 2 8 5
+9 5 2 7 6 8 3 1 4
+2 6 3 9 1 4 7 5 8
+4 1 5 3 8 7 6 2 9
+7 8 9 6 2 5 1 4 3
+5 9 1 4 7 6 8 3 2
+3 2 4 8 9 1 5 7 6
+8 7 6 5 3 2 4 9 1
+2025-11-21 11:30:14.581 | INFO     | __main__:main:484 - [1/10] ✓ correct_samples=1/1
+2025-11-21 11:30:14.581 | INFO     | __main__:main:434 - 
+--- Puzzle 2/10 ---
+2025-11-21 11:30:14.581 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 0, 6, 0, 0, 9, 0, 2, 0], [0, 7, 0, 0, 0, 8, 0, 0, 0], [8, 5, 0, 0, 0, 4, 9, 0, 0], [0, 0, 3, 9, 0, 0, 0, 5, 2], [5, 0, 0, 0, 8, 3, 1, 4, 0], [4, 0, 0, 0, 0, 0, 0, 0, 9], [1, 0, 0, 0, 0, 0, 2, 0, 0], [0, 0, 8, 4, 9, 7, 5, 0, 0], [0, 0, 7, 2, 1, 0, 0, 0, 0]]
+2025-11-21 11:30:14.581 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[3, 1, 6, 5, 7, 9, 4, 2, 8], [9, 7, 4, 3, 2, 8, 6, 1, 5], [8, 5, 2, 1, 6, 4, 9, 7, 3], [7, 6, 3, 9, 4, 1, 8, 5, 2], [5, 2, 9, 7, 8, 3, 1, 4, 6], [4, 8, 1, 6, 5, 2, 7, 3, 9], [1, 4, 5, 8, 3, 6, 2, 9, 7], [2, 3, 8, 4, 9, 7, 5, 6, 1], [6, 9, 7, 2, 1, 5, 3, 8, 4]]
+2025-11-21 11:30:14.581 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:30:14.582 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:30:14.582 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:30:14.582 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:30:14.582 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:30:14.625 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. . 6 . . 9 . 2 .
+. 7 . . . 8 . . .
+8 5 . . . 4 9 . .
+. . 3 9 . . . 5 2
+5 . . . 8 3 1 4 .
+4 . . . . . . . 9
+1 . . . . . 2 . .
+. . 8 4 9 7 5 . .
+. . 7 2 1 . . . .
+
+2025-11-21 11:30:14.625 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:32:14.727 | INFO     | __main__:main:484 - [2/10] ✗ correct_samples=0/1
+2025-11-21 11:32:14.727 | INFO     | __main__:main:434 - 
+--- Puzzle 3/10 ---
+2025-11-21 11:32:14.728 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 2, 9, 0, 0, 8, 0, 0, 3], [0, 0, 0, 0, 2, 7, 5, 8, 0], [0, 0, 5, 6, 0, 0, 9, 4, 0], [7, 0, 0, 2, 6, 4, 3, 0, 0], [0, 0, 0, 0, 0, 0, 0, 7, 0], [0, 5, 3, 0, 7, 0, 0, 0, 0], [0, 1, 7, 0, 0, 0, 0, 0, 8], [6, 0, 0, 0, 0, 0, 1, 0, 0], [5, 0, 0, 4, 9, 0, 6, 0, 0]]
+2025-11-21 11:32:14.728 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[1, 2, 9, 5, 4, 8, 7, 6, 3], [3, 4, 6, 9, 2, 7, 5, 8, 1], [8, 7, 5, 6, 1, 3, 9, 4, 2], [7, 8, 1, 2, 6, 4, 3, 5, 9], [9, 6, 2, 1, 3, 5, 8, 7, 4], [4, 5, 3, 8, 7, 9, 2, 1, 6], [2, 1, 7, 3, 5, 6, 4, 9, 8], [6, 9, 4, 7, 8, 2, 1, 3, 5], [5, 3, 8, 4, 9, 1, 6, 2, 7]]
+2025-11-21 11:32:14.728 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:32:14.728 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:32:14.728 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:32:14.729 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:32:14.729 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:32:14.821 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 2 9 . . 8 . . 3
+. . . . 2 7 5 8 .
+. . 5 6 . . 9 4 .
+7 . . 2 6 4 3 . .
+. . . . . . . 7 .
+. 5 3 . 7 . . . .
+. 1 7 . . . . . 8
+6 . . . . . 1 . .
+5 . . 4 9 . 6 . .
+
+2025-11-21 11:32:14.822 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:34:14.921 | INFO     | __main__:main:484 - [3/10] ✗ correct_samples=0/1
+2025-11-21 11:34:14.921 | INFO     | __main__:main:434 - 
+--- Puzzle 4/10 ---
+2025-11-21 11:34:14.921 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[7, 0, 0, 0, 0, 0, 0, 0, 0], [0, 4, 9, 0, 0, 0, 3, 0, 2], [2, 0, 0, 9, 0, 3, 0, 6, 0], [0, 0, 0, 0, 7, 0, 1, 3, 0], [0, 3, 1, 8, 9, 0, 0, 0, 0], [8, 0, 0, 0, 0, 1, 0, 2, 0], [1, 0, 4, 5, 6, 0, 2, 0, 0], [0, 6, 0, 2, 0, 0, 0, 5, 0], [0, 0, 7, 0, 0, 0, 6, 0, 1]]
+2025-11-21 11:34:14.921 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[7, 8, 3, 1, 2, 6, 9, 4, 5], [6, 4, 9, 7, 8, 5, 3, 1, 2], [2, 1, 5, 9, 4, 3, 8, 6, 7], [9, 5, 2, 6, 7, 4, 1, 3, 8], [4, 3, 1, 8, 9, 2, 5, 7, 6], [8, 7, 6, 3, 5, 1, 4, 2, 9], [1, 9, 4, 5, 6, 7, 2, 8, 3], [3, 6, 8, 2, 1, 9, 7, 5, 4], [5, 2, 7, 4, 3, 8, 6, 9, 1]]
+2025-11-21 11:34:14.921 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:34:14.922 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:34:14.922 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:34:14.922 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:34:14.922 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:34:15.084 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+7 . . . . . . . .
+. 4 9 . . . 3 . 2
+2 . . 9 . 3 . 6 .
+. . . . 7 . 1 3 .
+. 3 1 8 9 . . . .
+8 . . . . 1 . 2 .
+1 . 4 5 6 . 2 . .
+. 6 . 2 . . . 5 .
+. . 7 . . . 6 . 1
+
+2025-11-21 11:34:15.084 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:35:16.785 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=7 8 3 1 2 6 9 4 5
+2025-11-21 11:35:16.785 | INFO     | __main__:evaluate_puzzle:189 - Answer: 7 8 3 1 2 6 9 4 5
+6 4 9 7 8 5 3 1 2
+2 1 5 9 4 3 8 6 7
+9 5 2 6 7 4 1 3 8
+4 3 1 8 9 2 5 7 6
+8 7 6 3 5 1 4 2 9
+1 9 4 5 6 7 2 8 3
+3 6 8 2 1 9 7 5 4
+5 2 7 4 3 8 6 9 1
+2025-11-21 11:35:16.786 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[7, 8, 3, 1, 2, 6, 9, 4, 5], [6, 4, 9, 7, 8, 5, 3, 1, 2], [2, 1, 5, 9, 4, 3, 8, 6, 7], [9, 5, 2, 6, 7, 4, 1, 3, 8], [4, 3, 1, 8, 9, 2, 5, 7, 6], [8, 7, 6, 3, 5, 1, 4, 2, 9], [1, 9, 4, 5, 6, 7, 2, 8, 3], [3, 6, 8, 2, 1, 9, 7, 5, 4], [5, 2, 7, 4, 3, 8, 6, 9, 1]]
+2025-11-21 11:35:16.786 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:35:16.786 | INFO     | __main__:evaluate_puzzle:208 - Latency: 61.70209765434265
+2025-11-21 11:35:16.786 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+7 . . . . . . . .
+. 4 9 . . . 3 . 2
+2 . . 9 . 3 . 6 .
+. . . . 7 . 1 3 .
+. 3 1 8 9 . . . .
+8 . . . . 1 . 2 .
+1 . 4 5 6 . 2 . .
+. 6 . 2 . . . 5 .
+. . 7 . . . 6 . 1
+
+2025-11-21 11:35:16.786 | INFO     | __main__:evaluate_puzzle:210 - Answer: 7 8 3 1 2 6 9 4 5
+6 4 9 7 8 5 3 1 2
+2 1 5 9 4 3 8 6 7
+9 5 2 6 7 4 1 3 8
+4 3 1 8 9 2 5 7 6
+8 7 6 3 5 1 4 2 9
+1 9 4 5 6 7 2 8 3
+3 6 8 2 1 9 7 5 4
+5 2 7 4 3 8 6 9 1
+2025-11-21 11:35:16.787 | INFO     | __main__:main:484 - [4/10] ✓ correct_samples=1/1
+2025-11-21 11:35:16.787 | INFO     | __main__:main:434 - 
+--- Puzzle 5/10 ---
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 4, 0, 0, 0, 0, 3, 0, 0], [0, 0, 1, 0, 6, 0, 5, 0, 9], [0, 0, 9, 0, 0, 7, 6, 0, 2], [5, 0, 0, 0, 0, 0, 0, 0, 4], [2, 0, 0, 4, 7, 8, 0, 0, 0], [4, 1, 7, 0, 0, 5, 2, 0, 6], [0, 0, 0, 3, 0, 0, 0, 0, 0], [0, 0, 3, 0, 9, 0, 0, 0, 5], [9, 0, 0, 1, 5, 0, 0, 2, 0]]
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[6, 4, 2, 5, 1, 9, 3, 7, 8], [7, 8, 1, 2, 6, 3, 5, 4, 9], [3, 5, 9, 8, 4, 7, 6, 1, 2], [5, 9, 8, 6, 2, 1, 7, 3, 4], [2, 3, 6, 4, 7, 8, 9, 5, 1], [4, 1, 7, 9, 3, 5, 2, 8, 6], [1, 6, 5, 3, 8, 2, 4, 9, 7], [8, 2, 3, 7, 9, 4, 1, 6, 5], [9, 7, 4, 1, 5, 6, 8, 2, 3]]
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:35:16.787 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:35:16.887 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 4 . . . . 3 . .
+. . 1 . 6 . 5 . 9
+. . 9 . . 7 6 . 2
+5 . . . . . . . 4
+2 . . 4 7 8 . . .
+4 1 7 . . 5 2 . 6
+. . . 3 . . . . .
+. . 3 . 9 . . . 5
+9 . . 1 5 . . 2 .
+
+2025-11-21 11:35:16.888 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:37:16.989 | INFO     | __main__:main:484 - [5/10] ✗ correct_samples=0/1
+2025-11-21 11:37:16.989 | INFO     | __main__:main:434 - 
+--- Puzzle 6/10 ---
+2025-11-21 11:37:16.989 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 7, 8, 0, 3, 0, 6, 1, 4], [3, 0, 0, 0, 1, 6, 0, 9, 8], [0, 0, 0, 0, 0, 7, 2, 0, 0], [6, 4, 0, 0, 0, 5, 0, 3, 0], [0, 0, 0, 0, 6, 0, 1, 0, 0], [9, 0, 3, 0, 2, 1, 0, 0, 7], [0, 0, 0, 0, 5, 0, 0, 0, 9], [0, 6, 0, 0, 0, 3, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 7, 0]]
+2025-11-21 11:37:16.989 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[5, 7, 8, 9, 3, 2, 6, 1, 4], [3, 2, 4, 5, 1, 6, 7, 9, 8], [1, 9, 6, 8, 4, 7, 2, 5, 3], [6, 4, 1, 7, 8, 5, 9, 3, 2], [7, 8, 2, 3, 6, 9, 1, 4, 5], [9, 5, 3, 4, 2, 1, 8, 6, 7], [8, 1, 7, 6, 5, 4, 3, 2, 9], [4, 6, 9, 2, 7, 3, 5, 8, 1], [2, 3, 5, 1, 9, 8, 4, 7, 6]]
+2025-11-21 11:37:16.990 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:37:16.990 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:37:16.990 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:37:16.990 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:37:16.990 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:37:17.010 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 8 . 3 . 6 1 4
+3 . . . 1 6 . 9 8
+. . . . . 7 2 . .
+6 4 . . . 5 . 3 .
+. . . . 6 . 1 . .
+9 . 3 . 2 1 . . 7
+. . . . 5 . . . 9
+. 6 . . . 3 . . 1
+. . . . . . . 7 .
+
+2025-11-21 11:37:17.011 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:38:20.536 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=5 7 8 9 3 2 6 1 4
+2025-11-21 11:38:20.536 | INFO     | __main__:evaluate_puzzle:189 - Answer: 5 7 8 9 3 2 6 1 4
+3 2 4 5 1 6 7 9 8
+1 9 6 8 4 7 2 5 3
+6 4 1 7 8 5 9 3 2
+7 8 2 3 6 9 1 4 5
+9 5 3 4 2 1 8 6 7
+8 1 7 6 5 4 3 2 9
+4 6 9 2 7 3 5 8 1
+2 3 5 1 9 8 4 7 6
+2025-11-21 11:38:20.537 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[5, 7, 8, 9, 3, 2, 6, 1, 4], [3, 2, 4, 5, 1, 6, 7, 9, 8], [1, 9, 6, 8, 4, 7, 2, 5, 3], [6, 4, 1, 7, 8, 5, 9, 3, 2], [7, 8, 2, 3, 6, 9, 1, 4, 5], [9, 5, 3, 4, 2, 1, 8, 6, 7], [8, 1, 7, 6, 5, 4, 3, 2, 9], [4, 6, 9, 2, 7, 3, 5, 8, 1], [2, 3, 5, 1, 9, 8, 4, 7, 6]]
+2025-11-21 11:38:20.537 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:38:20.537 | INFO     | __main__:evaluate_puzzle:208 - Latency: 63.526607513427734
+2025-11-21 11:38:20.537 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 8 . 3 . 6 1 4
+3 . . . 1 6 . 9 8
+. . . . . 7 2 . .
+6 4 . . . 5 . 3 .
+. . . . 6 . 1 . .
+9 . 3 . 2 1 . . 7
+. . . . 5 . . . 9
+. 6 . . . 3 . . 1
+. . . . . . . 7 .
+
+2025-11-21 11:38:20.537 | INFO     | __main__:evaluate_puzzle:210 - Answer: 5 7 8 9 3 2 6 1 4
+3 2 4 5 1 6 7 9 8
+1 9 6 8 4 7 2 5 3
+6 4 1 7 8 5 9 3 2
+7 8 2 3 6 9 1 4 5
+9 5 3 4 2 1 8 6 7
+8 1 7 6 5 4 3 2 9
+4 6 9 2 7 3 5 8 1
+2 3 5 1 9 8 4 7 6
+2025-11-21 11:38:20.538 | INFO     | __main__:main:484 - [6/10] ✓ correct_samples=1/1
+2025-11-21 11:38:20.538 | INFO     | __main__:main:434 - 
+--- Puzzle 7/10 ---
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[0, 7, 0, 3, 0, 1, 9, 6, 0], [0, 5, 0, 0, 4, 0, 3, 7, 0], [0, 0, 0, 0, 0, 7, 0, 0, 1], [0, 0, 0, 0, 0, 2, 0, 9, 0], [4, 2, 0, 9, 0, 0, 0, 0, 0], [0, 0, 7, 0, 0, 4, 1, 5, 2], [8, 3, 0, 0, 0, 0, 0, 0, 0], [7, 0, 0, 4, 2, 3, 0, 0, 5], [1, 0, 0, 0, 0, 0, 0, 0, 6]]
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[2, 7, 8, 3, 5, 1, 9, 6, 4], [6, 5, 1, 2, 4, 9, 3, 7, 8], [3, 9, 4, 8, 6, 7, 5, 2, 1], [5, 1, 6, 7, 8, 2, 4, 9, 3], [4, 2, 3, 9, 1, 5, 6, 8, 7], [9, 8, 7, 6, 3, 4, 1, 5, 2], [8, 3, 5, 1, 7, 6, 2, 4, 9], [7, 6, 9, 4, 2, 3, 8, 1, 5], [1, 4, 2, 5, 9, 8, 7, 3, 6]]
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:38:20.538 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:38:20.630 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 . 3 . 1 9 6 .
+. 5 . . 4 . 3 7 .
+. . . . . 7 . . 1
+. . . . . 2 . 9 .
+4 2 . 9 . . . . .
+. . 7 . . 4 1 5 2
+8 3 . . . . . . .
+7 . . 4 2 3 . . 5
+1 . . . . . . . 6
+
+2025-11-21 11:38:20.631 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:39:31.347 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=2 7 8 3 5 1 9 6 4  
+2025-11-21 11:39:31.347 | INFO     | __main__:evaluate_puzzle:189 - Answer: 2 7 8 3 5 1 9 6 4  
+6 5 1 2 4 9 3 7 8  
+3 9 4 8 6 7 5 2 1  
+5 1 6 7 8 2 4 9 3  
+4 2 3 9 1 5 6 8 7  
+9 8 7 6 3 4 1 5 2  
+8 3 5 1 7 6 2 4 9  
+7 6 9 4 2 3 8 1 5  
+1 4 2 5 9 8 7 3 6
+2025-11-21 11:39:31.347 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[2, 7, 8, 3, 5, 1, 9, 6, 4], [6, 5, 1, 2, 4, 9, 3, 7, 8], [3, 9, 4, 8, 6, 7, 5, 2, 1], [5, 1, 6, 7, 8, 2, 4, 9, 3], [4, 2, 3, 9, 1, 5, 6, 8, 7], [9, 8, 7, 6, 3, 4, 1, 5, 2], [8, 3, 5, 1, 7, 6, 2, 4, 9], [7, 6, 9, 4, 2, 3, 8, 1, 5], [1, 4, 2, 5, 9, 8, 7, 3, 6]]
+2025-11-21 11:39:31.348 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:39:31.348 | INFO     | __main__:evaluate_puzzle:208 - Latency: 70.71766948699951
+2025-11-21 11:39:31.348 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+. 7 . 3 . 1 9 6 .
+. 5 . . 4 . 3 7 .
+. . . . . 7 . . 1
+. . . . . 2 . 9 .
+4 2 . 9 . . . . .
+. . 7 . . 4 1 5 2
+8 3 . . . . . . .
+7 . . 4 2 3 . . 5
+1 . . . . . . . 6
+
+2025-11-21 11:39:31.348 | INFO     | __main__:evaluate_puzzle:210 - Answer: 2 7 8 3 5 1 9 6 4  
+6 5 1 2 4 9 3 7 8  
+3 9 4 8 6 7 5 2 1  
+5 1 6 7 8 2 4 9 3  
+4 2 3 9 1 5 6 8 7  
+9 8 7 6 3 4 1 5 2  
+8 3 5 1 7 6 2 4 9  
+7 6 9 4 2 3 8 1 5  
+1 4 2 5 9 8 7 3 6
+2025-11-21 11:39:31.348 | INFO     | __main__:main:484 - [7/10] ✓ correct_samples=1/1
+2025-11-21 11:39:31.349 | INFO     | __main__:main:434 - 
+--- Puzzle 8/10 ---
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[3, 0, 7, 2, 0, 9, 0, 0, 0], [0, 0, 0, 8, 0, 3, 7, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 9, 0, 8, 0, 1, 0], [9, 0, 0, 1, 4, 6, 8, 7, 0], [1, 6, 0, 0, 0, 0, 0, 2, 0], [4, 8, 3, 0, 0, 0, 0, 5, 0], [0, 0, 0, 6, 0, 0, 3, 0, 0], [0, 7, 0, 3, 5, 0, 0, 0, 9]]
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[3, 5, 7, 2, 1, 9, 4, 6, 8], [2, 4, 1, 8, 6, 3, 7, 9, 5], [8, 9, 6, 4, 7, 5, 2, 3, 1], [7, 3, 4, 9, 2, 8, 5, 1, 6], [9, 2, 5, 1, 4, 6, 8, 7, 3], [1, 6, 8, 5, 3, 7, 9, 2, 4], [4, 8, 3, 7, 9, 1, 6, 5, 2], [5, 1, 9, 6, 8, 2, 3, 4, 7], [6, 7, 2, 3, 5, 4, 1, 8, 9]]
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:39:31.349 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:39:31.359 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+3 . 7 2 . 9 . . .
+. . . 8 . 3 7 . .
+. . . . . . . . 1
+. . . 9 . 8 . 1 .
+9 . . 1 4 6 8 7 .
+1 6 . . . . . 2 .
+4 8 3 . . . . 5 .
+. . . 6 . . 3 . .
+. 7 . 3 5 . . . 9
+
+2025-11-21 11:39:31.359 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:40:47.128 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=3 5 7 2 1 9 4 6 8
+2025-11-21 11:40:47.128 | INFO     | __main__:evaluate_puzzle:189 - Answer: 3 5 7 2 1 9 4 6 8
+2 4 1 8 6 3 7 9 5
+8 9 6 4 7 5 2 3 1
+7 3 4 9 2 8 5 1 6
+9 2 5 1 4 6 8 7 3
+1 6 8 5 3 7 9 2 4
+4 8 3 7 9 1 6 5 2
+5 1 9 6 8 2 3 4 7
+6 7 2 3 5 4 1 8 9
+2025-11-21 11:40:47.129 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[3, 5, 7, 2, 1, 9, 4, 6, 8], [2, 4, 1, 8, 6, 3, 7, 9, 5], [8, 9, 6, 4, 7, 5, 2, 3, 1], [7, 3, 4, 9, 2, 8, 5, 1, 6], [9, 2, 5, 1, 4, 6, 8, 7, 3], [1, 6, 8, 5, 3, 7, 9, 2, 4], [4, 8, 3, 7, 9, 1, 6, 5, 2], [5, 1, 9, 6, 8, 2, 3, 4, 7], [6, 7, 2, 3, 5, 4, 1, 8, 9]]
+2025-11-21 11:40:47.129 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:40:47.129 | INFO     | __main__:evaluate_puzzle:208 - Latency: 75.76973819732666
+2025-11-21 11:40:47.129 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+3 . 7 2 . 9 . . .
+. . . 8 . 3 7 . .
+. . . . . . . . 1
+. . . 9 . 8 . 1 .
+9 . . 1 4 6 8 7 .
+1 6 . . . . . 2 .
+4 8 3 . . . . 5 .
+. . . 6 . . 3 . .
+. 7 . 3 5 . . . 9
+
+2025-11-21 11:40:47.129 | INFO     | __main__:evaluate_puzzle:210 - Answer: 3 5 7 2 1 9 4 6 8
+2 4 1 8 6 3 7 9 5
+8 9 6 4 7 5 2 3 1
+7 3 4 9 2 8 5 1 6
+9 2 5 1 4 6 8 7 3
+1 6 8 5 3 7 9 2 4
+4 8 3 7 9 1 6 5 2
+5 1 9 6 8 2 3 4 7
+6 7 2 3 5 4 1 8 9
+2025-11-21 11:40:47.130 | INFO     | __main__:main:484 - [8/10] ✓ correct_samples=1/1
+2025-11-21 11:40:47.130 | INFO     | __main__:main:434 - 
+--- Puzzle 9/10 ---
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[8, 0, 6, 3, 7, 1, 9, 0, 5], [0, 3, 0, 0, 0, 0, 0, 0, 0], [0, 5, 1, 2, 9, 0, 0, 6, 0], [0, 0, 0, 0, 1, 0, 0, 7, 0], [6, 0, 0, 0, 0, 0, 0, 5, 8], [0, 0, 0, 8, 0, 5, 0, 0, 0], [3, 0, 0, 0, 6, 4, 0, 2, 0], [1, 0, 4, 0, 0, 7, 0, 0, 0], [9, 0, 0, 0, 8, 0, 7, 0, 0]]
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[8, 2, 6, 3, 7, 1, 9, 4, 5], [7, 3, 9, 4, 5, 6, 1, 8, 2], [4, 5, 1, 2, 9, 8, 3, 6, 7], [5, 9, 8, 6, 1, 2, 4, 7, 3], [6, 1, 3, 7, 4, 9, 2, 5, 8], [2, 4, 7, 8, 3, 5, 6, 9, 1], [3, 7, 5, 1, 6, 4, 8, 2, 9], [1, 8, 4, 9, 2, 7, 5, 3, 6], [9, 6, 2, 5, 8, 3, 7, 1, 4]]
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:40:47.130 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:40:47.193 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+8 . 6 3 7 1 9 . 5
+. 3 . . . . . . .
+. 5 1 2 9 . . 6 .
+. . . . 1 . . 7 .
+6 . . . . . . 5 8
+. . . 8 . 5 . . .
+3 . . . 6 4 . 2 .
+1 . 4 . . 7 . . .
+9 . . . 8 . 7 . .
+
+2025-11-21 11:40:47.193 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:41:43.981 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=8 2 6 3 7 1 9 4 5
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:189 - Answer: 8 2 6 3 7 1 9 4 5
+7 3 9 4 5 6 1 8 2
+4 5 1 2 9 8 3 6 7
+5 9 8 6 1 2 4 7 3
+6 1 3 7 4 9 2 5 8
+2 4 7 8 3 5 6 9 1
+3 7 5 1 6 4 8 2 9
+1 8 4 9 2 7 5 3 6
+9 6 2 5 8 3 7 1 4
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[8, 2, 6, 3, 7, 1, 9, 4, 5], [7, 3, 9, 4, 5, 6, 1, 8, 2], [4, 5, 1, 2, 9, 8, 3, 6, 7], [5, 9, 8, 6, 1, 2, 4, 7, 3], [6, 1, 3, 7, 4, 9, 2, 5, 8], [2, 4, 7, 8, 3, 5, 6, 9, 1], [3, 7, 5, 1, 6, 4, 8, 2, 9], [1, 8, 4, 9, 2, 7, 5, 3, 6], [9, 6, 2, 5, 8, 3, 7, 1, 4]]
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:208 - Latency: 56.78924798965454
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+8 . 6 3 7 1 9 . 5
+. 3 . . . . . . .
+. 5 1 2 9 . . 6 .
+. . . . 1 . . 7 .
+6 . . . . . . 5 8
+. . . 8 . 5 . . .
+3 . . . 6 4 . 2 .
+1 . 4 . . 7 . . .
+9 . . . 8 . 7 . .
+
+2025-11-21 11:41:43.982 | INFO     | __main__:evaluate_puzzle:210 - Answer: 8 2 6 3 7 1 9 4 5
+7 3 9 4 5 6 1 8 2
+4 5 1 2 9 8 3 6 7
+5 9 8 6 1 2 4 7 3
+6 1 3 7 4 9 2 5 8
+2 4 7 8 3 5 6 9 1
+3 7 5 1 6 4 8 2 9
+1 8 4 9 2 7 5 3 6
+9 6 2 5 8 3 7 1 4
+2025-11-21 11:41:43.983 | INFO     | __main__:main:484 - [9/10] ✓ correct_samples=1/1
+2025-11-21 11:41:43.983 | INFO     | __main__:main:434 - 
+--- Puzzle 10/10 ---
+2025-11-21 11:41:43.983 | DEBUG    | __main__:evaluate_puzzle:164 - Evaluating puzzle: [[4, 0, 0, 0, 3, 0, 0, 0, 8], [7, 3, 0, 6, 9, 1, 4, 0, 0], [0, 0, 1, 2, 0, 0, 0, 0, 0], [0, 0, 0, 7, 4, 6, 8, 3, 0], [0, 0, 0, 0, 0, 0, 7, 0, 4], [2, 7, 0, 0, 0, 8, 0, 0, 0], [0, 0, 2, 1, 0, 0, 3, 4, 0], [1, 0, 0, 0, 0, 2, 5, 0, 0], [5, 0, 0, 0, 0, 0, 0, 9, 0]]
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:165 - Solution: [[4, 2, 9, 5, 3, 7, 1, 6, 8], [7, 3, 8, 6, 9, 1, 4, 2, 5], [6, 5, 1, 2, 8, 4, 9, 7, 3], [9, 1, 5, 7, 4, 6, 8, 3, 2], [3, 8, 6, 9, 2, 5, 7, 1, 4], [2, 7, 4, 3, 1, 8, 6, 5, 9], [8, 6, 2, 1, 5, 9, 3, 4, 7], [1, 9, 3, 4, 7, 2, 5, 8, 6], [5, 4, 7, 8, 6, 3, 2, 9, 1]]
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:166 - Provider: ollama
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:167 - Model: gpt-oss:20b
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:168 - Temperature: 0.0
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:169 - Num samples: 1
+2025-11-21 11:41:43.984 | DEBUG    | __main__:evaluate_puzzle:170 - Seed: None
+2025-11-21 11:41:44.019 | INFO     | __main__:evaluate_puzzle:176 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+4 . . . 3 . . . 8
+7 3 . 6 9 1 4 . .
+. . 1 2 . . . . .
+. . . 7 4 6 8 3 .
+. . . . . . 7 . 4
+2 7 . . . 8 . . .
+. . 2 1 . . 3 4 .
+1 . . . . 2 5 . .
+5 . . . . . . 9 .
+
+2025-11-21 11:41:44.019 | DEBUG    | llm_client:chat_completion:157 - POST http://127.0.0.1:11434/v1/chat/completions | provider=ollama model=gpt-oss:20b temperature=0.0 messages=2
+2025-11-21 11:42:33.573 | DEBUG    | llm_client:chat_completion:190 - Response http://127.0.0.1:11434/v1/chat/completions | provider=ollama status=200 content_preview=4 2 9 5 3 7 1 6 8
+2025-11-21 11:42:33.573 | INFO     | __main__:evaluate_puzzle:189 - Answer: 4 2 9 5 3 7 1 6 8
+7 3 8 6 9 1 4 2 5
+6 5 1 2 8 4 9 7 3
+9 1 5 7 4 6 8 3 2
+3 8 6 9 2 5 7 1 4
+2 7 4 3 1 8 6 5 9
+8 6 2 1 5 9 3 4 7
+1 9 3 4 7 2 5 8 6
+5 4 7 8 6 3 2 9 1
+2025-11-21 11:42:33.574 | INFO     | __main__:evaluate_puzzle:206 - Parsed board: [[4, 2, 9, 5, 3, 7, 1, 6, 8], [7, 3, 8, 6, 9, 1, 4, 2, 5], [6, 5, 1, 2, 8, 4, 9, 7, 3], [9, 1, 5, 7, 4, 6, 8, 3, 2], [3, 8, 6, 9, 2, 5, 7, 1, 4], [2, 7, 4, 3, 1, 8, 6, 5, 9], [8, 6, 2, 1, 5, 9, 3, 4, 7], [1, 9, 3, 4, 7, 2, 5, 8, 6], [5, 4, 7, 8, 6, 3, 2, 9, 1]]
+2025-11-21 11:42:33.574 | INFO     | __main__:evaluate_puzzle:207 - Is correct: True
+2025-11-21 11:42:33.574 | INFO     | __main__:evaluate_puzzle:208 - Latency: 49.5552294254303
+2025-11-21 11:42:33.574 | INFO     | __main__:evaluate_puzzle:209 - Prompt: You are a reasoning-only assistant working in plain text. Solve the following Sudoku puzzle without using any external tools. Return the completed grid as 9 lines, each with 9 numbers separated by spaces.
+
+Puzzle:
+4 . . . 3 . . . 8
+7 3 . 6 9 1 4 . .
+. . 1 2 . . . . .
+. . . 7 4 6 8 3 .
+. . . . . . 7 . 4
+2 7 . . . 8 . . .
+. . 2 1 . . 3 4 .
+1 . . . . 2 5 . .
+5 . . . . . . 9 .
+
+2025-11-21 11:42:33.574 | INFO     | __main__:evaluate_puzzle:210 - Answer: 4 2 9 5 3 7 1 6 8
+7 3 8 6 9 1 4 2 5
+6 5 1 2 8 4 9 7 3
+9 1 5 7 4 6 8 3 2
+3 8 6 9 2 5 7 1 4
+2 7 4 3 1 8 6 5 9
+8 6 2 1 5 9 3 4 7
+1 9 3 4 7 2 5 8 6
+5 4 7 8 6 3 2 9 1
+2025-11-21 11:42:33.575 | INFO     | __main__:main:484 - [10/10] ✓ correct_samples=1/1
+2025-11-21 11:42:33.575 | INFO     | __main__:main:498 - 
+=== Evaluation Summary ===
+2025-11-21 11:42:33.575 | INFO     | __main__:main:500 - pass@1: 70.000%
+2025-11-21 11:42:33.575 | INFO     | __main__:main:501 - majority@pass: 70.000%
+2025-11-21 11:42:33.575 | INFO     | __main__:main:503 - Average latency per call: 80.63s
+2025-11-21 11:42:33.576 | INFO     | __main__:main:504 - Median latency per call: 69.33s
+2025-11-21 11:42:33.577 | INFO     | __main__:main:530 - 
+Detailed results written to /home/andrew/sokudo_llm/eval_results/run_20251121_112906
