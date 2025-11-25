@@ -1,151 +1,170 @@
-# 数独求解器 (Sudoku Solver)
+# Sudoku Reasoning Lab
 
-一个使用回溯算法实现的数独求解器程序，并支持调用多种 LLM（OpenAI / DeepSeek / Qwen 等）进行纯文本解答校验。
+An end-to-end playground for Sudoku research that combines:
 
-## 功能特点
+- classical exact solving (`sudoku_solver.py`)
+- dataset generation/export (`sokudu_dataset.py`)
+- LLM-based interactive solving (`gpt_sudoku_session.py`, `gpt_sudoku_session_16.py`)
+- automated pass@k benchmarking (`sudoku_passk_eval.py`)
 
-- ✅ 使用经典的回溯算法解决数独问题
-- ✅ 支持手动输入数独题目
-- ✅ 随机生成不同的数独题目
-- ✅ 美观的棋盘显示格式
-- ✅ 完整的输入验证
-- ✅ 可调用多种 LLM 文本求解并自动验证答案
-- ✅ 出错时自动生成反馈，与模型多轮对话直到回答正确或达到上限
-- ✅ 支持 9x9 与 16x16 两种棋盘规模
+All components speak plain text and store exhaustive logs so you can reproduce experiments, diff prompts, and run local or cloud models interchangeably.
 
-## 使用方法
+---
 
-### 运行程序
+## 1. Classical Solver CLI
 
 ```bash
 python sudoku_solver.py
 ```
 
-### 输入格式
+Features:
 
-程序支持两种输入方式：
+- Backtracking solver for 9×9 grids
+- Interactive or sample puzzle input (0 = empty)
+- Pretty board rendering + validation
 
-1. **使用示例数独**：选择选项1，程序会使用内置的示例题目
-2. **手动输入**：选择选项2，然后按提示输入9行，每行9个数字（0表示空格）
+Use it to sanity-check puzzles or export fully solved boards.
 
-### 输入示例
+---
 
-```
-第 1 行: 5 3 0 0 7 0 0 0 0
-第 2 行: 6 0 0 1 9 5 0 0 0
-...
-```
+## 2. Dataset Generation (`sokudu_dataset.py`)
 
-## 算法说明
-
-程序使用回溯算法（Backtracking）来解决数独：
-
-1. 找到第一个空格
-2. 尝试填入数字1-9
-3. 检查填入的数字是否有效（行、列、3x3宫格）
-4. 如果有效，递归解决下一个空格
-5. 如果无效或导致无解，回溯并尝试下一个数字
-
-## 示例输出
-
-```
-原始题目：
-=========================
-5 3 .  | . 7 .  | . . . 
-6 . .  | 1 9 5  | . . . 
-. 9 8  | . . .  | . 6 . 
--------------------------
-8 . .  | . 6 .  | . . 3 
-4 . .  | 8 . 3  | . . 1 
-7 . .  | . 2 .  | . . 6 
--------------------------
-. 6 .  | . . .  | 2 8 . 
-. . .  | 4 1 9  | . . 5 
-. . .  | . 8 .  | . 7 9 
-=========================
-
-解决方案：
-...
-```
-
-## 调用 LLM 解答
-
-通过 `gpt_sudoku_session.py` 可以把随机生成的数独题交给 LLM 处理，并自动验证回复是否正确。每次运行都会生成一个新的题目，并在历史目录中新建一个 `session_<timestamp>/` 子目录，内部包含：
-
-- `conversation.json`：完整的聊天记录（含 reasoning 字段，若模型返回）
-- `summary.json`：本次对话概览（轮数、是否成功、最后的问题等）
-- `rounds.txt`：单行记录本次使用了几轮提示
-
-### 运行前准备
-
-1. 在环境中设置对应供应商的 API Key
-
-   ```bash
-   # OpenAI
-   export OPENAI_API_KEY=sk-xxxx...
-
-   # DeepSeek
-   export DEEPSEEK_API_KEY=dsk-xxxx...
-
-   # Qwen (DashScope 兼容模式)
-   export DASHSCOPE_API_KEY=sk-xxxx...
-   ```
-
-2. 安装依赖
-
-   ```bash
-   pip install --upgrade requests
-   ```
-
-### 运行脚本
+Create large corpora with unique solutions and human-readable JSON formatting.
 
 ```bash
+# 1000 puzzles for each size, stored under sokudu_dataset/
+python sokudu_dataset.py
+
+# Only 4×4 (1000 easy puzzles)
+python sokudu_dataset.py --num-4x4 1000 --num-9x9 0 --num-16x16 0
+
+# Verify uniqueness or check duplicates
+python sokudu_dataset.py --verify-unique sokudu_dataset/sudoku_4x4.json
+python sokudu_dataset.py --check-file sokudu_dataset/sudoku_9x9.json
+```
+
+Outputs live under `sokudu_dataset/` as `sudoku_<size>x<size>.json` with both puzzles and solutions serialized as 2D arrays.
+
+---
+
+## 3. LLM Interactive Sessions (`gpt_sudoku_session.py`)
+
+Run a single puzzle or sweep through a dataset while automatically:
+
+- building rich prompts (size-aware, tool-use bans, strict formatting)
+- tracking conversation history + reasoning
+- validating each answer and generating cumulative feedback
+- logging every attempt under an organized directory tree
+
+### Example: dataset sweep with remote Qwen
+
+```bash
+export DASHSCOPE_API_KEY=sk-xxxx
+
 python gpt_sudoku_session.py \
-  --provider openai \           # 可选：openai / deepseek / qwen
-  --model gpt-5 \               # 可选：指定模型（不填则使用供应商默认模型）
-  --temperature 1 \             # 可选：回复温度，默认为 1
-  --holes 45 \                  # 可选：挖空数量，默认 45（中等难度）
-  --history-dir ./histories \   # 可选：自定义历史目录
-  --max-rounds 3 \              # 可选：最多对话轮数，默认 3
-  --reset                       # 可选：启动前清空历史目录
+  --provider qwen \
+  --model qwen3-max \
+  --dataset sokudu_dataset/sudoku_9x9.json \
+  --dataset-limit 20 \
+  --max-rounds 10 \
+  --retry-attempts 3 \
+  --history-dir gpt_sudoku_histories
 ```
 
-程序会：
+Logs are placed under `gpt_sudoku_histories/dataset_run_<timestamp>/puzzle_XXXX/attempt_YY/` with:
 
-- 随机生成一个可解的数独题目，并向模型发送提示
-- 明确禁止模型使用任何外部工具，只能在文本中给出解答
-- 将会话记录保存到指定目录下独立的 `session_<timestamp>/conversation.json`
-- 解析并验证模型的解答，指出不符合数独规则的行/列/宫或与原题冲突的位置
-- 若答案有误，会自动总结问题生成下一轮提示，把完整聊天记录继续带入直至回答正确或达到最大轮数
-- 将每一轮的提示、回复、校验结果完整写入 JSON 记录，并额外生成 `summary.json`、`rounds.txt` 方便快速查阅
+- `conversation.json` – full chat with reasoning fields
+- `summary.json` – success flag, rounds, final issues
+- `rounds.txt` – number of dialogue rounds used
 
-### 16x16 数独测试
-
-我们也提供了 16x16 棋盘的 LLM 调度脚本，逻辑与 9x9 类似，但题目与校验规则针对 16x16 做了强化：
+### Local/Remote Ollama (gpt-oss:20b)
 
 ```bash
-python gpt_sudoku_session_16.py \
-  --provider deepseek \          # 可选：openai / deepseek / qwen
-  --model deepseek-chat \        # 可选：指定模型
-  --temperature 1.0 \             # 可选：回复温度，默认为 1.0
-  --holes 180 \                   # 可选：挖空数量，默认 180
-  --history-dir ./histories16 \   # 可选：自定义 16x16 历史目录
-  --max-rounds 10 \               # 可选：最多对话轮数，默认 10
-  --reset                         # 可选：启动前清空历史目录
+# optional: point to remote host
+export OLLAMA_BASE_URL="http://192.168.3.103:11434/v1"
+
+python gpt_sudoku_session.py \
+  --use-ollama \
+  --dataset sokudu_dataset/sudoku_9x9.json \
+  --dataset-limit 20 \
+  --max-rounds 10 \
+  --history-dir gpt_sudoku_histories
 ```
 
-工作流程：
+`--use-ollama` switches provider to `ollama` and defaults to `gpt-oss:20b`.
 
-- 随机生成可解的 16x16 数独题目，并向模型发送
-- 明确禁止模型使用任何外部工具；要求输出 16 行，每行 16 个数字
-- 多轮对话自动反馈问题，直到模型给出合法解答或达到最大轮数
-- 所有历史写入 `session_<timestamp>/conversation.json`，并附带 `summary.json`、`rounds.txt`
+---
 
-## 要求
+## 4. Pass@k Benchmarking (`sudoku_passk_eval.py`)
 
-- Python 3.6+
+Benchmark any provider/model across a dataset with multiple independent samples per puzzle.
 
-## 作者
+```bash
+# Qwen cloud
+python sudoku_passk_eval.py \
+  --dataset sokudu_dataset/sudoku_9x9.json \
+  --provider qwen \
+  --model qwen3-max \
+  --num-samples 10 \
+  --limit 20 \
+  --log-level INFO
 
-使用AI生成
+# Local/Remote Ollama shortcut
+python sudoku_passk_eval.py \
+  --dataset sokudu_dataset/sudoku_9x9.json \
+  --use-ollama \
+  --num-samples 5 \
+  --limit 20
+```
+
+Outputs saved under `eval_results/run_<timestamp>/`:
+
+- `summary.json` – pass@1/3/5/10, majority@pass, latency stats
+- `llm_calls.jsonl` – each sample’s prompt/response/parsed board
+- `puzzle_XXXX.json` – per-puzzle records with readable 2D arrays
+
+---
+
+## 5. LLM Providers & Environment Variables
+
+Supported providers (`llm_client.py`):
+
+| Provider | Base URL | Env Var |
+|----------|----------|---------|
+| openai   | https://api.openai.com/v1 | `OPENAI_API_KEY` |
+| deepseek | https://api.deepseek.com/v1 | `DEEPSEEK_API_KEY` |
+| qwen     | https://dashscope.aliyuncs.com/compatible-mode/v1 | `DASHSCOPE_API_KEY` |
+| glm      | https://open.bigmodel.cn/api/paas/v4 | `GLM_API_KEY` |
+| ollama   | http://127.0.0.1:11434/v1 (override via `OLLAMA_BASE_URL`) | *none* |
+
+Ollama runs without API keys; just ensure `ollama serve` is listening on the desired host/port.
+
+---
+
+## 6. Requirements
+
+```bash
+pip install -r requirements.txt
+```
+
+(Currently only `requests` + `loguru`, but keep requirements pinned here.)
+
+---
+
+## 7. Repository Layout
+
+```
+sudoku_solver.py           # CLI backtracking solver
+sokudu_dataset.py          # dataset generation & verification
+gpt_sudoku_session.py      # 9×9 LLM loop with feedback
+gpt_sudoku_session_16.py   # 16×16 variant
+sudoku_passk_eval.py       # pass@k + majority benchmarking
+gpt_sudoku_histories/      # interactive session logs
+eval_results/              # benchmarking outputs
+sokudu_dataset/            # generated puzzle corpora
+```
+
+---
+
+Happy experimenting! Contributions and prompt ideas are welcome. Feel free to open issues describing new providers, dataset formats, or evaluation metrics you’d like to see. 👋
 
