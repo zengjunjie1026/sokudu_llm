@@ -48,7 +48,7 @@ import sys
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
-from llm_client import LLMClientError, chat_completion
+from llm_client import LLMClientError, PROVIDERS, chat_completion
 from loguru import logger
 
 BOARD_ROWS_PATTERN = re.compile(r"\d+")
@@ -298,8 +298,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--model",
         type=str,
-        default="glm-4",
-        help="LLM model identifier (default: glm-4).",
+        default=None,
+        help="LLM model identifier (defaults to provider's default model).",
     )
     parser.add_argument(
         "--temperature",
@@ -343,7 +343,22 @@ def parse_args() -> argparse.Namespace:
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         help="Logging level for console and file outputs (default: INFO).",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--use-ollama",
+        action="store_true",
+        help="Shortcut to run against the local/remote Ollama server using gpt-oss:20b.",
+    )
+
+    args = parser.parse_args()
+    if args.use_ollama:
+        args.provider = "ollama"
+        if args.model is None:
+            args.model = "gpt-oss:20b"
+
+    if args.model is None:
+        args.model = PROVIDERS[args.provider].default_model
+
+    return args
 
 
 def load_dataset(path: str) -> List[Dict[str, List[List[int]]]]:

@@ -374,6 +374,7 @@ def run_session(
     holes: int,
     max_rounds: int,
     puzzle_override: Optional[Sequence[Sequence[int]]] = None,
+    session_dir_override: Optional[Path] = None,
 ) -> Dict[str, Any]:
     history_dir = history_dir.resolve()
     history_dir.mkdir(parents=True, exist_ok=True)
@@ -397,7 +398,12 @@ def run_session(
     else:
         puzzle = generate_random_puzzle(holes=holes)
     session_ts = int(time.time() * 1000)
-    session_dir = history_dir / f"session_{session_ts}"
+    if session_dir_override is not None:
+        session_dir = session_dir_override.resolve()
+        session_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        session_dir = history_dir / f"session_{session_ts}"
+        session_dir.mkdir(parents=True, exist_ok=True)
 
     session = SudokuChatSession(
         puzzle=puzzle,
@@ -566,6 +572,10 @@ def run_dataset_benchmark(
         print(f"⚠️ 数据集为空或 limit=0：{dataset_path}")
         return
 
+    dataset_history_root = history_dir.resolve() / f"dataset_run_{time.strftime('%Y%m%d_%H%M%S')}"
+    dataset_history_root.mkdir(parents=True, exist_ok=True)
+    print(f"📁 数据集日志目录: {dataset_history_root}")
+
     print(
         f"📚 使用数据集 {dataset_path} 的前 {limit} 道题，评估模型 {provider}:{model} "
         f"(temperature={temperature}, max_rounds={max_rounds})"
@@ -583,6 +593,7 @@ def run_dataset_benchmark(
         last_error: Optional[str] = None
 
         for attempt in range(1, max(1, retry_attempts) + 1):
+            attempt_dir = dataset_history_root / f"puzzle_{idx + 1:04d}" / f"attempt_{attempt:02d}"
             summary = run_session(
                 model=model,
                 temperature=temperature,
@@ -592,6 +603,7 @@ def run_dataset_benchmark(
                 holes=0,
                 max_rounds=max_rounds,
                 puzzle_override=puzzles[idx],
+                session_dir_override=attempt_dir,
             )
             if summary is None:
                 last_error = "unknown failure"

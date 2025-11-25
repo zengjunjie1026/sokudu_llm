@@ -1,4 +1,0 @@
-2025-11-18 16:54:59.371 | INFO     | __main__:main:346 - Evaluating 10 puzzle(s) from /home/andrew/sokudo_llm/sokudu_dataset/sudoku_9x9.json using provider=qwen, model=qwen3-max, temperature=0.0, samples=10
-2025-11-18 16:54:59.372 | INFO     | __main__:main:364 - 
---- Puzzle 1/10 ---
-2025-11-18 16:54:59.427 | DEBUG    | llm_client:chat_completion:137 - POST https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions | provider=qwen model=qwen3-max temperature=0.0 messages=2

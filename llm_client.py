@@ -30,11 +30,19 @@ class ProviderConfig:
     base_url: str
     api_key_env: str
     default_model: str
-    request_timeout: float = 1200.0
+    request_timeout: float = 12000.0
     requires_api_key: bool = True
+    base_url_env: Optional[str] = None
+
+    def resolved_base_url(self) -> str:
+        if self.base_url_env:
+            env_value = os.getenv(self.base_url_env)
+            if env_value:
+                return env_value
+        return self.base_url
 
     def endpoint(self) -> str:
-        return self.base_url.rstrip("/") + "/chat/completions"
+        return self.resolved_base_url().rstrip("/") + "/chat/completions"
 
 
 PROVIDERS: Dict[str, ProviderConfig] = {
@@ -70,6 +78,7 @@ PROVIDERS: Dict[str, ProviderConfig] = {
         default_model="gpt-oss:20b",
         request_timeout=60000.0,
         requires_api_key=False,
+        base_url_env="OLLAMA_BASE_URL",
     ),
 }
 
