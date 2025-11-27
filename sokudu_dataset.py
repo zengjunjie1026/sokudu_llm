@@ -295,9 +295,11 @@ def save_dataset(
     output_dir: Path,
     size: int,
     metadata: Optional[Dict[str, Optional[float]]] = None,
+    filename_tag: Optional[str] = None,
 ) -> Path:
     output_dir.mkdir(parents=True, exist_ok=True)
-    dataset_path = output_dir / f"sudoku_{size}x{size}.json"
+    suffix = f"_{filename_tag}" if filename_tag else ""
+    dataset_path = output_dir / f"sudoku_{size}x{size}{suffix}.json"
 
     generated_at = time.strftime("%Y-%m-%d %H:%M:%S")
     count = len(entries)
@@ -344,6 +346,14 @@ def save_dataset(
         fp.write("}\n")
 
     return dataset_path
+
+
+DIFFICULTY_PRESETS_9X9 = {
+    "easy": 40,
+    "medium": 34,
+    "hard": 28,
+    "expert": 24,
+}
 
 
 def parse_args() -> argparse.Namespace:
@@ -421,6 +431,13 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=None,
         help="Verify that every puzzle inside the given dataset has a unique solution.",
+    )
+    parser.add_argument(
+        "--difficulty-9x9",
+        type=str,
+        choices=["standard", "easy", "medium", "hard", "expert"],
+        default="standard",
+        help="Difficulty preset for 9x9 puzzles (controls clue count).",
     )
     return parser.parse_args()
 
@@ -513,15 +530,39 @@ def main() -> None:
 
     output_dir = args.output_dir.resolve()
 
+    difficulty_tag = (
+        args.difficulty_9x9 if args.difficulty_9x9 != "standard" else None
+    )
+    difficulty_min_clues = (
+        DIFFICULTY_PRESETS_9X9.get(args.difficulty_9x9)
+        if args.difficulty_9x9 != "standard"
+        else None
+    )
+
     tasks = [
-        (4, args.num_4x4, args.min_clues_4x4, args.seed_4x4),
-        (9, args.num_9x9, args.min_clues_9x9, args.seed_9x9),
-        (16, args.num_16x16, args.min_clues_16x16, args.seed_16x16),
+        {"size": 4, "count": args.num_4x4, "min_clues": args.min_clues_4x4, "seed": args.seed_4x4, "tag": None, "difficulty": None},
+        {
+            "size": 9,
+            "count": args.num_9x9,
+            "min_clues": args.min_clues_9x9
+            if args.min_clues_9x9 is not None
+            else difficulty_min_clues,
+            "seed": args.seed_9x9,
+            "tag": difficulty_tag,
+            "difficulty": args.difficulty_9x9 if difficulty_tag else None,
+        },
+        {"size": 16, "count": args.num_16x16, "min_clues": args.min_clues_16x16, "seed": args.seed_16x16, "tag": None, "difficulty": None},
     ]
 
     overall_start = time.time()
 
-    for size, count, min_clues, seed in tasks:
+    for task in tasks:
+        size = task["size"]
+        count = task["count"]
+        min_clues = task["min_clues"]
+        seed = task["seed"]
+        tag = task["tag"]
+        difficulty = task["difficulty"]
         if count <= 0:
             print(f"[{size}x{size}] Skipping generation (count <= 0).")
             continue
@@ -542,7 +583,15 @@ def main() -> None:
                 "actual_count": len(entries),
             }
         )
-        path = save_dataset(entries, output_dir, size, metadata=metadata)
+        if difficulty:
+            metadata["difficulty"] = difficulty
+        path = save_dataset(
+            entries,
+            output_dir,
+            size,
+            metadata=metadata,
+            filename_tag=tag,
+        )
         print(f"[{size}x{size}] Dataset saved to {path}.")
 
     overall_elapsed = time.time() - overall_start

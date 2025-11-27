@@ -64,15 +64,16 @@ def format_puzzle(puzzle: Sequence[Sequence[int]]) -> str:
 
 def build_prompt(puzzle: Sequence[Sequence[int]]) -> str:
     return (
-        
-       """You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, and no reliance on precomputed solutions.
+
+        """You are a reasoning-only assistant operating in a plain text environment. Your task is to solve the given Sudoku puzzle using logical deduction only—no guessing, no external tools, no code execution, and no reliance on precomputed solutions.
 
 Instructions:
 1. The puzzle is a {size}×{size} grid, where {size} is typically 9 (standard Sudoku), but may vary (e.g., 4 or 6).
 2. Each row, each column, and each designated subgrid (box) must contain all digits from 1 to {size} exactly once.
 3. Empty cells in the puzzle are represented by '0' or '.' — treat them as unknowns to be filled.
 4. Use step-by-step deductive reasoning to determine the correct digit for each empty cell.
-5. Do not output any explanations, comments, thought processes, or formatting beyond the final answer.
+5. Do not write or reference any code/pseudocode; solve purely by logical reasoning.
+6. You may think step by step, but the final output must follow the exact formatting rules below.
 6. Return exactly {size} lines of output.
 7. Each line must contain exactly {size} digits (from 1 to {size}), separated by single spaces.
 8. Ensure the completed grid satisfies all Sudoku rules.
@@ -86,7 +87,8 @@ Your Output Format:
 - Only the solved grid.
 - {size} lines.
 - Each line: {size} numbers separated by single spaces.
-- No extra text before or after.
+- No extra text before or after (i.e., only the grid). If you must give explanations, place them after the grid on a new paragraph.
+- Even if you are uncertain, you must still output a full {size}×{size} grid; do not leave the answer blank or respond with explanations only.
 
 Now solve the following Sudoku puzzle:
 
