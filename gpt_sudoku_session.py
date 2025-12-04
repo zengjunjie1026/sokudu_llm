@@ -257,6 +257,11 @@ class SudokuChatSession:
             out_of_range = [num for num in row if num < 1 or num > 9]
             if out_of_range:
                 issues.append(f"Row {r_idx} contains digits outside 1-9: {sorted(out_of_range)}.")
+            blanks = [idx + 1 for idx, num in enumerate(row) if num == 0]
+            if blanks:
+                issues.append(
+                    f"Row {r_idx} still has blanks at columns {blanks}; fill every cell with digits 1-9."
+                )
 
         # 线索一致性
         for r in range(9):
@@ -314,6 +319,20 @@ class SudokuChatSession:
                     issues.append(
                             f"Subgrid ({box_row + 1}, {box_col + 1}) violates Sudoku rules: {'; '.join(issue_parts)}."
                     )
+
+        mismatch_positions: List[str] = []
+        for r in range(9):
+            for c in range(9):
+                if candidate[r][c] != self.correct_solution[r][c]:
+                    mismatch_positions.append(f"({r + 1}, {c + 1})={candidate[r][c]}")
+        if mismatch_positions:
+            limited = mismatch_positions[:12]
+            extra = "" if len(mismatch_positions) <= 12 else f" ... (+{len(mismatch_positions) - 12} more)"
+            issues.append(
+                "The following cells violate Sudoku constraints; adjust their values (no answer provided): "
+                + ", ".join(limited)
+                + extra
+            )
 
         is_correct = not issues
         return SudokuCheckResult(is_correct=is_correct, issues=issues, parsed_board=candidate)
