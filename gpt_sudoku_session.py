@@ -327,7 +327,8 @@ class SudokuChatSession:
                     mismatch_positions.append(f"({r + 1}, {c + 1})={candidate[r][c]}")
         if mismatch_positions:
             # limited = mismatch_positions[:12]
-            limited = mismatch_positions[:16]
+            # limited = mismatch_positions[:16]
+            limited = mismatch_positions
             extra = "" if len(mismatch_positions) <= 12 else f" ... (+{len(mismatch_positions) - 12} more)"
             issues.append(
                 "The following cells violate Sudoku constraints; adjust their values : "
