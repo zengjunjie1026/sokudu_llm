@@ -329,7 +329,7 @@ class SudokuChatSession:
             limited = mismatch_positions[:12]
             extra = "" if len(mismatch_positions) <= 12 else f" ... (+{len(mismatch_positions) - 12} more)"
             issues.append(
-                "The following cells violate Sudoku constraints; adjust their values (no answer provided): "
+                "The following cells violate Sudoku constraints; adjust their values : "
                 + ", ".join(limited)
                 + extra
             )
