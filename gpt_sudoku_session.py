@@ -150,6 +150,8 @@ class SudokuChatSession:
         self.messages: List[dict] = []
         self.round_records: List[dict] = []
         self.created_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        self.prompt_tokens = 0
+        self.completion_tokens = 0
 
     @staticmethod
     def _default_session_dir() -> Path:
@@ -201,13 +203,13 @@ class SudokuChatSession:
             puzzle=board_to_text(self.puzzle),
         )
 
-    def request_solution(self, user_content: str) -> Tuple[str, Optional[str]]:
+    def request_solution(self, user_content: str) -> Tuple[str, Optional[str], Optional[Dict[str, Any]]]:
         """向 LLM 发送请求并返回文本回复。"""
 
         user_message = {"role": "user", "content": user_content}
         messages = [{"role": "system", "content": self.system_prompt}] + self.messages + [user_message]
 
-        assistant_message, reasoning_text = chat_completion(
+        assistant_message, reasoning_text, usage = chat_completion(
             provider=self.provider,
             model=self.model,
             messages=messages,
@@ -221,7 +223,15 @@ class SudokuChatSession:
         self.messages.extend([user_message, assistant_entry])
         self._save_history()
 
-        return assistant_message, reasoning_text
+        if usage:
+            prompt_tokens = usage.get("prompt_tokens")
+            completion_tokens = usage.get("completion_tokens")
+            if isinstance(prompt_tokens, int):
+                self.prompt_tokens += prompt_tokens
+            if isinstance(completion_tokens, int):
+                self.completion_tokens += completion_tokens
+
+        return assistant_message, reasoning_text, usage
 
     # ------------------------------------------------------------------
     # 校验逻辑
@@ -231,7 +241,9 @@ class SudokuChatSession:
         if len(rows) < 9:
             return SudokuCheckResult(
                 is_correct=False,
-                issues=["未能识别出完整的 9 行解答，请确保输出 9 行、每行 9 个数字。"],
+                issues=[
+                    "Failed to detect 9 valid lines. Please output 9 lines, each containing exactly 9 digits."
+                ],
                 parsed_board=None,
             )
 
@@ -241,12 +253,10 @@ class SudokuChatSession:
         # 长度与范围检查
         for r_idx, row in enumerate(candidate, start=1):
             if len(row) != 9:
-                issues.append(f"第 {r_idx} 行不是 9 个数字。")
+                issues.append(f"Row {r_idx} does not contain exactly 9 digits.")
             out_of_range = [num for num in row if num < 1 or num > 9]
             if out_of_range:
-                issues.append(
-                    f"第 {r_idx} 行存在非 1-9 的数字：{', '.join(map(str, out_of_range))}。"
-                )
+                issues.append(f"Row {r_idx} contains digits outside 1-9: {sorted(out_of_range)}.")
 
         # 线索一致性
         for r in range(9):
@@ -254,7 +264,7 @@ class SudokuChatSession:
                 clue = self.puzzle[r][c]
                 if clue and candidate[r][c] != clue:
                     issues.append(
-                        f"原题第 {r + 1} 行第 {c + 1} 列应为 {clue}，但回答为 {candidate[r][c]}。"
+                        f"Cell ({r + 1}, {c + 1}) must be {clue} per the puzzle, but your answer uses {candidate[r][c]}."
                     )
 
         # 行、列、宫格检测
@@ -267,10 +277,10 @@ class SudokuChatSession:
                 duplicates = [num for num in row if row.count(num) > 1]
                 issue_parts = []
                 if missing:
-                    issue_parts.append(f"缺少 {sorted(missing)}")
+                    issue_parts.append(f"missing {sorted(missing)}")
                 if duplicates:
-                    issue_parts.append(f"存在重复 {sorted(set(duplicates))}")
-                issues.append(f"第 {idx} 行不符合数独规则：{'; '.join(issue_parts)}。")
+                    issue_parts.append(f"duplicate {sorted(set(duplicates))}")
+                issues.append(f"Row {idx} violates Sudoku rules: {'; '.join(issue_parts)}.")
 
         for col in range(9):
             column = [candidate[row][col] for row in range(9)]
@@ -280,10 +290,10 @@ class SudokuChatSession:
                 duplicates = [num for num in column if column.count(num) > 1]
                 issue_parts = []
                 if missing:
-                    issue_parts.append(f"缺少 {sorted(missing)}")
+                    issue_parts.append(f"missing {sorted(missing)}")
                 if duplicates:
-                    issue_parts.append(f"存在重复 {sorted(set(duplicates))}")
-                issues.append(f"第 {col + 1} 列不符合数独规则：{'; '.join(issue_parts)}。")
+                    issue_parts.append(f"duplicate {sorted(set(duplicates))}")
+                issues.append(f"Column {col + 1} violates Sudoku rules: {'; '.join(issue_parts)}.")
 
         for box_row in range(3):
             for box_col in range(3):
@@ -298,11 +308,11 @@ class SudokuChatSession:
                     duplicates = [num for num in cells if cells.count(num) > 1]
                     issue_parts = []
                     if missing:
-                        issue_parts.append(f"缺少 {sorted(missing)}")
+                            issue_parts.append(f"missing {sorted(missing)}")
                     if duplicates:
-                        issue_parts.append(f"存在重复 {sorted(set(duplicates))}")
+                            issue_parts.append(f"duplicate {sorted(set(duplicates))}")
                     issues.append(
-                        f"第 {box_row + 1} 行第 {box_col + 1} 宫不符合数独规则：{'; '.join(issue_parts)}。"
+                            f"Subgrid ({box_row + 1}, {box_col + 1}) violates Sudoku rules: {'; '.join(issue_parts)}."
                     )
 
         is_correct = not issues
@@ -315,6 +325,7 @@ class SudokuChatSession:
         assistant_message: str,
         result: SudokuCheckResult,
         reasoning_log: Optional[str] = None,
+        token_usage: Optional[Dict[str, Any]] = None,
     ) -> None:
         record = {
             "round": round_index,
@@ -327,6 +338,8 @@ class SudokuChatSession:
             },
             "parsed_board": board_to_text(result.parsed_board) if result.parsed_board else None,
         }
+        if token_usage:
+            record["token_usage"] = token_usage
         self.round_records.append(record)
         self._save_history()
 
@@ -437,7 +450,7 @@ def run_session(
             user_prompt = session.build_feedback_prompt(history=attempt_history)
 
         try:
-            assistant_reply, reasoning_log = session.request_solution(user_prompt)
+            assistant_reply, reasoning_log, usage = session.request_solution(user_prompt)
         except LLMClientError as exc:  # pragma: no cover - 运行期容错
             print(f"❌ 调用 {provider} 接口失败：{exc}")
             return {
@@ -479,6 +492,7 @@ def run_session(
             assistant_reply,
             result,
             reasoning_log=reasoning_log,
+            token_usage=usage,
         )
 
         if result.is_correct:
@@ -520,6 +534,11 @@ def run_session(
         "puzzle": board_to_text(puzzle),
         "conversation_file": str(session.history_file.name),
         "error": None,
+        "token_usage": {
+            "prompt_tokens": session.prompt_tokens,
+            "completion_tokens": session.completion_tokens,
+            "total_tokens": session.prompt_tokens + session.completion_tokens,
+        },
     }
     if final_result:
         summary["final_issues"] = final_result.issues

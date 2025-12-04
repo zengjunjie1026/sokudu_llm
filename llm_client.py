@@ -135,7 +135,7 @@ def chat_completion(
     messages: List[Dict[str, str]],
     temperature: float = 1.0,
     model: Optional[str] = None,
-) -> Tuple[str, Optional[str]]:
+) -> Tuple[str, Optional[str], Optional[Dict[str, Any]]]:
     """
     调用指定 provider 的聊天补全接口。
 
@@ -196,6 +196,7 @@ def chat_completion(
 
     content = (choice.get("content") or "").strip()
     reasoning = normalize_reasoning(choice.get("reasoning"))
+    usage = data.get("usage")
 
     logger.debug(
         "Response {endpoint} | provider={provider} status={status} content_preview={preview}",
@@ -205,7 +206,7 @@ def chat_completion(
         preview=(content.splitlines()[0][:120] if content else ""),
     )
 
-    return content, reasoning
+    return content, reasoning, usage
 
 
 __all__ = [
