@@ -183,10 +183,10 @@ class Sudoku16ChatSession:
     # ------------------------------------------------------------------
     # 与 LLM 交互
     # ------------------------------------------------------------------
-    def request_solution(self, user_content: str) -> Tuple[str, Optional[str]]:
+    def request_solution(self, user_content: str) -> Tuple[str, Optional[str], Optional[Dict[str, Any]]]:
         user_message = {"role": "user", "content": user_content}
         messages = [{"role": "system", "content": self.system_prompt}] + self.messages + [user_message]
-        assistant_message, reasoning_text = chat_completion(
+        assistant_message, reasoning_text, usage = chat_completion(
             provider=self.provider,
             model=self.model,
             messages=messages,
@@ -201,7 +201,7 @@ class Sudoku16ChatSession:
         )
         self._save_history()
 
-        return assistant_message, reasoning_text
+        return assistant_message, reasoning_text, usage
 
     # ------------------------------------------------------------------
     # 校验
@@ -383,7 +383,7 @@ def run_session(
             )
 
         try:
-            assistant_reply, reasoning_log = session.request_solution(user_prompt)
+            assistant_reply, reasoning_log, usage = session.request_solution(user_prompt)
         except LLMClientError as exc:  # pragma: no cover
             print(f"❌ 调用 {provider} 接口失败：{exc}")
             return

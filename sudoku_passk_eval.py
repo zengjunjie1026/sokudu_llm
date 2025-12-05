@@ -199,7 +199,7 @@ def evaluate_puzzle(
         start = time.time()
         try:
             logger.info("Prompt: {}", prompt)
-            answer, _ = chat_completion(
+            answer, _, usage = chat_completion(
                 provider=provider,
                 model=model,
                 messages=[
